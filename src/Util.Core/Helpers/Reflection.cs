@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Util.Extensions;
-using Util.Utils;
+using Util.Helpers;
 
 namespace Util.Helpers {
     /// <summary>

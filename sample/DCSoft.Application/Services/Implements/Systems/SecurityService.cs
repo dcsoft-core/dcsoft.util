@@ -18,8 +18,7 @@ using Util.Extensions;
 using Util.Helpers;
 using Util.Sessions;
 using Util.Sessions.Claims;
-using Util.Utils;
-using Random = Util.Utils.Random;
+using Random = Util.Helpers.Random;
 
 namespace DCSoft.Applications.Services.Implements.Systems
 {

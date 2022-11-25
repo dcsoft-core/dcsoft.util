@@ -7,6 +7,7 @@ using System.Text;
 using Util.Dependency;
 using Util.Extensions;
 using Util.Helpers;
+using Random = System.Random;
 
 namespace DCSoft.Integration.Helpers
 {

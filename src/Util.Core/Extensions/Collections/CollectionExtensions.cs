@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Util.Helpers;
-using Util.Utils;
 
 // ReSharper disable once CheckNamespace
 namespace Util.Extensions

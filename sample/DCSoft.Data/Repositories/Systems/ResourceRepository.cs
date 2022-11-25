@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DCSoft.Domain.Enums;
-using DCSoft.Domain.Models;
 using DCSoft.Domain.Models.Systems;
 using DCSoft.Domain.Repositories.Systems;
 using Microsoft.EntityFrameworkCore;

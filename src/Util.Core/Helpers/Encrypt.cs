@@ -3,9 +3,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Util.Extensions;
-using Util.Utils.Internal;
+using Util.Helpers.Internal;
 
-namespace Util.Utils
+namespace Util.Helpers
 {
     /// <summary>
     /// 加密操作

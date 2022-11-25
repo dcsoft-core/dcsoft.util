@@ -7,7 +7,6 @@ using DCSoft.Domain.Repositories.Systems;
 using Microsoft.EntityFrameworkCore;
 using Util.Data.EntityFrameworkCore;
 using Util.Domain;
-using Util.Extensions;
 
 namespace DCSoft.Data.Repositories.Systems
 {

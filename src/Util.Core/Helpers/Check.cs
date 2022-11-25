@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Util.Properties;
 
-namespace Util.Utils
+namespace Util.Helpers
 {
     /// <summary>
     /// 参数检查 操作

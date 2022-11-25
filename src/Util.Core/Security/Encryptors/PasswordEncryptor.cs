@@ -11,7 +11,7 @@
         /// <param name="data">原始数据</param>
         public string Encrypt(string data)
         {
-            return Util.Utils.Encrypt.AesEncrypt(data);
+            return Util.Helpers.Encrypt.AesEncrypt(data);
         }
 
         /// <summary>
@@ -20,7 +20,7 @@
         /// <param name="data">已加密数据</param>
         public string Decrypt(string data)
         {
-            return Util.Utils.Encrypt.AesDecrypt(data);
+            return Util.Helpers.Encrypt.AesDecrypt(data);
         }
     }
 }

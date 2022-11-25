@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Util.Helpers;
 
-namespace Util.Utils;
+namespace Util.Helpers;
 
 /// <summary>
 /// 随机数操作
