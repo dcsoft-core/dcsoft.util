@@ -53,21 +53,21 @@ namespace Build {
         /// <summary>
         /// 单元测试项目文件列表
         /// </summary>
-        public List<FileFullPath> UnitTestProjecs { get; set; }
+        public List<FileFullPath> UnitTestProjects { get; set; }
         /// <summary>
         /// 集成测试项目文件列表
         /// </summary>
-        public List<FileFullPath> IntegrationTestProjecs { get; set; }
+        public List<FileFullPath> IntegrationTestProjects { get; set; }
         /// <summary>
         /// 忽略测试项目文件列表
         /// </summary>
-        public List<FileFullPath> IgnoreTestProjecs { get; set; }
+        public List<FileFullPath> IgnoreTestProjects { get; set; }
 
         /// <summary>
         /// 获取集成测试项目文件列表
         /// </summary>
-        protected List<FileFullPath> GetIntegrationTestProjecs() {
-            return IntegrationTestProjecs.Where( t => IgnoreTestProjecs.Exists( p => p.FileName == t.FileName ) == false ).ToList();
+        protected List<FileFullPath> GetIntegrationTestProjects() {
+            return IntegrationTestProjects.Where( t => IgnoreTestProjects.Exists( p => p.FileName == t.FileName ) == false ).ToList();
         }
 
         /// <summary>
@@ -76,17 +76,17 @@ namespace Build {
         /// <param name="context">构建任务上下文</param>
         protected override void BeforeBuildExecution( ITaskContext context ) {
             Projects = context.GetFiles( SourceDir, "*/*.csproj" );
-            UnitTestProjecs = context.GetFiles( TestDir, "*/*.Tests.csproj" );
-            IntegrationTestProjecs = context.GetFiles( TestDir, "*/*.Tests.Integration.csproj" );
-            IgnoreTestProjecs = new List<FileFullPath>();
-            AddIgnoreTestProjecs( context );
+            UnitTestProjects = context.GetFiles( TestDir, "*/*.Tests.csproj" );
+            IntegrationTestProjects = context.GetFiles( TestDir, "*/*.Tests.Integration.csproj" );
+            IgnoreTestProjects = new List<FileFullPath>();
+            AddIgnoreTestProjects( context );
         }
 
         /// <summary>
         /// 添加忽略测试项目文件列表
         /// </summary>
-        private void AddIgnoreTestProjecs( ITaskContext context ) {
-            IgnoreTestProjecs.AddRange( context.GetFiles( TestDir, "*/*.Oracle.Tests.Integration.csproj" ) );
+        private void AddIgnoreTestProjects( ITaskContext context ) {
+            IgnoreTestProjects.AddRange( context.GetFiles( TestDir, "*/*.Oracle.Tests.Integration.csproj" ) );
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Build {
             return context.CreateTarget( "unit.test" )
                 .SetDescription( "Run unit tests." )
                 .DependsOn( dependTargets )
-                .ForEach( UnitTestProjecs, ( project, target ) => {
+                .ForEach( UnitTestProjects, ( project, target ) => {
                     target.AddCoreTask( t => t.Test().Project( project ) );
                 } );
         }
@@ -161,7 +161,7 @@ namespace Build {
             return context.CreateTarget( "integration.test" )
                 .SetDescription( "Run integration tests." )
                 .DependsOn( dependTargets )
-                .ForEach( GetIntegrationTestProjecs(), ( project, target ) => {
+                .ForEach( GetIntegrationTestProjects(), ( project, target ) => {
                     target.AddCoreTask( t => t.Test().Project( project ) );
                 } );
         }
