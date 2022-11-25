@@ -1,0 +1,20 @@
+<Project>
+	<Import Project="version.props" />
+	<PropertyGroup>
+		<NetTargetFramework>net6.0</NetTargetFramework>
+		<NoWarn>NU1803</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Product>DCSoft Application Framework</Product>
+		<Authors>dcsoft;willow</Authors>
+		<Copyright>Copyright © 2022 DCSoft Studio</Copyright>
+		<MaintainerEmail>willow.lau@outlook.com</MaintainerEmail>
+		<PackageProjectUrl>https://github.com/willowlau/dcsoft</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/willowlau/dcsoft</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReleaseNotes>DCSoft应用框架以MIT开源发布，可随意使用</PackageReleaseNotes>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIconUrl>https://avatars2.githubusercontent.com/u/19421630</PackageIconUrl>
+		<PackageTags>util;applicationframework;dotnetcore;aspnetcore;</PackageTags>
+	</PropertyGroup>
+</Project>

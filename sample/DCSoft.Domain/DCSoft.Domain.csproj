@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>$(NetTargetFramework)</TargetFramework>
+		<RootNamespace>DCSoft.Domain</RootNamespace>
+		<PackageIcon>icon.jpg</PackageIcon>
+		<Description>DCSoft.Domain是管理系统的业务层</Description>
+		<AssemblyName>DCSoft.Domain</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\DCSoft.Domain.xml</DocumentationFile>
+		<OutputPath></OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\DCSoft.Domain.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\build\icon.jpg">
+			<Pack>True</Pack>
+			<Visible>False</Visible>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Models/Commons/Attachment.*.cs">
+			<DependentUpon>Attachment.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Commons/Department.*.cs">
+			<DependentUpon>Department.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Commons/DictData.*.cs">
+			<DependentUpon>DictData.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Commons/DictType.*.cs">
+			<DependentUpon>DictType.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/ComParameters.*.cs">
+			<DependentUpon>Parameters.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Logs/Login.*.cs">
+			<DependentUpon>Login.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Logs/Operate.*.cs">
+			<DependentUpon>Operate.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/Application.*.cs">
+			<DependentUpon>Application.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/Claim.*.cs">
+			<DependentUpon>Claim.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/Permission.*.cs">
+			<DependentUpon>Permission.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/Resource.*.cs">
+			<DependentUpon>Resource.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/Module.*.cs">
+			<DependentUpon>Module.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/Role.*.cs">
+			<DependentUpon>Role.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/User.*.cs">
+			<DependentUpon>User.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Models/Systems/UserRole.*.cs">
+			<DependentUpon>UserRole.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Util.AspNetCore\07-Util.AspNetCore.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Domain\01-Util.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

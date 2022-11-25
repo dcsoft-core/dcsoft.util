@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- <PropertyGroup> -->
+	<!--   <TargetFramework>net6.0</TargetFramework> -->
+	<!--   <ImplicitUsings>enable</ImplicitUsings> -->
+	<!--   <Nullable>enable</Nullable> -->
+	<!-- </PropertyGroup> -->
+
+	<PropertyGroup>
+		<TargetFramework>$(NetTargetFramework)</TargetFramework>
+		<RootNamespace>DCSoft.Data.MySql</RootNamespace>
+		<PackageIcon>icon.jpg</PackageIcon>
+		<Description>DCSoft.Data.MySql是管理系统的MySql数据访问层</Description>
+		<AssemblyName>DCSoft.Data.MySql</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\DCSoft.Data.MySql.xml</DocumentationFile>
+		<OutputPath></OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\DCSoft.Data.MySql.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\build\icon.jpg">
+			<Pack>True</Pack>
+			<Visible>False</Visible>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Util.Data.EntityFrameworkCore.MySql\04-Util.Data.EntityFrameworkCore.MySql.csproj" />
+	  <ProjectReference Include="..\DCSoft.Data\DCSoft.Data.csproj" />
+	  <ProjectReference Include="..\DCSoft.Domain\DCSoft.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

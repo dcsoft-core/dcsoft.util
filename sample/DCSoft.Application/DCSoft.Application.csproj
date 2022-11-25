@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- <PropertyGroup> -->
+  <!--   <TargetFramework>net6.0</TargetFramework> -->
+  <!--   <ImplicitUsings>enable</ImplicitUsings> -->
+  <!--   <Nullable>enable</Nullable> -->
+  <!-- </PropertyGroup> -->
+
+  <PropertyGroup>
+	  <TargetFramework>$(NetTargetFramework)</TargetFramework>
+	  <RootNamespace>DCSoft.Applications</RootNamespace>
+	  <PackageIcon>icon.jpg</PackageIcon>
+	  <Description>DCSoft.Application是管理系统的应用层</Description>
+	  <AssemblyName>DCSoft.Application</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>.\obj\Debug\$(NetTargetFramework)\DCSoft.Application.xml</DocumentationFile>
+	  <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <OutputPath></OutputPath>
+	  <DocumentationFile>.\obj\Release\$(NetTargetFramework)\DCSoft.Application.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <None Include="..\..\build\icon.jpg">
+		  <Pack>True</Pack>
+		  <Visible>False</Visible>
+		  <PackagePath></PackagePath>
+	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\Logs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Util.Application.EntityFrameworkCore\Util.Application.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\Util.Application\Util.Application.csproj" />
+    <ProjectReference Include="..\..\src\Util.Authentication.JwtBearer\Util.Authentication.JwtBearer.csproj" />
+    <ProjectReference Include="..\DCSoft.Domain\DCSoft.Domain.csproj" />
+    <ProjectReference Include="..\DCSoft.Data.MySql\DCSoft.Data.MySql.csproj" />
+    <ProjectReference Include="..\DCSoft.Integration\DCSoft.Integration.csproj" />
+    <ProjectReference Include="..\DCSoft.Logging.Serilog\DCSoft.Logging.Serilog.csproj" />
+  </ItemGroup>
+
+</Project>

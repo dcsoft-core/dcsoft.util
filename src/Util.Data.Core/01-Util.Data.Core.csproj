@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>$(NetTargetFramework)</TargetFramework>
+		<RootNamespace>Util.Data</RootNamespace>
+		<PackageIcon>icon.jpg</PackageIcon>
+		<Description>DCSoft.Util.Data.Core是Util应用框架数据访问基础类库</Description>
+		<AssemblyName>DCSoft.Util.Data.Core</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\build\icon.jpg">
+			<Pack>True</Pack>
+			<Visible>False</Visible>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.20" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Util.Data.Abstractions\06-Util.Data.Abstractions.csproj" />
+	  <ProjectReference Include="..\Util.Domain\01-Util.Domain.csproj" />
+	  <ProjectReference Include="..\Util.Logging\01-Util.Logging.csproj" />
+	  <ProjectReference Include="..\Util.ObjectMapping.AutoMapper\02-Util.ObjectMapping.AutoMapper.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- <PropertyGroup> -->
+  <!--   <TargetFramework>net6.0</TargetFramework> -->
+  <!--   <ImplicitUsings>enable</ImplicitUsings> -->
+  <!--   <Nullable>enable</Nullable> -->
+  <!-- </PropertyGroup> -->
+
+  <PropertyGroup>
+	  <TargetFramework>$(NetTargetFramework)</TargetFramework>
+	  <RootNamespace>DCSoft.Logging.Serilog</RootNamespace>
+	  <PackageIcon>icon.jpg</PackageIcon>
+	  <Description>DCSoft.Logging.Serilog是管理系统的MySql日志层</Description>
+	  <AssemblyName>DCSoft.Logging.Serilog</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>.\obj\Debug\$(NetTargetFramework)\DCSoft.Logging.Serilog.xml</DocumentationFile>
+	  <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <OutputPath></OutputPath>
+	  <DocumentationFile>.\obj\Release\$(NetTargetFramework)\DCSoft.Logging.Serilog.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <None Include="..\..\build\icon.jpg">
+		  <Pack>True</Pack>
+		  <Visible>False</Visible>
+		  <PackagePath></PackagePath>
+	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="UAParser" Version="3.1.47" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Util.Logging.Serilog\02-Util.Logging.Serilog.csproj" />
+    <ProjectReference Include="..\..\src\Util.Logging.Serilog.MySQL\04-Util.Logging.Serilog.MySQL.csproj" />
+    <ProjectReference Include="..\..\src\Util.Tools.IPLocation\Util.Tools.IPLocation.csproj" />
+  </ItemGroup>
+
+</Project>

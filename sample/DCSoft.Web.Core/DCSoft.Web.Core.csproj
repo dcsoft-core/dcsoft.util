@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>$(NetTargetFramework)</TargetFramework>
+		<RootNamespace>DCSoft.Web.Core</RootNamespace>
+		<PackageIcon>icon.jpg</PackageIcon>
+		<Description>DCSoft.Web.Core是管理系统的Web核心层</Description>
+		<AssemblyName>DCSoft.Web.Core</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\DCSoft.Web.Core.xml</DocumentationFile>
+		<OutputPath></OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\DCSoft.Web.Core.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\build\icon.jpg">
+			<Pack>True</Pack>
+			<Visible>False</Visible>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Util.Application.WebApi\Util.Application.WebApi.csproj" />
+	  <ProjectReference Include="..\..\src\Util.AspNetCore\07-Util.AspNetCore.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Caching.EasyCaching\02-Util.Caching.EasyCaching.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Data.Dapper.MySql\04-Util.Data.Dapper.MySql.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Logging.Serilog.Exceptionless\03-Util.Logging.Serilog.Exceptionless.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Ui.NgZorro\03-Util.Ui.NgZorro.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Authentication.JwtBearer\Util.Authentication.JwtBearer.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Caching.CSRedisCore\03-Util.Caching.CSRedisCore.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Logging.Serilog.MySQL\04-Util.Logging.Serilog.MySQL.csproj" />
+	  <ProjectReference Include="..\DCSoft.Application\DCSoft.Application.csproj" />
+	  <ProjectReference Include="..\DCSoft.Integration\DCSoft.Integration.csproj" />
+	</ItemGroup>
+
+</Project>
