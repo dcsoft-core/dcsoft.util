@@ -151,6 +151,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "12-Tools", "12-Tools", "{C6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "11-Security", "11-Security", "{E8795AE3-E66C-4905-8736-303F7E449A13}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util.Tools.Offices", "src\Util.Tools.Offices\Util.Tools.Offices.csproj", "{E4989F56-1D18-4E76-92D0-3D9A16AC17E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -373,6 +375,10 @@ Global
 		{27B75DF8-43B8-43BC-A9A5-5F466A45E0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B75DF8-43B8-43BC-A9A5-5F466A45E0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B75DF8-43B8-43BC-A9A5-5F466A45E0BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4989F56-1D18-4E76-92D0-3D9A16AC17E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4989F56-1D18-4E76-92D0-3D9A16AC17E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4989F56-1D18-4E76-92D0-3D9A16AC17E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4989F56-1D18-4E76-92D0-3D9A16AC17E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -447,6 +453,7 @@ Global
 		{27B75DF8-43B8-43BC-A9A5-5F466A45E0BE} = {DFDDD609-07CF-4479-A327-C841D16E49C3}
 		{C60A0D99-E3CD-46F6-A7DD-3DB76D615282} = {A1B16F56-F07D-4C38-91E6-BFB636836DF1}
 		{E8795AE3-E66C-4905-8736-303F7E449A13} = {A1B16F56-F07D-4C38-91E6-BFB636836DF1}
+		{E4989F56-1D18-4E76-92D0-3D9A16AC17E9} = {C60A0D99-E3CD-46F6-A7DD-3DB76D615282}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A99CBA9-4A62-454F-9267-D3F362965038}

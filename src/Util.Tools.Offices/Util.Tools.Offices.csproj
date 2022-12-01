@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>$(NetTargetFramework)</TargetFramework>
+		<RootNamespace>Util.Tools.Offices</RootNamespace>
+		<PackageIcon>icon.jpg</PackageIcon>
+		<Description>DCSoft.Util.Tools.Offices是办公工具类</Description>
+		<AssemblyName>DCSoft.Util.Tools.Offices</AssemblyName>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath></OutputPath>
+		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\build\icon.jpg">
+			<Pack>True</Pack>
+			<Visible>False</Visible>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Util.Core\01-Util.Core.csproj" />
+	</ItemGroup>
+
+</Project>
