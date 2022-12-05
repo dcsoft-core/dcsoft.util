@@ -2,13 +2,14 @@
 using System.IO;
 using System.Threading.Tasks;
 using Magicodes.ExporterAndImporter.Core.Models;
+using Util.Dependency;
 
 namespace Util.Tools.Offices.Excel
 {
     /// <summary>
     /// Excel工厂
     /// </summary>
-    public interface IExcelFactory
+    public interface IExcelFactory : ISingletonDependency
     {
         /// <summary>
         /// 导入

@@ -6,6 +6,7 @@ using DCSoft.Logging.Serilog;
 using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Util.Tools.Offices.Excel;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
 namespace DCSoft.Apis.Admin.Systems
@@ -21,10 +22,14 @@ namespace DCSoft.Apis.Admin.Systems
         /// </summary>
         /// <param name="logger">日志服务</param>
         /// <param name="service">应用程序服务</param>
-        public ApplicationController(ILogger logger, IApplicationService service)
+        /// <param name="excelFactory">Excel工厂</param>
+        public ApplicationController(ILogger logger, 
+            IApplicationService service,
+            IExcelFactory excelFactory)
         {
             _logger = logger;
             _applicationService = service;
+            _excelFactory = excelFactory;
         }
 
         /// <summary>
@@ -37,6 +42,11 @@ namespace DCSoft.Apis.Admin.Systems
         /// </summary>
         private readonly IApplicationService _applicationService;
 
+        /// <summary>
+        /// Excel工厂
+        /// </summary>
+        private readonly IExcelFactory _excelFactory;
+
         #region 获取全部
 
         /// <summary>
@@ -47,6 +57,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> GetAllAsync()
         {
             var result = await _applicationService.GetAllAsync();
+            var bytes = await _excelFactory.ExportAsByteArray(result);
             return Success(result);
         }
 
