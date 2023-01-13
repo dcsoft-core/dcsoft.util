@@ -10,7 +10,6 @@ namespace Util.Ui.NgZorro.Data {
         /// </summary>
         public NgZorroTreeResult() {
             Nodes = new List<NgZorroTreeNode>();
-            ExpandedKeys = new List<string>();
             CheckedKeys = new List<string>();
             SelectedKeys = new List<string>();
         }
@@ -19,10 +18,6 @@ namespace Util.Ui.NgZorro.Data {
         /// 树节点列表
         /// </summary>
         public List<NgZorroTreeNode> Nodes { get; set; }
-        /// <summary>
-        /// 展开节点标识列表
-        /// </summary>
-        public List<string> ExpandedKeys { get; set; }
         /// <summary>
         /// 复选框选中节点标识列表
         /// </summary>

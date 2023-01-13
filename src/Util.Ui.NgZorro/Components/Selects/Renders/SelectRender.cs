@@ -1,8 +1,8 @@
-﻿using Util.Ui.Builders;
-using Util.Ui.Configs;
-using Util.Ui.Extensions;
+﻿using Microsoft.AspNetCore.Html;
+using Util.Ui.Builders;
 using Util.Ui.NgZorro.Components.Base;
 using Util.Ui.NgZorro.Components.Selects.Builders;
+using Util.Ui.NgZorro.Components.Selects.Configs;
 
 namespace Util.Ui.NgZorro.Components.Selects.Renders {
     /// <summary>
@@ -12,13 +12,13 @@ namespace Util.Ui.NgZorro.Components.Selects.Renders {
         /// <summary>
         /// 配置
         /// </summary>
-        private readonly Config _config;
+        private readonly SelectConfig _config;
 
         /// <summary>
         /// 初始化选择器渲染器
         /// </summary>
         /// <param name="config">配置</param>
-        public SelectRender( Config config ) : base( config ) {
+        public SelectRender( SelectConfig config ) : base( config ) {
             _config = config;
         }
 
@@ -35,8 +35,12 @@ namespace Util.Ui.NgZorro.Components.Selects.Renders {
         protected override void AppendControl( TagBuilder formControlBuilder ) {
             var builder = new SelectBuilder( _config );
             builder.Config();
-            _config.Content.AppendTo( builder );
             formControlBuilder.AppendContent( builder );
+        }
+
+        /// <inheritdoc />
+        public override IHtmlContent Clone() {
+            return new SelectRender( _config.Copy() );
         }
     }
 }

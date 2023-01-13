@@ -80,6 +80,10 @@
         /// </summary>
         public const string FixedOffsetTop = "fixed-offset-top";
         /// <summary>
+        /// 加载模式
+        /// </summary>
+        public const string LoadMode = "load-mode";
+        /// <summary>
         /// Logo
         /// </summary>
         public const string Logo = "logo";
@@ -768,6 +772,10 @@
         /// </summary>
         public const string ExpandAll = "expand-all";
         /// <summary>
+        /// 根节点异步展开
+        /// </summary>
+        public const string ExpandForRootAsync = "expand-for-root-async";
+        /// <summary>
         /// 显示图标
         /// </summary>
         public const string ShowIcon = "show-icon";
@@ -779,6 +787,10 @@
         /// 展开事件
         /// </summary>
         public const string OnExpand = "on-expand";
+        /// <summary>
+        /// 折叠事件
+        /// </summary>
+        public const string OnCollapse = "on-collapse";
         /// <summary>
         /// 显示按钮
         /// </summary>

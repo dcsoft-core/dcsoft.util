@@ -1,6 +1,7 @@
 ﻿using Util.Ui.Angular.Builders;
 using Util.Ui.Angular.Configs;
 using Util.Ui.Configs;
+using Util.Ui.NgZorro.Components.Trees.Helpers;
 
 namespace Util.Ui.NgZorro.Components.Trees.Builders {
     /// <summary>
@@ -11,20 +12,37 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
         /// 配置
         /// </summary>
         private readonly Config _config;
+        /// <summary>
+        /// 树形服务
+        /// </summary>
+        private readonly TreeService _service;
 
         /// <summary>
         /// 初始化树形控件标签生成器
         /// </summary>
         /// <param name="config">配置</param>
-        public TreeBuilder( Config config ) : base( config,"nz-tree" ) {
+        public TreeBuilder( Config config ) : base( config, "nz-tree" ) {
             _config = config;
+            _service = new TreeService( _config );
         }
+
+        /// <summary>
+        /// 扩展标识
+        /// </summary>
+        private string ExtendId => _service.ExtendId;
 
         /// <summary>
         /// 配置数据
         /// </summary>
         public TreeBuilder Data() {
-            AttributeIfNotEmpty( "[nzData]", _config.GetValue( UiConst.Data ) );
+            return Data( _config.GetValue( UiConst.Data ) );
+        }
+
+        /// <summary>
+        /// 配置数据
+        /// </summary>
+        public TreeBuilder Data( string data ) {
+            AttributeIfNotEmpty( "[nzData]", data );
             return this;
         }
 
@@ -41,8 +59,16 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
         /// 配置节点前是否显示复选框
         /// </summary>
         public TreeBuilder Checkable() {
-            AttributeIfNotEmpty( "[nzCheckable]", _config.GetBoolValue( UiConst.Checkable ) );
+            Checkable( _config.GetBoolValue( UiConst.Checkable ) );
             AttributeIfNotEmpty( "[nzCheckable]", _config.GetValue( AngularConst.BindCheckable ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置节点前是否显示复选框
+        /// </summary>
+        public TreeBuilder Checkable( string value ) {
+            AttributeIfNotEmpty( "[nzCheckable]", value );
             return this;
         }
 
@@ -85,8 +111,16 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
         /// 配置是否异步加载
         /// </summary>
         public TreeBuilder AsyncData() {
-            AttributeIfNotEmpty( "[nzAsyncData]", _config.GetBoolValue( UiConst.AsyncData ) );
-            AttributeIfNotEmpty( "[nzAsyncData]", _config.GetValue( AngularConst.BindAsyncData ) );
+            AsyncData( _config.GetBoolValue( UiConst.AsyncData ) );
+            AsyncData( _config.GetValue( AngularConst.BindAsyncData ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置是否异步加载
+        /// </summary>
+        public TreeBuilder AsyncData( string value ) {
+            AttributeIfNotEmpty( "[nzAsyncData]", value );
             return this;
         }
 
@@ -147,7 +181,16 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
         /// 配置展开节点的键集合
         /// </summary>
         public TreeBuilder ExpandedKeys() {
-            AttributeIfNotEmpty( "[nzExpandedKeys]", _config.GetValue( UiConst.ExpandedKeys ) );
+            ExpandedKeys( _config.GetValue( UiConst.ExpandedKeys ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置展开节点的键集合
+        /// </summary>
+        /// <param name="keys">键集合</param>
+        public TreeBuilder ExpandedKeys( string keys ) {
+            AttributeIfNotEmpty( "[nzExpandedKeys]", keys );
             return this;
         }
 
@@ -155,7 +198,16 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
         /// 配置勾选节点复选框的键集合
         /// </summary>
         public TreeBuilder CheckedKeys() {
-            AttributeIfNotEmpty( "[nzCheckedKeys]", _config.GetValue( UiConst.CheckedKeys ) );
+            CheckedKeys( _config.GetValue( UiConst.CheckedKeys ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置勾选节点复选框的键集合
+        /// </summary>
+        /// <param name="keys">键集合</param>
+        public TreeBuilder CheckedKeys( string keys ) {
+            AttributeIfNotEmpty( "[nzCheckedKeys]", keys );
             return this;
         }
 
@@ -163,7 +215,16 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
         /// 配置选中节点的键集合
         /// </summary>
         public TreeBuilder SelectedKeys() {
-            AttributeIfNotEmpty( "[nzSelectedKeys]", _config.GetValue( UiConst.SelectedKeys ) );
+            SelectedKeys( _config.GetValue( UiConst.SelectedKeys ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置选中节点的键集合
+        /// </summary>
+        /// <param name="keys">键集合</param>
+        public TreeBuilder SelectedKeys( string keys ) {
+            AttributeIfNotEmpty( "[nzSelectedKeys]", keys );
             return this;
         }
 
@@ -237,7 +298,7 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
             AttributeIfNotEmpty( "(nzDblClick)", _config.GetValue( UiConst.OnDblClick ) );
             AttributeIfNotEmpty( "(nzContextMenu)", _config.GetValue( UiConst.OnContextmenu ) );
             AttributeIfNotEmpty( "(nzCheckBoxChange)", _config.GetValue( UiConst.OnCheckBoxChange ) );
-            AttributeIfNotEmpty( "(nzExpandChange)", _config.GetValue( UiConst.OnExpandChange ) );
+            OnExpandChange( _config.GetValue( UiConst.OnExpandChange ) );
             AttributeIfNotEmpty( "(nzSearchValueChange)", _config.GetValue( UiConst.OnSearchValueChange ) );
             AttributeIfNotEmpty( "(nzOnDragStart)", _config.GetValue( UiConst.OnDragStart ) );
             AttributeIfNotEmpty( "(nzOnDragEnter)", _config.GetValue( UiConst.OnDragEnter ) );
@@ -245,6 +306,14 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
             AttributeIfNotEmpty( "(nzOnDragLeave)", _config.GetValue( UiConst.OnDragLeave ) );
             AttributeIfNotEmpty( "(nzOnDrop)", _config.GetValue( UiConst.OnDrop ) );
             AttributeIfNotEmpty( "(nzOnDragEnd)", _config.GetValue( UiConst.OnDragEnd ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 展开收缩节点事件
+        /// </summary>
+        public TreeBuilder OnExpandChange( string value ) {
+            AttributeIfNotEmpty( "(nzExpandChange)", value );
             return this;
         }
 
@@ -259,6 +328,21 @@ namespace Util.Ui.NgZorro.Components.Trees.Builders {
                 .SearchValue().SearchFunc().BeforeDrop()
                 .VirtualHeight().VirtualItemSize().VirtualMaxBufferPx().VirtualMinBufferPx()
                 .Events();
+            _service.ConfigBuilder( this );
+            ConfigDefault();
+        }
+
+        /// <summary>
+        /// 配置默认属性
+        /// </summary>
+        private void ConfigDefault() {
+            if ( _service.IsEnableExtend() == false )
+                return;
+            Checkable( "true" ).
+                Data( $"{ExtendId}.dataSource" )
+                .CheckedKeys( $"{ExtendId}.checkedKeys" )
+                .SelectedKeys( $"{ExtendId}.selectedKeys" )
+                .OnExpandChange( $"{ExtendId}.expandChange($event)" );
         }
     }
 }

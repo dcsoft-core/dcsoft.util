@@ -1,6 +1,7 @@
 ﻿using Util.Ui.Angular.Configs;
 using Util.Ui.Configs;
 using Util.Ui.NgZorro.Components.Base;
+using Util.Ui.NgZorro.Components.Trees.Helpers;
 using Util.Ui.NgZorro.Enums;
 
 namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
@@ -12,6 +13,10 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
         /// 配置
         /// </summary>
         private readonly Config _config;
+        /// <summary>
+        /// 树形服务
+        /// </summary>
+        private readonly TreeService _service;
 
         /// <summary>
         /// 初始化树选择标签生成器
@@ -19,7 +24,13 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
         /// <param name="config">配置</param>
         public TreeSelectBuilder( Config config ) : base( config, "nz-tree-select" ) {
             _config = config;
+            _service = new TreeService( _config );
         }
+
+        /// <summary>
+        /// 扩展标识
+        /// </summary>
+        private string ExtendId => _service.ExtendId;
 
         /// <summary>
         /// 配置允许清除
@@ -132,8 +143,16 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
         /// 配置节点前是否添加复选框
         /// </summary>
         public TreeSelectBuilder Checkable() {
-            AttributeIfNotEmpty( "[nzCheckable]", _config.GetBoolValue( UiConst.Checkable ) );
-            AttributeIfNotEmpty( "[nzCheckable]", _config.GetValue( AngularConst.BindCheckable ) );
+            Checkable( _config.GetBoolValue( UiConst.Checkable ) );
+            Checkable( _config.GetValue( AngularConst.BindCheckable ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置节点前是否添加复选框
+        /// </summary>
+        public TreeSelectBuilder Checkable( string value ) {
+            AttributeIfNotEmpty( "[nzCheckable]", value );
             return this;
         }
 
@@ -177,7 +196,15 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
         /// 配置节点数据
         /// </summary>
         public TreeSelectBuilder Nodes() {
-            AttributeIfNotEmpty( "[nzNodes]", _config.GetValue( UiConst.Nodes ) );
+            Nodes( _config.GetValue( UiConst.Nodes ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置节点数据
+        /// </summary>
+        public TreeSelectBuilder Nodes( string value ) {
+            AttributeIfNotEmpty( "[nzNodes]", value );
             return this;
         }
 
@@ -268,10 +295,35 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
         }
 
         /// <summary>
+        /// 配置宽度
+        /// </summary>
+        public TreeSelectBuilder Width() {
+            var style = _config.GetValue( UiConst.Style );
+            var width = _config.GetValue( UiConst.Width );
+            if ( width.IsEmpty() )
+                return this;
+            if ( Util.Helpers.Validation.IsNumber( width ) )
+                width = $"{width}px";
+            if ( style.IsEmpty() == false )
+                style += ";";
+            style = $"{style}width:{width}";
+            _config.SetAttribute( UiConst.Style, style );
+            return this;
+        }
+
+        /// <summary>
         /// 配置事件
         /// </summary>
         public TreeSelectBuilder Events() {
-            AttributeIfNotEmpty( "(nzExpandChange)", _config.GetValue( UiConst.OnExpandChange ) );
+            OnExpandChange( _config.GetValue( UiConst.OnExpandChange ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 展开收缩节点事件
+        /// </summary>
+        public TreeSelectBuilder OnExpandChange( string value ) {
+            AttributeIfNotEmpty( "(nzExpandChange)", value );
             return this;
         }
 
@@ -279,8 +331,7 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
         /// 配置
         /// </summary>
         public override void Config() {
-            base.ConfigBase( _config );
-            ConfigForm().AllowClear().Placeholder().Disabled().ShowIcon()
+            ConfigForm().Name().AllowClear().Placeholder().Disabled().ShowIcon()
                 .ShowSearch().NotFoundContent().DropdownMatchSelectWidth()
                 .DropdownStyle().DropdownClassName().Multiple()
                 .HideUnmatched().Size().Checkable().CheckStrictly()
@@ -288,7 +339,21 @@ namespace Util.Ui.NgZorro.Components.TreeSelects.Builders {
                 .DefaultExpandAll().ExpandedKeys().DisplayWith()
                 .MaxTagCount().MaxTagPlaceholder().TreeTemplate()
                 .VirtualHeight().VirtualItemSize().VirtualMaxBufferPx().VirtualMinBufferPx()
+                .Width()
                 .Events();
+            base.ConfigBase( _config );
+            _service.ConfigBuilder( this );
+            ConfigDefault();
+        }
+
+        /// <summary>
+        /// 配置默认属性
+        /// </summary>
+        private void ConfigDefault() {
+            if ( _service.IsEnableExtend() == false )
+                return;
+            Nodes( $"{ExtendId}.dataSource" )
+                .OnExpandChange( $"{ExtendId}.expandChange($event)" );
         }
     }
 }

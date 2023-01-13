@@ -1,4 +1,5 @@
-﻿using Util.Ui.Angular.Configs;
+﻿using Util.Applications.Trees;
+using Util.Ui.Angular.Configs;
 using Util.Ui.Angular.Extensions;
 using Util.Ui.Configs;
 using Util.Ui.NgZorro.Components.Tables.Builders;
@@ -59,10 +60,26 @@ namespace Util.Ui.NgZorro.Components.TreeTables.Builders {
         }
 
         /// <summary>
+        /// 配置加载模式
+        /// </summary>
+        public TreeTableBuilder LoadMode() {
+            AttributeIfNotEmpty( "loadMode", _config.GetValue<LoadMode?>( UiConst.LoadMode )?.Value().SafeString() );
+            return this;
+        }
+
+        /// <summary>
         /// 配置展开
         /// </summary>
         public TreeTableBuilder ExpandAll() {
             AttributeIfNotEmpty( "[isExpandAll]", _config.GetBoolValue( UiConst.ExpandAll ) );
+            return this;
+        }
+
+        /// <summary>
+        /// 配置根节点异步加载模式是否展开子节点
+        /// </summary>
+        public TreeTableBuilder ExpandForRootAsync() {
+            AttributeIfNotEmpty( "[isExpandForRootAsync]", _config.GetBoolValue( UiConst.ExpandForRootAsync ) );
             return this;
         }
 
@@ -75,18 +92,13 @@ namespace Util.Ui.NgZorro.Components.TreeTables.Builders {
         }
 
         /// <summary>
-        /// 配置子节点加载前事件
+        /// 配置事件
         /// </summary>
-        public TreeTableBuilder OnLoadChildrenBefore() {
+        public new TreeTableBuilder Events() {
             AttributeIfNotEmpty( "[onLoadChildrenBefore]", _config.GetValue( UiConst.OnLoadChildrenBefore ) );
-            return this;
-        }
-
-        /// <summary>
-        /// 配置子节点加载完成事件
-        /// </summary>
-        public TreeTableBuilder OnLoadChildren() {
             AttributeIfNotEmpty( "(onLoadChildren)", _config.GetValue( UiConst.OnLoadChildren ) );
+            AttributeIfNotEmpty( "(onExpand)", _config.GetValue( UiConst.OnExpand ) );
+            AttributeIfNotEmpty( "(onCollapse)", _config.GetValue( UiConst.OnCollapse ) );
             return this;
         }
 
@@ -96,8 +108,8 @@ namespace Util.Ui.NgZorro.Components.TreeTables.Builders {
         public override void Config() {
             base.Config();
             LoadUrl().QueryUrl().LoadChildrenUrl()
-                .ExpandAll().CheckLeafOnly()
-                .OnLoadChildrenBefore().OnLoadChildren();
+                .LoadMode().ExpandAll().ExpandForRootAsync().CheckLeafOnly()
+                .Events();
         }
 
         /// <inheritdoc />

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using Util.Ui.Angular.TagHelpers;
 using Util.Ui.Configs;
 using Util.Ui.NgZorro.Components.Tables.Helpers;
 using Util.Ui.NgZorro.Components.Tables.Renders;
 using Util.Ui.NgZorro.Enums;
+using Util.Ui.Renders;
 
 namespace Util.Ui.NgZorro.Components.Tables {
     /// <summary>
@@ -65,11 +65,11 @@ namespace Util.Ui.NgZorro.Components.Tables {
         /// </summary>
         public string CheckedKeys { get; set; }
         /// <summary>
-        /// order,排序条件,范例: creationTime desc
+        /// 扩展属性 order,排序条件,范例: creationTime desc
         /// </summary>
         public string Sort { get; set; }
         /// <summary>
-        /// [order],排序条件,范例: creationTime desc
+        /// 扩展属性 [order],排序条件,范例: creationTime desc
         /// </summary>
         public string BindSort { get; set; }
         /// <summary>
@@ -325,7 +325,7 @@ namespace Util.Ui.NgZorro.Components.Tables {
         }
 
         /// <inheritdoc />
-        protected override IHtmlContent GetRender( TagHelperContext context, TagHelperOutput output, TagHelperContent content ) {
+        protected override IRender GetRender( TagHelperContext context, TagHelperOutput output, TagHelperContent content ) {
             _config.Content = content;
             return new TableRender( _config );
         }

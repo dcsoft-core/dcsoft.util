@@ -47,7 +47,6 @@ namespace Util.Ui.NgZorro.Data {
         /// </summary>
         protected override NgZorroTreeResult ToResult( List<NgZorroTreeNode> nodes ) {
             var data = GetData();
-            _result.ExpandedKeys = data.Where( t => t.Expanded == true ).Select( t => t.Id ).ToList();
             _result.CheckedKeys = data.Where( t => t.Checked == true ).Select( t => t.Id ).ToList();
             _result.SelectedKeys = data.Where( t => t.Selected == true ).Select( t => t.Id ).ToList();
             _result.Nodes = nodes;

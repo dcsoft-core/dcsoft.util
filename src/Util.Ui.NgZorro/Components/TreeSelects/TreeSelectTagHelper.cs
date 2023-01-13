@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+using Util.Applications.Trees;
 using Util.Ui.Configs;
 using Util.Ui.NgZorro.Components.Base;
+using Util.Ui.NgZorro.Components.Inputs.Helpers;
 using Util.Ui.NgZorro.Components.TreeSelects.Renders;
 using Util.Ui.NgZorro.Enums;
+using Util.Ui.Renders;
 
 namespace Util.Ui.NgZorro.Components.TreeSelects {
     /// <summary>
@@ -11,6 +13,74 @@ namespace Util.Ui.NgZorro.Components.TreeSelects {
     /// </summary>
     [HtmlTargetElement( "util-tree-select" )]
     public class TreeSelectTagHelper : FormControlTagHelperBase {
+        /// <summary>
+        /// 配置
+        /// </summary>
+        private Config _config;
+        /// <summary>
+        /// 扩展属性,是否启用扩展指令,当设置Api地址时自动启用,默认为 false
+        /// </summary>
+        public bool EnableExtend { get; set; }
+        /// <summary>
+        /// 扩展属性 [autoLoad],初始化时是否自动加载数据，默认为true,设置成false则手工加载
+        /// </summary>
+        public bool AutoLoad { get; set; }
+        /// <summary>
+        /// 扩展属性 loadMode,加载模式，默认为同步加载
+        /// </summary>
+        public LoadMode LoadMode { get; set; }
+        /// <summary>
+        /// 扩展属性 [isExpandForRootAsync],根节点异步加载模式是否展开子节点,默认为 true
+        /// </summary>
+        public bool ExpandForRootAsync { get; set; }
+        /// <summary>
+        /// 扩展属性[(queryParam)],查询参数
+        /// </summary>
+        public string QueryParam { get; set; }
+        /// <summary>
+        /// 扩展属性 order,排序条件,范例: creationTime desc
+        /// </summary>
+        public string Sort { get; set; }
+        /// <summary>
+        /// 扩展属性 [order],排序条件,范例: creationTime desc
+        /// </summary>
+        public string BindSort { get; set; }
+        /// <summary>
+        /// 扩展属性 url,Api地址
+        /// </summary>
+        public string Url { get; set; }
+        /// <summary>
+        /// 扩展属性 [url],Api地址
+        /// </summary>
+        public string BindUrl { get; set; }
+        /// <summary>
+        /// 扩展属性 loadUrl,首次加载地址，对于异步请求,仅加载第一级节点,如果未设置该属性,则使用 Url 属性地址
+        /// </summary>
+        public string LoadUrl { get; set; }
+        /// <summary>
+        /// 扩展属性 [loadUrl],首次加载地址，对于异步请求,仅加载第一级节点,如果未设置该属性,则使用 Url 属性地址
+        /// </summary>
+        public string BindLoadUrl { get; set; }
+        /// <summary>
+        /// 扩展属性 queryUrl,查询地址，如果未设置该属性,则使用 Url 属性地址
+        /// </summary>
+        public string QueryUrl { get; set; }
+        /// <summary>
+        /// 扩展属性 [queryUrl],查询地址，如果未设置该属性,则使用 Url 属性地址
+        /// </summary>
+        public string BindQueryUrl { get; set; }
+        /// <summary>
+        /// 扩展属性 loadChildrenUrl,加载子节点地址，如果未设置该属性,则使用 Url 属性地址
+        /// </summary>
+        public string LoadChildrenUrl { get; set; }
+        /// <summary>
+        /// 扩展属性 [loadChildrenUrl],加载子节点地址，如果未设置该属性,则使用 Url 属性地址
+        /// </summary>
+        public string BindLoadChildrenUrl { get; set; }
+        /// <summary>
+        /// 扩展属性,宽度,如果设置数字,则单位为px,范例:100,表示style="width:100px",也可以设置百分比,范例:25%,表示style="width:25%"
+        /// </summary>
+        public string Width { get; set; }
         /// <summary>
         /// [nzAllowClear],允许清除,默认值: false
         /// </summary>
@@ -211,11 +281,34 @@ namespace Util.Ui.NgZorro.Components.TreeSelects {
         /// (nzExpandChange),展开收缩节点事件,类型: EventEmitter&lt;NzFormatEmitEvent>
         /// </summary>
         public string OnExpandChange { get; set; }
+        /// <summary>
+        /// 扩展属性 [onLoadChildrenBefore],子节点加载前事件,返回false停止加载,类型: (node:NzTreeNode) => boolean,参数为父节点
+        /// </summary>
+        public string OnLoadChildrenBefore { get; set; }
+        /// <summary>
+        /// 扩展事件 (onLoadChildren),子节点加载完成事件,参数为{ node: NzTreeNode, result }
+        /// </summary>
+        public string OnLoadChildren { get; set; }
+        /// <summary>
+        /// 扩展事件 (onExpand),节点展开事件,参数为 NzTreeNode
+        /// </summary>
+        public string OnExpand { get; set; }
+        /// <summary>
+        /// 扩展事件 (onCollapse),节点折叠事件,参数为 NzTreeNode
+        /// </summary>
+        public string OnCollapse { get; set; }
 
         /// <inheritdoc />
-        protected override IHtmlContent GetRender( TagHelperContext context, TagHelperOutput output, TagHelperContent content ) {
-            var config = new Config( context, output, content );
-            return new TreeSelectRender( config );
+        protected override void ProcessBefore( TagHelperContext context, TagHelperOutput output ) {
+            _config = new Config( context, output );
+            var service = new InputService( _config );
+            service.Init();
+        }
+
+        /// <inheritdoc />
+        protected override IRender GetRender( TagHelperContext context, TagHelperOutput output, TagHelperContent content ) {
+            _config.Content = content;
+            return new TreeSelectRender( _config );
         }
     }
 }

@@ -35,6 +35,10 @@ namespace Util.Applications.Trees {
         /// </summary>
         private readonly bool _isFirstLoad;
         /// <summary>
+        /// 是否展开所有节点
+        /// </summary>
+        private readonly bool _isExpandAll;
+        /// <summary>
         /// 根节点异步加载模式是否展开子节点列表
         /// </summary>
         private readonly bool _isExpandForRootAsync;
@@ -55,17 +59,19 @@ namespace Util.Applications.Trees {
         /// <param name="loadOperation">加载操作</param>
         /// <param name="maxPageSize">最大分页大小</param>
         /// <param name="isFirstLoad">是否首次加载</param>
+        /// <param name="isExpandAll">是否展开所有节点</param>
         /// <param name="isExpandForRootAsync">根节点异步加载模式是否展开子节点列表</param>
         /// <param name="queryBefore">查询前操作</param>
         /// <param name="queryAfter">查询后操作</param>
         protected TreeQueryServiceBase( IQueryService<TDto, TQuery> service, LoadMode loadMode, LoadOperation loadOperation,
-            int maxPageSize, bool isFirstLoad,bool isExpandForRootAsync, 
+            int maxPageSize, bool isFirstLoad, bool isExpandAll, bool isExpandForRootAsync, 
             Action<TQuery> queryBefore, Action<PageList<TDto>, TQuery> queryAfter ) {
             _service = service ?? throw new ArgumentNullException( nameof(service) );
             _loadMode = loadMode;
             _loadOperation = loadOperation;
             _maxPageSize = maxPageSize;
             _isFirstLoad = isFirstLoad;
+            _isExpandAll = isExpandAll;
             _isExpandForRootAsync = isExpandForRootAsync;
             _queryBefore = queryBefore;
             _queryAfter = queryAfter;
@@ -110,9 +116,9 @@ namespace Util.Applications.Trees {
         protected virtual async Task<dynamic> LoadChildren( TQuery query ) {
             if ( query.ParentId.IsEmpty() )
                 throw new InvalidOperationException( ApplicationResource.ParentIdIsEmpty );
-            if ( _loadMode == LoadMode.Async )
-                return await AsyncLoadChildren( query );
-            return await SyncLoadChildren( query );
+            if ( _loadMode == LoadMode.RootAsync )
+                return await SyncLoadChildren( query );
+            return await AsyncLoadChildren( query );
         }
 
         /// <summary>
@@ -191,7 +197,7 @@ namespace Util.Applications.Trees {
         protected virtual async Task<dynamic> SyncLoadQuery( TQuery query ) {
             var data = await SyncQuery( query );
             _queryAfter?.Invoke( data, query );
-            return ToResult( data );
+            return ToResult( data,false, _isExpandAll );
         }
 
         /// <summary>

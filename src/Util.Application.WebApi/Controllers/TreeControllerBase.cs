@@ -75,6 +75,10 @@ namespace Util.Applications.Controllers {
         /// 获取加载模式,默认值: 同步加载模式
         /// </summary>
         protected virtual LoadMode GetLoadMode() {
+            var loadMode = Request.Query["loadMode"].SafeString();
+            var result = Util.Helpers.Enum.Parse<LoadMode?>( loadMode );
+            if ( result != null )
+                return result.Value;
             return LoadMode.Sync;
         }
 
@@ -94,12 +98,29 @@ namespace Util.Applications.Controllers {
 
         #endregion
 
-        #region IsExpandForRootAsync(根节点异步加载模式是否展开子节点列表)
+        #region IsExpandAll(是否展开所有节点)
 
         /// <summary>
-        /// 根节点异步加载模式是否展开子节点列表,默认值: true
+        /// 是否展开所有节点,仅对同步加载和同步查询有效
+        /// </summary>
+        protected virtual bool IsExpandAll() {
+            var isExpandAll = Request.Query["is_expand_all"].SafeString();
+            if ( isExpandAll == "true" )
+                return true;
+            return false;
+        }
+
+        #endregion
+
+        #region IsExpandForRootAsync(根节点异步加载模式是否展开子节点)
+
+        /// <summary>
+        /// 根节点异步加载模式是否展开子节点,默认值: true
         /// </summary>
         protected virtual bool IsExpandForRootAsync() {
+            var isExpand = Request.Query["is_expand_for_root_async"].SafeString();
+            if ( isExpand == "false" )
+                return false;
             return true;
         }
 
@@ -192,7 +213,7 @@ namespace Util.Applications.Controllers {
         /// <param name="query">查询参数</param>
         protected virtual async Task<IActionResult> QueryAsync( TQuery query ) {
             var service = new TreeTableQueryService<TDto, TQuery>( _service, GetLoadMode(), GetOperation( query ),
-                GetMaxPageSize(), IsFirstLoad(), IsExpandForRootAsync(), QueryBefore, QueryAfter );
+                GetMaxPageSize(), IsFirstLoad(), IsExpandAll(), IsExpandForRootAsync(), QueryBefore, QueryAfter );
             var result = await service.QueryAsync( query );
             return Success( result );
         }

@@ -105,14 +105,7 @@ namespace Util.Applications.Trees {
         protected virtual void InitExpanded( TSourceNode node ) {
             if ( _allExpand ) {
                 node.Expanded = true;
-                return;
             }
-            if ( node.Expanded == null ) {
-                node.Expanded = false;
-                return;
-            }
-            if ( node.Level == 1 )
-                node.Expanded = true;
         }
 
         /// <summary>
