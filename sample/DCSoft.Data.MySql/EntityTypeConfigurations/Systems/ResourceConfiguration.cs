@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Systems
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Resource> builder)
         {
-            builder.ToTable("sys_resource").HasComment("资源");
+            builder.ToTable("sys_resource", t => t.HasComment("资源"));
         }
 
         /// <summary>

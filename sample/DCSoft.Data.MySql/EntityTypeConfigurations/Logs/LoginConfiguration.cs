@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Logs
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Login> builder)
         {
-            builder.ToTable("log_login").HasComment("日志");
+            builder.ToTable("log_login", t => t.HasComment("日志"));
         }
 
         /// <summary>

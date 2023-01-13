@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Commons
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Attachment> builder)
         {
-            builder.ToTable("com_attachment").HasComment("公共附件");
+            builder.ToTable("com_attachment", t => t.HasComment("公共附件"));
         }
 
         /// <summary>

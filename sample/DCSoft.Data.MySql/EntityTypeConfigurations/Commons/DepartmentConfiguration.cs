@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Commons
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Department> builder)
         {
-            builder.ToTable("com_department").HasComment("组织机构");
+            builder.ToTable("com_department", t => t.HasComment("组织机构"));
         }
 
         /// <summary>

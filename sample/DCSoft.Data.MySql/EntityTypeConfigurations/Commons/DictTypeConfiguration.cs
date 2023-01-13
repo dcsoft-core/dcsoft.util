@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Commons
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<DictType> builder)
         {
-            builder.ToTable("com_dict_type").HasComment("字典类型");
+            builder.ToTable("com_dict_type", t => t.HasComment("字典类型"));
         }
 
         /// <summary>

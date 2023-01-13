@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Systems
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("sys_role").HasComment("角色");
+            builder.ToTable("sys_role", t => t.HasComment("角色"));
         }
 
         /// <summary>

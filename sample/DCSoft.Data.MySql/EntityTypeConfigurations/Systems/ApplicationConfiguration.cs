@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Systems
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Application> builder)
         {
-            builder.ToTable("sys_application").HasComment("应用程序");
+            builder.ToTable("sys_application", t => t.HasComment("应用程序"));
         }
 
         /// <summary>

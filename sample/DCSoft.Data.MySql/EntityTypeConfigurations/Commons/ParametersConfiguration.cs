@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Commons
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Parameters> builder)
         {
-            builder.ToTable("com_parameters").HasComment("公共参数");
+            builder.ToTable("com_parameters", t => t.HasComment("公共参数"));
         }
 
         /// <summary>

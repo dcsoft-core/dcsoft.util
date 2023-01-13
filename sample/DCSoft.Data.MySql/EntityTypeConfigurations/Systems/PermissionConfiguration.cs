@@ -25,7 +25,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Systems
         /// </summary>
         private void ConfigTable(EntityTypeBuilder<Permission> builder)
         {
-            builder.ToTable("sys_permission").HasComment("权限");
+            builder.ToTable("sys_permission", t => t.HasComment("权限"));
         }
 
         /// <summary>
