@@ -1,8 +1,7 @@
 <Project>
 	<Import Project="version.props" />
 	<PropertyGroup>
-		<NetTargetFramework>net6.0</NetTargetFramework>
-		<NoWarn>NU1803</NoWarn>
+		<NetTargetFramework>net7.0</NetTargetFramework>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Product>DCSoft Application Framework</Product>
