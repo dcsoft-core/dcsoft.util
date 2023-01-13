@@ -10,7 +10,7 @@ namespace Util {
         /// </summary>
         /// <param name="value">可空值</param>
         public static T SafeValue<T>( this T? value ) where T : struct {
-            return value ?? default( T );
+            return value ?? default;
         }
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Util {
         /// <param name="instance">枚举实例</param>
         public static int? Value( this System.Enum instance ) {
             if( instance == null )
-                return 0;
+                return null;
             return Util.Helpers.Enum.GetValue( instance.GetType(), instance );
         }
 

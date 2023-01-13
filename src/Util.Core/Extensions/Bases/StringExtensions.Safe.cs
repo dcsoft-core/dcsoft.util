@@ -160,9 +160,7 @@ namespace Util.Extensions
         private static byte[] CryptBytes(string pwd, byte[] bytes, bool encrypt)
         {
             //第三方加密服务商
-#pragma warning disable SYSLIB0021 // 类型或成员已过时
-            var desProvider = new TripleDESCryptoServiceProvider();
-#pragma warning restore SYSLIB0021 // 类型或成员已过时
+            var desProvider = TripleDES.Create();
             //找到此提供程序的有效密钥大小
             int keySizeBits = 0;
             for (int i = 1024; i >= 1; i--)
@@ -231,7 +229,9 @@ namespace Util.Extensions
         private static void MakeKeyAndIv(string pwd, byte[] salt, int keySizeBits, int blockSizeBits, ref byte[] key,
             ref byte[] iv)
         {
+#pragma warning disable SYSLIB0041 // 类型或成员已过时
             var deriveBytes = new Rfc2898DeriveBytes(pwd, salt, 1234);
+#pragma warning restore SYSLIB0041 // 类型或成员已过时
             key = deriveBytes.GetBytes(keySizeBits / 8);
             iv = deriveBytes.GetBytes(blockSizeBits / 8);
         }
