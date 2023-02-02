@@ -5,7 +5,7 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<Product>DCSoft Application Framework</Product>
-		<Authors>dcsoft;willow</Authors>
+		<Authors>杨柳</Authors>
 		<Copyright>Copyright © 2022 DCSoft Studio</Copyright>
 		<MaintainerEmail>willow.lau@outlook.com</MaintainerEmail>
 		<PackageProjectUrl>https://github.com/willowlau/dcsoft</PackageProjectUrl>
