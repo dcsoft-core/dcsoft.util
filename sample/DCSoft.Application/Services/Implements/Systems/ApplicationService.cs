@@ -10,7 +10,7 @@ using DCSoft.Applications.Extensions.Systems;
 using DCSoft.Domain.Models.Systems;
 using Util.Applications;
 using Util.Data;
-using Util.Extensions;
+using Util.Extras.Extensions;
 using Util.Exceptions;
 
 namespace DCSoft.Applications.Services.Implements.Systems
@@ -50,7 +50,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             return base.Filter(queryable, param)
                 .WhereIfNotEmpty(t => t.Code.Contains(param.Code))
                 .WhereIfNotEmpty(t => t.Name.Contains(param.Name))
-                .WhereIfNotEmpty(t => t.Remark.Contains(param.Remark)); ;
+                .WhereIfNotEmpty(t => t.Remark.Contains(param.Remark));
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 验证创建应用程序
         /// </summary>
-        private async Task ValidateCreateAsync(Domain.Models.Systems.Application entity)
+        private async Task ValidateCreateAsync(Application entity)
         {
             entity.CheckNull(nameof(entity));
             if (await _repository.CanCreateAsync(entity) == false)
@@ -79,7 +79,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 抛出编码重复异常
         /// </summary>
-        private void ThrowCodeRepeatException(Domain.Models.Systems.Application entity)
+        private void ThrowCodeRepeatException(Application entity)
         {
             throw new Warning($"应用程序编码{entity.Code}已存在");
         }
@@ -98,7 +98,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 验证修改应用程序
         /// </summary>
-        private async Task ValidateUpdateAsync(Domain.Models.Systems.Application entity)
+        private async Task ValidateUpdateAsync(Application entity)
         {
             entity.CheckNull(nameof(entity));
             if (await _repository.CanUpdateAsync(entity) == false)

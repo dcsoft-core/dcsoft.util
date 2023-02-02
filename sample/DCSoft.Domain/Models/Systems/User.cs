@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Util;
+using Util.Extras.Helpers;
+using Util.Extras.Security.Encryptors;
 using Util.Helpers;
 using Util.Security;
-using Util.Security.Encryptors;
 
 namespace DCSoft.Domain.Models.Systems
 {
@@ -26,7 +27,7 @@ namespace DCSoft.Domain.Models.Systems
             InitUserName();
             AccessFailedCount = 0;
             LoginCount = 0;
-            RegisterIp = Web.Ip;
+            RegisterIp = Ip.GetIp();
         }
 
         /// <summary>

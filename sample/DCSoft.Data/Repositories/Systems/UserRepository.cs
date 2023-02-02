@@ -7,7 +7,7 @@ using DCSoft.Domain.Repositories.Systems;
 using Util;
 using Util.Data.EntityFrameworkCore;
 using Util.Exceptions;
-using Util.Helpers;
+using Util.Extras.Helpers;
 
 namespace DCSoft.Data.Repositories.Systems
 {

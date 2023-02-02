@@ -1,11 +1,10 @@
 ﻿using DCSoft.Integration.Options.VerifyCode;
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using Util.Dependency;
-using Util.Extensions;
+using Util.Extras.Extensions;
 using Util.Helpers;
 using Random = System.Random;
 

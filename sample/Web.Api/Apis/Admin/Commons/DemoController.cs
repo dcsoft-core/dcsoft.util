@@ -1,7 +1,7 @@
 using DCSoft.Apis.Base;
 using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Mvc;
-using Util.Extensions;
+using Util.Extras.Extensions;
 
 namespace DCSoft.Apis.Admin.Commons
 {
@@ -114,14 +114,14 @@ namespace DCSoft.Apis.Admin.Commons
                 Type = "已租赁",
                 Name = "已租赁",
                 Value = value1,
-                Percent = ((decimal)value1 / (decimal)value3).ToString("F2").ToDecimal()
+                Percent = (value1 / (decimal)value3).ToString("F2").ToDecimal()
             });
             list.Add(new
             {
                 Type = "未租赁",
                 Name = "未租赁",
                 Value = value2,
-                Percent = ((decimal)value2 / (decimal)value3).ToString("F2").ToDecimal()
+                Percent = (value2 / (decimal)value3).ToString("F2").ToDecimal()
             });
 
             return Success(list);

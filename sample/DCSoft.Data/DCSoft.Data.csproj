@@ -33,7 +33,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Util.Data.EntityFrameworkCore\01-Util.Data.EntityFrameworkCore.csproj" />
+		<PackageReference Include="Util.Data.EntityFrameworkCore" Version="7.0.14" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\DCSoft.Domain\DCSoft.Domain.csproj" />
 	</ItemGroup>
 

@@ -33,7 +33,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Util.Data.EntityFrameworkCore.MySql\04-Util.Data.EntityFrameworkCore.MySql.csproj" />
+		<PackageReference Include="Util.Data.EntityFrameworkCore.MySql" Version="7.0.14" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Util.Extras.Data.EntityFrameworkCore.MySql\04-Util.Extras.Data.EntityFrameworkCore.MySql.csproj" />
 	  <ProjectReference Include="..\DCSoft.Data\DCSoft.Data.csproj" />
 	  <ProjectReference Include="..\DCSoft.Domain\DCSoft.Domain.csproj" />
 	</ItemGroup>

@@ -22,13 +22,8 @@ namespace DCSoft.Logging.Serilog
         /// <param name="creationTime">创建时间</param>
         /// <param name="creatorId">创建人编号</param>
         /// <param name="creator">创建人</param>
-        /// <param name="lastModificationTime">最后修改时间</param>
-        /// <param name="lastModifierId">最后修改人编号</param>
-        /// <param name="lastModifier">最后修改人</param>
         /// <param name="isDeleted">是否删除</param>
-        /// <param name="version">版本号</param>
         void Write(Guid logId, string loginName, string ipAddress, string location, string operatingSystem,
-            LoginStatus status, string promptMsg, string browser, DateTime creationTime, Guid creatorId, string creator,
-            DateTime lastModificationTime, Guid lastModifierId, string lastModifier, bool isDeleted, byte[] version);
+            LoginStatus status, string promptMsg, string browser, DateTime creationTime, Guid creatorId, string creator, bool isDeleted);
     }
 }

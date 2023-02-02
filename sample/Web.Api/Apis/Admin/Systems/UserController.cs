@@ -11,9 +11,9 @@ using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Util;
-using Util.Applications.Properties;
 using Util.Exceptions;
-using Util.Sessions;
+using Util.Extras.Applications.Properties;
+using Util.Extras.Sessions;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
 namespace DCSoft.Apis.Admin.Systems
@@ -135,7 +135,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> CreateAsync([FromBody] CreateUserRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.CreateRequestIsEmpty);
+                throw new Warning(AppRes.CreateRequestIsEmpty);
             var id = await _userService.CreateAsync(request);
             _logger.Operate("用户", BusinessType.Insert, CurrentMethodName);
             return Success(id);
@@ -154,7 +154,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> GetByIdAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             var result = await _userService.GetByIdAsync(id);
             return Success(result);
         }
@@ -190,7 +190,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> UpdateBaseAsync([FromBody] UpdateUserBaseRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.UpdateRequestIsEmpty);
+                throw new Warning(AppRes.UpdateRequestIsEmpty);
             var result = await _userService.UpdateBaseAsync(request);
             _logger.Operate("用户", BusinessType.Update, CurrentMethodName);
             return Success(result);
@@ -208,7 +208,7 @@ namespace DCSoft.Apis.Admin.Systems
         [Login]
         public async Task<IActionResult> UpdateAvatarAsync()
         {
-            var file = Util.Helpers.Web.GetFile();
+            var file = Util.Extras.Helpers.Web.GetFile();
             if (file == null)
             {
                 throw new Warning("上传文件有误");
@@ -240,7 +240,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.UpdateRequestIsEmpty);
+                throw new Warning(AppRes.UpdateRequestIsEmpty);
             await _userService.UpdateAsync(request);
             _logger.Operate("用户", BusinessType.Update, CurrentMethodName);
             return Success();
@@ -264,7 +264,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> DeleteAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             await _userService.DeleteAsync(id);
             _logger.Operate("用户", BusinessType.Delete, CurrentMethodName);
             return Success();
@@ -288,7 +288,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> EnableAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             var userId = await _userService.EnableAsync(id.ToGuid(), true);
             _logger.Operate("用户", BusinessType.Enable, CurrentMethodName);
             return Success(userId);
@@ -308,7 +308,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> DisabledAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             var userId = await _userService.EnableAsync(id.ToGuid(), false);
             _logger.Operate("用户", BusinessType.Disable, CurrentMethodName);
             return Success(userId);
@@ -332,7 +332,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> ResetPwdAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             var ret = await _userService.ResetPasswordAsync(id.ToGuid());
             _logger.Operate("用户", BusinessType.ResetPwd, CurrentMethodName);
             return Success(ret);
@@ -356,7 +356,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> ChangePwdAsync([FromBody] ChangePwdRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.RequestIsEmpty);
+                throw new Warning(AppRes.RequestIsEmpty);
             var ret = await _userService.ChangePasswordAsync(Session.GetUserId(), request.OldPassword,
                 request.NewPassword);
             _logger.Operate("用户", BusinessType.ChangePwd, CurrentMethodName);
@@ -381,7 +381,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids)
         {
             if (ids.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             await _userService.DeleteAsync(ids);
             _logger.Operate("用户", BusinessType.BatchDelete, CurrentMethodName);
             return Success(true);

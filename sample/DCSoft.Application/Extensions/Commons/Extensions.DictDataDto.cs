@@ -4,8 +4,8 @@ using DCSoft.Applications.Requests.Commons;
 using DCSoft.Applications.Responses.Commons;
 using DCSoft.Domain.Models.Commons;
 using Util;
-using Util.Text;
-using Util.Tree;
+using Util.Extras.Text;
+using Util.Extras.Tree;
 
 namespace DCSoft.Applications.Extensions.Commons
 {

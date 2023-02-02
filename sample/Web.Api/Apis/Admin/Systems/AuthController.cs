@@ -4,7 +4,7 @@ using DCSoft.Applications.Services.Abstractions.Systems;
 using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Util.Applications.Properties;
+using Util.Extras.Applications.Properties;
 using Util.Exceptions;
 
 namespace DCSoft.Apis.Admin.Systems
@@ -49,7 +49,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> LoginAsync([FromBody] UserLoginRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.RequestIsEmpty);
+                throw new Warning(AppRes.RequestIsEmpty);
             var result = await _securityService.SignInAsync(request);
             return Success(result);
         }

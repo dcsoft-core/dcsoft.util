@@ -6,7 +6,7 @@ using DCSoft.Logging.Serilog;
 using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Util;
-using Util.Applications.Properties;
+using Util.Extras.Applications.Properties;
 using Util.Exceptions;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
@@ -74,7 +74,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> CreateAsync([FromBody] ClaimDto request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.CreateRequestIsEmpty);
+                throw new Warning(AppRes.CreateRequestIsEmpty);
             var id = await _claimService.CreateAsync(request);
             _logger.Operate("声明", BusinessType.Insert, CurrentMethodName);
             return Success(id);
@@ -93,7 +93,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> GetByIdAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             var result = await _claimService.GetByIdAsync(id);
             return Success(result);
         }
@@ -111,7 +111,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> UpdateAsync([FromBody] ClaimDto request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.UpdateRequestIsEmpty);
+                throw new Warning(AppRes.UpdateRequestIsEmpty);
             await _claimService.UpdateAsync(request);
             _logger.Operate("声明", BusinessType.Update, CurrentMethodName);
             return Success();
@@ -130,7 +130,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> DeleteAsync(string id)
         {
             if (id.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             await _claimService.DeleteAsync(id);
             _logger.Operate("声明", BusinessType.Delete, CurrentMethodName);
             return Success();
@@ -154,7 +154,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids)
         {
             if (ids.IsEmpty())
-                throw new Warning(WebApiResource.IdIsEmpty);
+                throw new Warning(AppRes.IdIsEmpty);
             await _claimService.DeleteAsync(ids);
             _logger.Operate("声明", BusinessType.BatchDelete, CurrentMethodName);
             return Success();

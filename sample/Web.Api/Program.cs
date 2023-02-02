@@ -6,9 +6,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Util;
 using Util.Aop;
-using Util.Applications.Middles;
 using Util.Data.EntityFrameworkCore;
 using Util.Data.Sql;
+using Util.Extras.Applications.Middles;
 using Util.Logging.Serilog;
 
 //创建Web应用程序生成器

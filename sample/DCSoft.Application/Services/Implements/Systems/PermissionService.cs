@@ -97,7 +97,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             await _repository.SaveAsync(request.ApplicationId.SafeValue(), request.RoleId.SafeValue(),
                 request.ResourceIds.ToGuidList(), request.IsDeny.SafeValue());
 
-            await _cache.RemoveByPatternAsync(CacheKey.UserPermissions);
+            _cache.Remove(CacheKey.UserPermissions);
         }
     }
 }

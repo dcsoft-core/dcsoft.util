@@ -1,5 +1,4 @@
 using Util;
-using Util.Extensions;
 
 namespace DCSoft.Domain.Models.Systems
 {

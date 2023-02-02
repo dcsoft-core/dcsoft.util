@@ -27,17 +27,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Util.Application.WebApi\Util.Application.WebApi.csproj" />
-	  <ProjectReference Include="..\..\src\Util.AspNetCore\07-Util.AspNetCore.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Caching.EasyCaching\02-Util.Caching.EasyCaching.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Data.Dapper.MySql\04-Util.Data.Dapper.MySql.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Logging.Serilog.Exceptionless\03-Util.Logging.Serilog.Exceptionless.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Ui.NgZorro\03-Util.Ui.NgZorro.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Authentication.JwtBearer\Util.Authentication.JwtBearer.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Caching.CSRedisCore\03-Util.Caching.CSRedisCore.csproj" />
-	  <ProjectReference Include="..\..\src\Util.Logging.Serilog.MySQL\04-Util.Logging.Serilog.MySQL.csproj" />
-	  <ProjectReference Include="..\DCSoft.Application\DCSoft.Application.csproj" />
-	  <ProjectReference Include="..\DCSoft.Integration\DCSoft.Integration.csproj" />
+		<PackageReference Include="Util.Application.WebApi" Version="7.0.14" />
+		<PackageReference Include="Util.Caching.EasyCaching" Version="7.0.14" />
+		<PackageReference Include="Util.Data.Dapper.MySql" Version="7.0.14" />
+		<PackageReference Include="Util.Logging.Serilog.Exceptionless" Version="7.0.14" />
+		<PackageReference Include="Util.Ui.NgZorro" Version="7.0.14" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Util.Extras.Application\Util.Extras.Application.csproj" />
+		<ProjectReference Include="..\..\src\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
+		<ProjectReference Include="..\..\src\Util.Extras.Authentication.JwtBearer\Util.Extras.Authentication.JwtBearer.csproj" />
+		<ProjectReference Include="..\..\src\Util.Extras.Caching.CSRedisCore\03-Util.Extras.Caching.CSRedisCore.csproj" />
+		<ProjectReference Include="..\..\src\Util.Extras.Logging.Serilog.MySQL\04-Util.Extras.Logging.Serilog.MySQL.csproj" />
+		<ProjectReference Include="..\DCSoft.Application\DCSoft.Application.csproj" />
+		<ProjectReference Include="..\DCSoft.Integration\DCSoft.Integration.csproj" />
 	</ItemGroup>
 
 </Project>

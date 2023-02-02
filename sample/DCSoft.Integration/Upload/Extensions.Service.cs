@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using System.IO;
+using Microsoft.AspNetCore.Builder;
 using Util.Helpers;
 
 namespace DCSoft.Integration.Upload

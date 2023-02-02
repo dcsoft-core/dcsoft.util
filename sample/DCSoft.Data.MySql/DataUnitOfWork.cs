@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
-using Util.Data.EntityFrameworkCore;
+using Util.Extras.Data.EntityFrameworkCore;
 
 namespace DCSoft.Data.MySql
 {

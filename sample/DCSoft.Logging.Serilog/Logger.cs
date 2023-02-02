@@ -1,16 +1,17 @@
 using System;
 using UAParser;
-using Util.Dependency;
-using Util.Helpers;
+using Util.Extras.Sessions;
 using Util.Sessions;
-using Util.Tools.IPLocation;
+using Util.Extras.Tools.IPLocation;
+using Util.Helpers;
+using Web = Util.Extras.Helpers.Web;
 
 namespace DCSoft.Logging.Serilog
 {
     /// <summary>
     /// 日志操作者
     /// </summary>
-    public class Logger : ILogger, IScopeDependency
+    public class Logger : ILogger
     {
         /// <summary>
         /// 构造函数
@@ -61,14 +62,9 @@ namespace DCSoft.Logging.Serilog
             var creationTime = DateTime.Now;
             var creatorId = Session.Instance.GetUserId();
             var creator = Session.Instance.GetUserName();
-            var lastModificationTime = DateTime.Now;
-            var lastModifierId = Session.Instance.GetUserId();
-            var lastModifier = Session.Instance.GetUserName();
-            var version = Array.Empty<byte>();
 
             LoginLog.Write(logId, loginName, ipAddress, location, operatingSystem, status, promptMsg, browser,
-                creationTime, creatorId, creator,
-                lastModificationTime, lastModifierId, lastModifier, false, version);
+                creationTime, creatorId, creator, false);
         }
 
         /// <summary>
@@ -138,7 +134,7 @@ namespace DCSoft.Logging.Serilog
             var ua = Parser.GetDefault().Parse(Web.Browser ?? "");
             var logId = Id.CreateGuid();
             var httpMethod = Util.Helpers.Web.Request.Method;
-            var url = Web.Url;
+            var url = Util.Helpers.Web.Url;
             var param = Web.Body;
             var result = response;
             var ipAddress = Web.Ip;
@@ -148,16 +144,10 @@ namespace DCSoft.Logging.Serilog
             var creationTime = DateTime.Now;
             var creatorId = Session.Instance.GetUserId();
             var creator = Session.Instance.GetUserName();
-            var lastModificationTime = DateTime.Now;
-            var lastModifierId = Session.Instance.GetUserId();
-            var lastModifier = Session.Instance.GetUserName();
-            var version = Array.Empty<byte>();
 
             OperateLog.Write(logId, title, type, httpMethod, method, url, userType, ipAddress,
                 location, param, result,
-                status, errorMsg, operatingSystem, browser, creationTime, creatorId, creator, lastModificationTime,
-                lastModifierId, lastModifier, false,
-                version);
+                status, errorMsg, operatingSystem, browser, creationTime, creatorId, creator, false);
         }
     }
 }

@@ -31,7 +31,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\Util.AspNetCore\07-Util.AspNetCore.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
+	  <ProjectReference Include="..\..\src\Util.Extras.Core\01-Util.Extras.Core.csproj" />
 	</ItemGroup>
 
 </Project>

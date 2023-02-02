@@ -7,6 +7,7 @@ using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Util.Applications.Properties;
 using Util.Exceptions;
+using Util.Extras.Applications.Properties;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
 namespace DCSoft.Apis.Admin.Systems
@@ -72,7 +73,7 @@ namespace DCSoft.Apis.Admin.Systems
         public async Task<IActionResult> SavePermitAsync([FromBody] SavePermissionRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.RequestIsEmpty);
+                throw new Warning(AppRes.RequestIsEmpty);
             await _permissionService.SaveAsync(request);
             _logger.Operate("用户权限", BusinessType.Save, CurrentMethodName);
             return Success();

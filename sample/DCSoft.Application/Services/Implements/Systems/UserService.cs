@@ -18,9 +18,9 @@ using Util;
 using Util.Applications;
 using Util.Caching;
 using Util.Data;
+using Util.Extras.Security.Encryptors;
+using Util.Extras.Sessions;
 using Util.Helpers;
-using Util.Security.Encryptors;
-using Util.Sessions;
 
 namespace DCSoft.Applications.Services.Implements.Systems
 {
@@ -154,7 +154,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             user.LoginCount = (user.LoginCount ?? 0) + 1;
             user.LastLoginIp = user.CurrentLoginIp;
             user.LastLoginTime = user.CurrentLoginTime;
-            user.CurrentLoginIp = Web.Ip;
+            user.CurrentLoginIp = Ip.GetIp();
             user.CurrentLoginTime = DateTime.Now;
             await _repository.UpdateAsync(user);
         }

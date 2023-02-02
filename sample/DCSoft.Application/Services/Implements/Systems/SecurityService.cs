@@ -12,13 +12,14 @@ using DCSoft.Integration.Options.VerifyCode;
 using DCSoft.Logging.Serilog;
 using Microsoft.AspNetCore.Http;
 using Util.Caching;
-using Util.DataEncryption;
 using Util.Exceptions;
-using Util.Extensions;
+using Util.Extras.Authorization;
+using Util.Extras.Extensions;
+using Util.Extras.Helpers;
+using Util.Extras.Sessions;
+using Util.Extras.Sessions.Claims;
 using Util.Helpers;
-using Util.Sessions;
-using Util.Sessions.Claims;
-using Random = Util.Helpers.Random;
+using Random = Util.Extras.Helpers.Random;
 
 namespace DCSoft.Applications.Services.Implements.Systems
 {
@@ -102,9 +103,9 @@ namespace DCSoft.Applications.Services.Implements.Systems
             if (verifyCodeOptions.Enable)
             {
                 var verifyCodeKey = string.Format(CacheKey.VerifyCodeKey, request.VerifyCodeKey);
-                if (await _cache.ExistsAsync(verifyCodeKey))
+                if (_cache.Exists(verifyCodeKey))
                 {
-                    var verifyCode = await _cache.GetAsync<string>(verifyCodeKey);
+                    var verifyCode = await _cache.GetAsync<string>(verifyCodeKey, null);
                     if (string.IsNullOrEmpty(verifyCode))
                     {
                         throw new Warning("验证码已过期！");
@@ -113,7 +114,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
                     {
                         throw new Warning("验证码输入有误！");
                     }
-                    await _cache.RemoveAsync(verifyCodeKey);
+                    _cache.Remove(verifyCodeKey);
                 }
                 else
                 {
@@ -150,15 +151,15 @@ namespace DCSoft.Applications.Services.Implements.Systems
             if (request.PasswordKey.NotEmpty())
             {
                 var passwordEncryptKey = string.Format(CacheKey.PassWordEncryptKey, request.PasswordKey);
-                if (await _cache.ExistsAsync(passwordEncryptKey))
+                if (_cache.Exists(passwordEncryptKey))
                 {
-                    var secretKey = await _cache.GetAsync<string>(passwordEncryptKey);
+                    var secretKey = await _cache.GetAsync<string>(passwordEncryptKey, null);
                     if (secretKey.IsNull())
                     {
                         throw new Warning("解析密码失败,密钥Key不存在.");
                     }
                     request.Password = Encrypt.DesDecrypt(request.Password, secretKey);
-                    await _cache.RemoveAsync(passwordEncryptKey);
+                    _cache.Remove(passwordEncryptKey);
                 }
                 else
                 {
@@ -236,7 +237,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         public async Task<JsonWebToken> RefreshTokenAsync()
         {
             var result = new JsonWebToken();
-            var refreshToken = Web.Header("refresh_token");
+            var refreshToken = Util.Extras.Helpers.Web.Header("refresh_token");
             var validate = JWTEncryption.Validate(refreshToken);
             if (validate.IsValid)
             {
@@ -277,39 +278,39 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// </summary>
         /// <param name="lastKey"></param>
         /// <returns></returns>
-        public async Task<AuthVerifyCodeResp> GetVerifyCodeAsync(string lastKey)
+        public Task<AuthVerifyCodeResp> GetVerifyCodeAsync(string lastKey)
         {
             var img = _verifyCode.GetBase64String(out string code);
 
             //删除上次缓存的验证码
             if (!lastKey.IsNull())
             {
-                await _cache.RemoveAsync(lastKey);
+                _cache.Remove(lastKey);
             }
 
             //写入Redis
             var guid = Id.Create();
             var key = string.Format(CacheKey.VerifyCodeKey, guid);
-            await _cache.TryAddAsync(key, code, TimeSpan.FromMinutes(5));
+            _cache.TryAdd(key, code, TimeSpan.FromMinutes(5));
 
             var result = new AuthVerifyCodeResp { Key = guid, Img = img };
-            return result;
+            return Task.FromResult(result);
         }
 
         /// <summary>
         /// 获取密码密钥
         /// </summary>
         /// <returns></returns>
-        public async Task<AuthEncryptKeyResp> GetEncryptKeyAsync()
+        public Task<AuthEncryptKeyResp> GetEncryptKeyAsync()
         {
             //写入Redis
             var guid = Id.Create();
             var key = string.Format(CacheKey.PassWordEncryptKey, guid);
             var encryptKey = Random.GenerateRandom(8);
-            await _cache.TryAddAsync(key, encryptKey, TimeSpan.FromMinutes(5));
+            _cache.TryAdd(key, encryptKey, TimeSpan.FromMinutes(5));
             var data = new AuthEncryptKeyResp { Key = guid, EncryptKey = encryptKey };
 
-            return data;
+            return Task.FromResult(data);
         }
 
         /// <summary>

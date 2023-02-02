@@ -6,9 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Util;
 using Util.Exceptions;
-using Util.Extensions;
+using Util.Extras.Extensions;
+using Util.Extras.Text;
 using Util.Helpers;
-using Util.Text;
 
 namespace DCSoft.Integration.Upload
 {
@@ -25,7 +25,7 @@ namespace DCSoft.Integration.Upload
         /// <param name="args"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Util.Files.FileInfo> UploadAsync(IFormFile file, FileUploadOptions config, object args, CancellationToken cancellationToken = default)
+        public async Task<Util.Extras.Files.FileInfo> UploadAsync(IFormFile file, FileUploadOptions config, object args, CancellationToken cancellationToken = default)
         {
             if (file == null || file.Length < 1)
             {
@@ -44,7 +44,7 @@ namespace DCSoft.Integration.Upload
                 throw new Warning("文件过大");
             }
 
-            var fileInfo = new Util.Files.FileInfo(file.FileName, file.Length)
+            var fileInfo = new Util.Extras.Files.FileInfo(file.FileName, file.Length)
             {
                 UploadPath = config.UploadPath,
                 RequestPath = config.RequestPath

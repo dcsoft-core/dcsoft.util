@@ -1,12 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <!-- <PropertyGroup> -->
-  <!--   <TargetFramework>net6.0</TargetFramework> -->
-  <!--   <ImplicitUsings>enable</ImplicitUsings> -->
-  <!--   <Nullable>enable</Nullable> -->
-  <!-- </PropertyGroup> -->
-
-  <PropertyGroup>
+	<PropertyGroup>
 	  <TargetFramework>$(NetTargetFramework)</TargetFramework>
 	  <RootNamespace>DCSoft.Logging.Serilog</RootNamespace>
 	  <PackageIcon>icon.jpg</PackageIcon>
@@ -37,9 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Util.Logging.Serilog\02-Util.Logging.Serilog.csproj" />
-    <ProjectReference Include="..\..\src\Util.Logging.Serilog.MySQL\04-Util.Logging.Serilog.MySQL.csproj" />
-    <ProjectReference Include="..\..\src\Util.Tools.IPLocation\Util.Tools.IPLocation.csproj" />
+    <ProjectReference Include="..\..\src\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Util.Extras.Logging.Serilog.MySQL\04-Util.Extras.Logging.Serilog.MySQL.csproj" />
+    <ProjectReference Include="..\..\src\Util.Extras.Tools.IPLocation\Util.Extras.Tools.IPLocation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -29,17 +29,11 @@ namespace DCSoft.Logging.Serilog
         /// <param name="creationTime">创建时间</param>
         /// <param name="creatorId">创建人编号</param>
         /// <param name="creator">创建人</param>
-        /// <param name="lastModificationTime">最后修改时间</param>
-        /// <param name="lastModifierId">最后修改人编号</param>
-        /// <param name="lastModifier">最后修改人</param>
         /// <param name="isDeleted">是否删除</param>
-        /// <param name="version">版本号</param>
         void Write(Guid logId, string title, BusinessType type, string httpMethod, string method, string url,
             OperateType urlType,
             string ipAddress, string location, string param, string result, OperateStatus status, string errorMsg,
             string operatingSystem,
-            string browser, DateTime creationTime, Guid creatorId, string creator, DateTime lastModificationTime,
-            Guid lastModifierId,
-            string lastModifier, bool isDeleted, byte[] version);
+            string browser, DateTime creationTime, Guid creatorId, string creator, bool isDeleted);
     }
 }

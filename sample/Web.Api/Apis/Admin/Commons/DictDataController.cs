@@ -7,7 +7,7 @@ using DCSoft.Logging.Serilog;
 using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Util.Applications.Properties;
+using Util.Extras.Applications.Properties;
 using Util.Exceptions;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
@@ -58,7 +58,7 @@ namespace DCSoft.Apis.Admin.Commons
         public async Task<IActionResult> CreateDictDataAsync([FromBody] CreateDictDataRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.CreateRequestIsEmpty);
+                throw new Warning(AppRes.CreateRequestIsEmpty);
             var id = await _service.CreateAsync(request);
             _logger.Operate("字典数据", BusinessType.Insert, CurrentMethodName);
             return Success(id);
@@ -73,7 +73,7 @@ namespace DCSoft.Apis.Admin.Commons
         public async Task<IActionResult> UpdateDictDataAsync([FromBody] DictDataDto request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.UpdateRequestIsEmpty);
+                throw new Warning(AppRes.UpdateRequestIsEmpty);
             await _service.UpdateAsync(request);
             _logger.Operate("字典数据", BusinessType.Update, CurrentMethodName);
             return Success();

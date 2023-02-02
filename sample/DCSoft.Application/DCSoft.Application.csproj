@@ -37,10 +37,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Util.Application.EntityFrameworkCore\Util.Application.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\src\Util.Application\Util.Application.csproj" />
-    <ProjectReference Include="..\..\src\Util.Authentication.JwtBearer\Util.Authentication.JwtBearer.csproj" />
-    <ProjectReference Include="..\..\src\Util.Tools.Offices\Util.Tools.Offices.csproj" />
+	  <PackageReference Include="Util.Application" Version="7.0.14" />
+	  <PackageReference Include="Util.Application.EntityFrameworkCore" Version="7.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Util.Extras.Authentication.JwtBearer\Util.Extras.Authentication.JwtBearer.csproj" />
+    <ProjectReference Include="..\..\src\Util.Extras.Tools.Offices\Util.Extras.Tools.Offices.csproj" />
     <ProjectReference Include="..\DCSoft.Domain\DCSoft.Domain.csproj" />
     <ProjectReference Include="..\DCSoft.Data.MySql\DCSoft.Data.MySql.csproj" />
     <ProjectReference Include="..\DCSoft.Integration\DCSoft.Integration.csproj" />

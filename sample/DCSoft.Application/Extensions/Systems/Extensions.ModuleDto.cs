@@ -7,8 +7,8 @@ using DCSoft.Domain.Extends;
 using DCSoft.Domain.Models.Systems;
 using Util;
 using Util.Helpers;
-using Util.Text;
-using Util.Tree;
+using Util.Extras.Text;
+using Util.Extras.Tree;
 
 namespace DCSoft.Applications.Extensions.Systems
 {

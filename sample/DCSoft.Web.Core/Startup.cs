@@ -4,7 +4,6 @@ using DCSoft.Integration.Upload;
 using DCSoft.Web.Core.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Util.Infrastructure;
-using Util.Sessions;
 
 namespace DCSoft.Web.Core
 {
@@ -14,7 +13,7 @@ namespace DCSoft.Web.Core
     public class Startup : IServiceRegistrar
     {
         /// <inheritdoc />
-        public int Id => 1000;
+        public int OrderId => 1000;
 
         /// <inheritdoc />
         public bool Enabled => true;

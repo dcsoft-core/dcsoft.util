@@ -63,7 +63,7 @@ namespace DCSoft.Web.Core.Extensions
         /// <param name="connectionString">连接字符串</param>
         public static void AddRedisCache(this IServiceCollection services, string connectionString)
         {
-            services.AddSingleton<ICache, Util.Caching.CSRedisCore.CacheManager>();
+            services.AddSingleton<ICache, Util.Extras.Caching.CSRedisCore.CacheManager>();
 
             var csRedis = new CSRedis.CSRedisClient(connectionString);
             RedisHelper.Initialization(csRedis);

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using Util;
-using Util.Extensions;
-using Util.Text;
+using Util.Extras.Text;
 
 namespace DCSoft.Integration.Upload
 {

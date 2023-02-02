@@ -11,6 +11,7 @@ using DCSoft.Domain.Models.Systems;
 using DCSoft.Domain.Repositories.Systems;
 using Util;
 using Util.Applications;
+using Util.Extras.Sessions;
 using Util.Sessions;
 
 namespace DCSoft.Applications.Services.Implements.Systems

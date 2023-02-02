@@ -1,5 +1,5 @@
 ﻿using System;
-using Util.Timing;
+using Util.Extras.Timing;
 using Convert = Util.Helpers.Convert;
 
 namespace DCSoft.Applications.Responses.Systems.AuthResult

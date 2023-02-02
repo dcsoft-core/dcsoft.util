@@ -8,8 +8,8 @@ using DCSoft.Data.Queries.Commons;
 using DCSoft.Logging.Serilog;
 using DCSoft.Web.Core.Attributes;
 using Microsoft.AspNetCore.Mvc;
-using Util.Applications.Properties;
 using Util.Exceptions;
+using Util.Extras.Applications.Properties;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
 namespace DCSoft.Apis.Admin.Commons
@@ -58,7 +58,7 @@ namespace DCSoft.Apis.Admin.Commons
         public async Task<IActionResult> CreateAsync([FromBody] CreateDepartmentRequest request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.CreateRequestIsEmpty);
+                throw new Warning(AppRes.CreateRequestIsEmpty);
             var id = await _departmentService.CreateAsync(request);
             _logger.Operate("组织机构", BusinessType.Insert, CurrentMethodName);
             return Success(id);
@@ -72,7 +72,7 @@ namespace DCSoft.Apis.Admin.Commons
         public async Task<IActionResult> UpdateAsync([FromBody] DepartmentDto request)
         {
             if (request == null)
-                throw new Warning(WebApiResource.UpdateRequestIsEmpty);
+                throw new Warning(AppRes.UpdateRequestIsEmpty);
             await _departmentService.UpdateAsync(request);
             _logger.Operate("组织机构", BusinessType.Update, CurrentMethodName);
             return Success();
