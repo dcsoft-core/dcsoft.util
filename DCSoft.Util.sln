@@ -73,6 +73,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-EntityFrameworkCore", "0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-Util.Extras.Data.EntityFrameworkCore.MySql", "src\Util.Extras.Data.EntityFrameworkCore.MySql\04-Util.Extras.Data.EntityFrameworkCore.MySql.csproj", "{7D8102EC-A0B9-4F82-838E-3D99BD70C83D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Extras.Tools.Captcha", "src\Util.Extras.Tools.Captcha\Util.Extras.Tools.Captcha.csproj", "{65864682-C187-4314-8296-094AD7ED4161}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{7D8102EC-A0B9-4F82-838E-3D99BD70C83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D8102EC-A0B9-4F82-838E-3D99BD70C83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D8102EC-A0B9-4F82-838E-3D99BD70C83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65864682-C187-4314-8296-094AD7ED4161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65864682-C187-4314-8296-094AD7ED4161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65864682-C187-4314-8296-094AD7ED4161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65864682-C187-4314-8296-094AD7ED4161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,6 +204,7 @@ Global
 		{C5B28C5C-66C3-4EBE-9142-7CD9EAD1B711} = {A1B16F56-F07D-4C38-91E6-BFB636836DF1}
 		{E4A21A41-D685-4E6E-8746-071E872A0AE6} = {C5B28C5C-66C3-4EBE-9142-7CD9EAD1B711}
 		{7D8102EC-A0B9-4F82-838E-3D99BD70C83D} = {E4A21A41-D685-4E6E-8746-071E872A0AE6}
+		{65864682-C187-4314-8296-094AD7ED4161} = {C60A0D99-E3CD-46F6-A7DD-3DB76D615282}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A99CBA9-4A62-454F-9267-D3F362965038}

@@ -11,24 +11,24 @@ using Util.Data.Sql;
 using Util.Extras.Applications.Middles;
 using Util.Logging.Serilog;
 
-//´´½¨WebÓ¦ÓÃ³ÌĞòÉú³ÉÆ÷
+//åˆ›å»ºWebåº”ç”¨ç¨‹åºç”Ÿæˆå™¨
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
 
-//ÅäÖÃ·şÎñ
+//é…ç½®æœåŠ¡
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    options.JsonSerializerOptions.DefaultBufferSize = 10_0000;//·µ»Ø½Ï´óÊı¾İÊı¾İĞòÁĞ»¯Ê±»á½Ø¶Ï£¬Ô­Òò£ºÄ¬ÈÏ»º³åÇø´óĞ¡£¨ÒÔ×Ö½ÚÎªµ¥Î»£©Îª16384¡£
+    options.JsonSerializerOptions.DefaultBufferSize = 10_0000;//è¿”å›è¾ƒå¤§æ•°æ®æ•°æ®åºåˆ—åŒ–æ—¶ä¼šæˆªæ–­ï¼ŒåŸå› ï¼šé»˜è®¤ç¼“å†²åŒºå¤§å°ï¼ˆä»¥å­—èŠ‚ä¸ºå•ä½ï¼‰ä¸º16384ã€‚
     options.JsonSerializerOptions.Converters.AddDateTimeTypeConverters("yyyy-MM-dd HH:mm:ss");
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; // ºöÂÔÑ­»·ÒıÓÃ ½ö.NET 6Ö§³Ö
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; // å¿½ç•¥å¾ªç¯å¼•ç”¨ ä»….NET 6æ”¯æŒ
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// Ìí¼ÓÉÏ´«ÅäÖÃ
+// æ·»åŠ ä¸Šä¼ é…ç½®
 builder.Services.AddUploadConfig();
 
-//ÅäÖÃUtil
+//é…ç½®Util
 builder.Host.AddUtil(options => options
     .UseAop()
     .UseSerilog(t => t.AddExceptionless())
@@ -37,10 +37,10 @@ builder.Host.AddUtil(options => options
     .UseMySqlUnitOfWork<IDataUnitOfWork, DataUnitOfWork>(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-//¹¹½¨WebÓ¦ÓÃ³ÌĞò
+//æ„å»ºWebåº”ç”¨ç¨‹åº
 var app = builder.Build();
 
-//ÅäÖÃÇëÇó¹ÜµÀ
+//é…ç½®è¯·æ±‚ç®¡é“
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -59,8 +59,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Ê¹ÓÃÉÏ´«ÅäÖÃ
+// ä½¿ç”¨ä¸Šä¼ é…ç½®
 app.UseUploadConfig();
 
-//ÔËĞĞÓ¦ÓÃ
+//è¿è¡Œåº”ç”¨
 app.Run();

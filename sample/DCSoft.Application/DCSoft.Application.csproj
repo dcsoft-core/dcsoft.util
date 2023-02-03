@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Util.Extras.Authentication.JwtBearer\Util.Extras.Authentication.JwtBearer.csproj" />
+    <ProjectReference Include="..\..\src\Util.Extras.Tools.Captcha\Util.Extras.Tools.Captcha.csproj" />
     <ProjectReference Include="..\..\src\Util.Extras.Tools.Offices\Util.Extras.Tools.Offices.csproj" />
     <ProjectReference Include="..\DCSoft.Domain\DCSoft.Domain.csproj" />
     <ProjectReference Include="..\DCSoft.Data.MySql\DCSoft.Data.MySql.csproj" />

@@ -6,9 +6,7 @@ using DCSoft.Applications.Requests.Systems;
 using DCSoft.Applications.Responses.Systems.AuthResult;
 using DCSoft.Applications.Services.Abstractions.Systems;
 using DCSoft.Integration.Cache;
-using DCSoft.Integration.Helpers;
 using DCSoft.Integration.Options.Token;
-using DCSoft.Integration.Options.VerifyCode;
 using DCSoft.Logging.Serilog;
 using Microsoft.AspNetCore.Http;
 using Util.Caching;
@@ -18,6 +16,7 @@ using Util.Extras.Extensions;
 using Util.Extras.Helpers;
 using Util.Extras.Sessions;
 using Util.Extras.Sessions.Claims;
+using Util.Extras.Tools.Captcha;
 using Util.Helpers;
 using Random = Util.Extras.Helpers.Random;
 
@@ -37,6 +36,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="session">当前会话</param>
         /// <param name="cache">缓存服务</param>
         /// <param name="verifyCodeHelper">验证码类</param>
+        /// <param name="securityCodeHelper">验证码类</param>
         /// <param name="userService">用户服务</param>
         public SecurityService(ILogger logger,
             IApplicationService applicationService,
@@ -44,6 +44,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             Util.Sessions.ISession session,
             ICache cache,
             VerifyCodeHelper verifyCodeHelper,
+            SecurityCodeHelper securityCodeHelper,
             IUserService userService)
         {
             _logger = logger;
@@ -52,6 +53,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             _session = session;
             _cache = cache;
             _verifyCode = verifyCodeHelper;
+            _securityCode = securityCodeHelper;
             _userService = userService;
         }
 
@@ -84,6 +86,11 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// 验证码类
         /// </summary>
         private readonly VerifyCodeHelper _verifyCode;
+
+        /// <summary>
+        /// 验证码类
+        /// </summary>
+        private readonly SecurityCodeHelper _securityCode;
 
         /// <summary>
         /// 用户仓储
@@ -281,6 +288,9 @@ namespace DCSoft.Applications.Services.Implements.Systems
         public Task<AuthVerifyCodeResp> GetVerifyCodeAsync(string lastKey)
         {
             var img = _verifyCode.GetBase64String(out string code);
+            
+            // var code = _securityCode.GetRandomEnDigitalText(4);
+            // var img = _securityCode.GetGifEnDigitalCodeByte(code).ToBase64();
 
             //删除上次缓存的验证码
             if (!lastKey.IsNull())

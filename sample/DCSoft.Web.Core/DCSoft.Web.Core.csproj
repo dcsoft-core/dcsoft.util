@@ -40,6 +40,7 @@
 		<ProjectReference Include="..\..\src\Util.Extras.Authentication.JwtBearer\Util.Extras.Authentication.JwtBearer.csproj" />
 		<ProjectReference Include="..\..\src\Util.Extras.Caching.CSRedisCore\03-Util.Extras.Caching.CSRedisCore.csproj" />
 		<ProjectReference Include="..\..\src\Util.Extras.Logging.Serilog.MySQL\04-Util.Extras.Logging.Serilog.MySQL.csproj" />
+		<ProjectReference Include="..\..\src\Util.Extras.Tools.Captcha\Util.Extras.Tools.Captcha.csproj" />
 		<ProjectReference Include="..\DCSoft.Application\DCSoft.Application.csproj" />
 		<ProjectReference Include="..\DCSoft.Integration\DCSoft.Integration.csproj" />
 	</ItemGroup>
