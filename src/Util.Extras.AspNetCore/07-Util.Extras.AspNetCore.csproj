@@ -37,7 +37,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.AspNetCore" Version="7.0.14" />
+		<PackageReference Include="Util.AspNetCore" Version="7.0.17" />
 	</ItemGroup>
 
 	<ItemGroup>
