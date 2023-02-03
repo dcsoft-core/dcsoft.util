@@ -47,7 +47,6 @@ public class UnifyResultStatusCodesMiddleware
         // 如果 Response 已经完成输出，则禁止写入
         if (context.Response.HasStarted) return;
         await OnResponseStatusCodes(context, context.Response.StatusCode);
-
     }
 
     /// <summary>
@@ -62,11 +61,13 @@ public class UnifyResultStatusCodesMiddleware
         {
             // 处理 401 状态码
             case StatusCodes.Status401Unauthorized:
-                await context.Response.WriteAsJsonAsync(RestfulResult(StateCode.Fail, "401 Unauthorized", null, statusCode));
+                await context.Response.WriteAsJsonAsync(RestfulResult(StateCode.Fail, "401 Unauthorized", null,
+                    statusCode));
                 break;
             // 处理 403 状态码
             case StatusCodes.Status403Forbidden:
-                await context.Response.WriteAsJsonAsync(RestfulResult(StateCode.Fail, "403 Forbidden", null, statusCode));
+                await context.Response.WriteAsJsonAsync(
+                    RestfulResult(StateCode.Fail, "403 Forbidden", null, statusCode));
                 break;
         }
     }

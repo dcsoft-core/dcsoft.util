@@ -25,8 +25,8 @@ namespace DCSoft.Applications.Services.Implements.Commons
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
-        public AttachmentService(IServiceProvider serviceProvider, 
-            IDataUnitOfWork unitOfWork, 
+        public AttachmentService(IServiceProvider serviceProvider,
+            IDataUnitOfWork unitOfWork,
             IAttachmentRepository repository) : base(serviceProvider, unitOfWork, repository)
         {
             _attachmentRepository = repository;

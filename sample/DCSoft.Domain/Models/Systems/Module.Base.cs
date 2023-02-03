@@ -86,38 +86,45 @@ namespace DCSoft.Domain.Models.Systems
         /// </summary>
         [Description("拼音简码"), MaxLength(256)]
         public string PinYin { get; set; }
+
         /// <summary>
         /// 创建时间
         ///</summary>
         [DisplayName("创建时间")]
         public DateTime? CreationTime { get; set; }
+
         /// <summary>
         /// 创建者标识
         ///</summary>
         [DisplayName("创建者标识")]
         public Guid? CreatorId { get; set; }
+
         /// <summary>
         /// 创建者
         ///</summary>
         [DisplayName("创建者")]
         [MaxLength(256)]
         public string Creator { get; set; }
+
         /// <summary>
         /// 最后修改时间
         ///</summary>
         [DisplayName("最后修改时间")]
         public DateTime? LastModificationTime { get; set; }
+
         /// <summary>
         /// 最后修改者标识
         ///</summary>
         [DisplayName("最后修改者标识")]
         public Guid? LastModifierId { get; set; }
+
         /// <summary>
         /// 最后修改者
         ///</summary>
         [DisplayName("最后修改者")]
         [MaxLength(256)]
         public string LastModifier { get; set; }
+
         /// <summary>
         /// 是否删除
         ///</summary>

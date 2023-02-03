@@ -27,6 +27,7 @@ namespace DCSoft.Integration.Upload
     public class FileUploadOptions
     {
         private string _uploadPath;
+
         /// <summary>
         /// 上传路径
         /// </summary>

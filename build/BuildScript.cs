@@ -8,198 +8,228 @@ using FlubuCore.Context.FluentInterface.Interfaces;
 using FlubuCore.IO;
 using FlubuCore.Scripting;
 
-namespace Build {
+namespace Build
+{
     /// <summary>
-    /// ¹¹½¨½Å±¾
+    /// æ„å»ºè„šæœ¬
     /// </summary>
-    public class BuildScript : DefaultBuildScript {
+    public class BuildScript : DefaultBuildScript
+    {
         /// <summary>
-        /// ½â¾ö·½°¸ÎÄ¼şÃû
+        /// è§£å†³æ–¹æ¡ˆæ–‡ä»¶å
         /// </summary>
         [SolutionFileName]
         public string SolutionFileName { get; set; } = "../DCSoft.Util.sln";
+
         /// <summary>
-        /// ¹¹½¨ÅäÖÃ
+        /// æ„å»ºé…ç½®
         /// </summary>
-        [FromArg( "c|configuration" )]
+        [FromArg("c|configuration")]
         [BuildConfiguration]
         public string BuildConfiguration { get; set; } = "Release";
+
         /// <summary>
-        /// NugetÍÆËÍµØÖ·
+        /// Nugetæ¨é€åœ°å€
         /// </summary>
-        [FromArg( "nugetUrl" )]
-        public string NugetUrl { get; set; } = "https://nuget.designcoding.com/v3/index.json";//"https://api.nuget.org/v3/index.json";
+        [FromArg("nugetUrl")]
+        public string NugetUrl { get; set; } =
+            "https://nuget.designcoding.com/v3/index.json"; //"https://api.nuget.org/v3/index.json";
+
         /// <summary>
-        /// NugetÃÜÔ¿
+        /// Nugetå¯†é’¥
         /// </summary>
         [FromArg("nugetKey", "Nuget api key for publishing nuget packages.")]
         public string NugetApiKey { get; set; } = "w9AiPxG2otJzL7srbzFF8hETquU1tFuTKse85C3cP0CAkB";
+
         /// <summary>
-        /// Ô´´úÂëÄ¿Â¼
+        /// æºä»£ç ç›®å½•
         /// </summary>
-        public FullPath SourceDir => RootDirectory.CombineWith( "../src" );
+        public FullPath SourceDir => RootDirectory.CombineWith("../src");
+
         /// <summary>
-        /// ²âÊÔÄ¿Â¼
+        /// æµ‹è¯•ç›®å½•
         /// </summary>
-        public FullPath TestDir => RootDirectory.CombineWith( "../test" );
+        public FullPath TestDir => RootDirectory.CombineWith("../test");
+
         /// <summary>
-        /// Êä³öÄ¿Â¼
+        /// è¾“å‡ºç›®å½•
         /// </summary>
-        public FullPath OutputDir => RootDirectory.CombineWith( "../output" );
+        public FullPath OutputDir => RootDirectory.CombineWith("../output");
+
         /// <summary>
-        /// ÏîÄ¿ÎÄ¼şÁĞ±í
+        /// é¡¹ç›®æ–‡ä»¶åˆ—è¡¨
         /// </summary>
         public List<FileFullPath> Projects { get; set; }
+
         /// <summary>
-        /// µ¥Ôª²âÊÔÏîÄ¿ÎÄ¼şÁĞ±í
+        /// å•å…ƒæµ‹è¯•é¡¹ç›®æ–‡ä»¶åˆ—è¡¨
         /// </summary>
         public List<FileFullPath> UnitTestProjects { get; set; }
+
         /// <summary>
-        /// ¼¯³É²âÊÔÏîÄ¿ÎÄ¼şÁĞ±í
+        /// é›†æˆæµ‹è¯•é¡¹ç›®æ–‡ä»¶åˆ—è¡¨
         /// </summary>
         public List<FileFullPath> IntegrationTestProjects { get; set; }
+
         /// <summary>
-        /// ºöÂÔ²âÊÔÏîÄ¿ÎÄ¼şÁĞ±í
+        /// å¿½ç•¥æµ‹è¯•é¡¹ç›®æ–‡ä»¶åˆ—è¡¨
         /// </summary>
         public List<FileFullPath> IgnoreTestProjects { get; set; }
 
         /// <summary>
-        /// »ñÈ¡¼¯³É²âÊÔÏîÄ¿ÎÄ¼şÁĞ±í
+        /// è·å–é›†æˆæµ‹è¯•é¡¹ç›®æ–‡ä»¶åˆ—è¡¨
         /// </summary>
-        protected List<FileFullPath> GetIntegrationTestProjects() {
-            return IntegrationTestProjects.Where( t => IgnoreTestProjects.Exists( p => p.FileName == t.FileName ) == false ).ToList();
+        protected List<FileFullPath> GetIntegrationTestProjects()
+        {
+            return IntegrationTestProjects.Where(t => IgnoreTestProjects.Exists(p => p.FileName == t.FileName) == false)
+                .ToList();
         }
 
         /// <summary>
-        /// ¹¹½¨Ç°²Ù×÷
+        /// æ„å»ºå‰æ“ä½œ
         /// </summary>
-        /// <param name="context">¹¹½¨ÈÎÎñÉÏÏÂÎÄ</param>
-        protected override void BeforeBuildExecution( ITaskContext context ) {
-            Projects = context.GetFiles( SourceDir, "*/*.csproj" );
-            UnitTestProjects = context.GetFiles( TestDir, "*/*.Tests.csproj" );
-            IntegrationTestProjects = context.GetFiles( TestDir, "*/*.Tests.Integration.csproj" );
+        /// <param name="context">æ„å»ºä»»åŠ¡ä¸Šä¸‹æ–‡</param>
+        protected override void BeforeBuildExecution(ITaskContext context)
+        {
+            Projects = context.GetFiles(SourceDir, "*/*.csproj");
+            UnitTestProjects = context.GetFiles(TestDir, "*/*.Tests.csproj");
+            IntegrationTestProjects = context.GetFiles(TestDir, "*/*.Tests.Integration.csproj");
             IgnoreTestProjects = new List<FileFullPath>();
-            AddIgnoreTestProjects( context );
+            AddIgnoreTestProjects(context);
         }
 
         /// <summary>
-        /// Ìí¼ÓºöÂÔ²âÊÔÏîÄ¿ÎÄ¼şÁĞ±í
+        /// æ·»åŠ å¿½ç•¥æµ‹è¯•é¡¹ç›®æ–‡ä»¶åˆ—è¡¨
         /// </summary>
-        private void AddIgnoreTestProjects( ITaskContext context ) {
-            IgnoreTestProjects.AddRange( context.GetFiles( TestDir, "*/*.Oracle.Tests.Integration.csproj" ) );
+        private void AddIgnoreTestProjects(ITaskContext context)
+        {
+            IgnoreTestProjects.AddRange(context.GetFiles(TestDir, "*/*.Oracle.Tests.Integration.csproj"));
         }
 
         /// <summary>
-        /// ÅäÖÃ¹¹½¨Ä¿±ê
+        /// é…ç½®æ„å»ºç›®æ ‡
         /// </summary>
-        /// <param name="context">¹¹½¨ÈÎÎñÉÏÏÂÎÄ</param>
-        protected override void ConfigureTargets( ITaskContext context ) {
-            var clean = Clean( context );
-            var restore = Restore( context, clean );
-            var build = Build( context, restore );
-            var test = Test( context );
-            var pack = Pack( context, clean );
-            PublishNuGetPackage( context, pack );
+        /// <param name="context">æ„å»ºä»»åŠ¡ä¸Šä¸‹æ–‡</param>
+        protected override void ConfigureTargets(ITaskContext context)
+        {
+            var clean = Clean(context);
+            var restore = Restore(context, clean);
+            var build = Build(context, restore);
+            var test = Test(context);
+            var pack = Pack(context, clean);
+            PublishNuGetPackage(context, pack);
         }
 
         /// <summary>
-        /// ÇåÀí½â¾ö·½°¸
+        /// æ¸…ç†è§£å†³æ–¹æ¡ˆ
         /// </summary>
-        private ITarget Clean( ITaskContext context ) {
-            return context.CreateTarget( "clean" )
-                .SetDescription( "Clean the solution." )
-                .AddCoreTask( t => t.Clean().AddDirectoryToClean( OutputDir, false ) );
+        private ITarget Clean(ITaskContext context)
+        {
+            return context.CreateTarget("clean")
+                .SetDescription("Clean the solution.")
+                .AddCoreTask(t => t.Clean().AddDirectoryToClean(OutputDir, false));
         }
 
         /// <summary>
-        /// »¹Ô­°ü
+        /// è¿˜åŸåŒ…
         /// </summary>
-        private ITarget Restore( ITaskContext context, params ITarget[] dependTargets ) {
-            return context.CreateTarget( "restore" )
-                .SetDescription( "Restore the solution." )
-                .DependsOn( dependTargets )
-                .AddCoreTask( t => t.Restore() );
+        private ITarget Restore(ITaskContext context, params ITarget[] dependTargets)
+        {
+            return context.CreateTarget("restore")
+                .SetDescription("Restore the solution.")
+                .DependsOn(dependTargets)
+                .AddCoreTask(t => t.Restore());
         }
 
         /// <summary>
-        /// ±àÒë½â¾ö·½°¸
+        /// ç¼–è¯‘è§£å†³æ–¹æ¡ˆ
         /// </summary>
-        private ITarget Build( ITaskContext context, params ITarget[] dependTargets ) {
-            return context.CreateTarget( "compile" )
-                .SetDescription( "Compiles the solution." )
-                .DependsOn( dependTargets )
-                .AddCoreTask( t => t.Build() );
+        private ITarget Build(ITaskContext context, params ITarget[] dependTargets)
+        {
+            return context.CreateTarget("compile")
+                .SetDescription("Compiles the solution.")
+                .DependsOn(dependTargets)
+                .AddCoreTask(t => t.Build());
         }
 
         /// <summary>
-        /// ÔËĞĞ²âÊÔ
+        /// è¿è¡Œæµ‹è¯•
         /// </summary>
-        private ITarget Test( ITaskContext context, params ITarget[] dependTargets ) {
-            var unitTest = UnitTest( context, dependTargets );
-            var integrationTest = IntegrationTest( context, dependTargets );
-            return context.CreateTarget( "test" )
-                .SetDescription( "Run all tests." )
-                .DependsOn( unitTest, integrationTest );
+        private ITarget Test(ITaskContext context, params ITarget[] dependTargets)
+        {
+            var unitTest = UnitTest(context, dependTargets);
+            var integrationTest = IntegrationTest(context, dependTargets);
+            return context.CreateTarget("test")
+                .SetDescription("Run all tests.")
+                .DependsOn(unitTest, integrationTest);
         }
 
         /// <summary>
-        /// ÔËĞĞµ¥Ôª²âÊÔ
+        /// è¿è¡Œå•å…ƒæµ‹è¯•
         /// </summary>
-        private ITarget UnitTest( ITaskContext context, params ITarget[] dependTargets ) {
-            return context.CreateTarget( "unit.test" )
-                .SetDescription( "Run unit tests." )
-                .DependsOn( dependTargets )
-                .ForEach( UnitTestProjects, ( project, target ) => {
-                    target.AddCoreTask( t => t.Test().Project( project ) );
-                } );
+        private ITarget UnitTest(ITaskContext context, params ITarget[] dependTargets)
+        {
+            return context.CreateTarget("unit.test")
+                .SetDescription("Run unit tests.")
+                .DependsOn(dependTargets)
+                .ForEach(UnitTestProjects,
+                    (project, target) => { target.AddCoreTask(t => t.Test().Project(project)); });
         }
 
         /// <summary>
-        /// ÔËĞĞ¼¯³É²âÊÔ
+        /// è¿è¡Œé›†æˆæµ‹è¯•
         /// </summary>
-        private ITarget IntegrationTest( ITaskContext context, params ITarget[] dependTargets ) {
-            return context.CreateTarget( "integration.test" )
-                .SetDescription( "Run integration tests." )
-                .DependsOn( dependTargets )
-                .ForEach( GetIntegrationTestProjects(), ( project, target ) => {
-                    target.AddCoreTask( t => t.Test().Project( project ) );
-                } );
+        private ITarget IntegrationTest(ITaskContext context, params ITarget[] dependTargets)
+        {
+            return context.CreateTarget("integration.test")
+                .SetDescription("Run integration tests.")
+                .DependsOn(dependTargets)
+                .ForEach(GetIntegrationTestProjects(),
+                    (project, target) => { target.AddCoreTask(t => t.Test().Project(project)); });
         }
 
         /// <summary>
-        /// ´´½¨nuget°ü
+        /// åˆ›å»ºnugetåŒ…
         /// </summary>
-        private ITarget Pack( ITaskContext context, params ITarget[] dependTargets ) {
-            return context.CreateTarget( "pack" )
-                .SetDescription( "Create nuget packages." )
-                .DependsOn( dependTargets )
-                .ForEach( Projects, ( project, target ) => {
-                    target.AddCoreTask( t => t.Pack()
-                        .Project( project )
+        private ITarget Pack(ITaskContext context, params ITarget[] dependTargets)
+        {
+            return context.CreateTarget("pack")
+                .SetDescription("Create nuget packages.")
+                .DependsOn(dependTargets)
+                .ForEach(Projects, (project, target) =>
+                {
+                    target.AddCoreTask(t => t.Pack()
+                        .Project(project)
                         .IncludeSymbols()
-                        .OutputDirectory( OutputDir ) );
-                } );
+                        .OutputDirectory(OutputDir));
+                });
         }
 
         /// <summary>
-        /// ·¢²¼nuget°ü
+        /// å‘å¸ƒnugetåŒ…
         /// </summary>
-        private void PublishNuGetPackage( ITaskContext context, params ITarget[] dependTargets ) {
-            context.CreateTarget( "nuget.publish" )
-                .SetDescription( "Publishes nuget packages" )
-                .DependsOn( dependTargets )
-                .Do( t => {
-                    var packages = Directory.GetFiles( OutputDir, "*.nupkg" );
-                    foreach ( var package in packages ) {
-                        if( package.EndsWith( "symbols.nupkg", StringComparison.OrdinalIgnoreCase ) )
+        private void PublishNuGetPackage(ITaskContext context, params ITarget[] dependTargets)
+        {
+            context.CreateTarget("nuget.publish")
+                .SetDescription("Publishes nuget packages")
+                .DependsOn(dependTargets)
+                .Do(t =>
+                {
+                    var packages = Directory.GetFiles(OutputDir, "*.nupkg");
+                    foreach (var package in packages)
+                    {
+                        if (package.EndsWith("symbols.nupkg", StringComparison.OrdinalIgnoreCase))
                             continue;
-                        context.CoreTasks().NugetPush( package )
-                            .DoNotFailOnError( ex => { Console.WriteLine( $"Failed to publish {package}.exception: {ex.Message}" ); } )
-                            .ServerUrl( NugetUrl )
-                            .ApiKey( NugetApiKey )
-                            .Execute( context );
+                        context.CoreTasks().NugetPush(package)
+                            .DoNotFailOnError(ex =>
+                            {
+                                Console.WriteLine($"Failed to publish {package}.exception: {ex.Message}");
+                            })
+                            .ServerUrl(NugetUrl)
+                            .ApiKey(NugetApiKey)
+                            .Execute(context);
                     }
-                } );
+                });
         }
     }
 }

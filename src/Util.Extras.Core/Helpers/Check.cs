@@ -130,7 +130,8 @@ namespace Util.Extras.Helpers
         public static void NotNullOrEmpty<T>(IDictionary<string, T> dictionary, string paramName)
         {
             NotNull(dictionary, paramName);
-            Require<ArgumentException>(dictionary.Any(), string.Format(CoreRes.ParameterCheck_NotNullOrEmpty_Collection));
+            Require<ArgumentException>(dictionary.Any(),
+                string.Format(CoreRes.ParameterCheck_NotNullOrEmpty_Collection));
         }
 
         #endregion
@@ -167,7 +168,9 @@ namespace Util.Extras.Helpers
             where T : IComparable<T>
         {
             bool flag = canEqual ? value.CompareTo(target) >= 0 : value.CompareTo(target) > 0;
-            string format = canEqual ? CoreRes.ParameterCheck_NotGreaterThanOrEqual : CoreRes.ParameterCheck_NotGreaterThan;
+            string format = canEqual
+                ? CoreRes.ParameterCheck_NotGreaterThanOrEqual
+                : CoreRes.ParameterCheck_NotGreaterThan;
             Require<ArgumentOutOfRangeException>(flag, string.Format(format, paramName, target));
         }
 

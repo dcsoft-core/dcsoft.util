@@ -11,7 +11,9 @@ namespace Util.Extras.Files
         /// <summary>
         /// 初始化
         /// </summary>
-        public FileInfo() { }
+        public FileInfo()
+        {
+        }
 
         /// <summary>
         /// 初始化文件信息

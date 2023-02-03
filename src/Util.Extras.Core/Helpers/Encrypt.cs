@@ -68,6 +68,7 @@ namespace Util.Extras.Helpers
                 md5.Clear();
                 md5.Dispose();
             }
+
             return result.Replace("-", "");
         }
 
@@ -113,7 +114,9 @@ namespace Util.Extras.Helpers
         /// </summary>
         /// <param name="text">待加密的文本</param>
         /// <param name="key">密钥，24位</param>
-        private static bool ValidateTripleDes(string text, string key) => !string.IsNullOrWhiteSpace(text) && !string.IsNullOrWhiteSpace(key) && key.Length == 24;
+        private static bool ValidateTripleDes(string text, string key) => !string.IsNullOrWhiteSpace(text) &&
+                                                                          !string.IsNullOrWhiteSpace(key) &&
+                                                                          key.Length == 24;
 
         /// <summary>
         /// 创建Des加密服务提供程序
@@ -242,7 +245,8 @@ namespace Util.Extras.Helpers
         /// </summary>
         /// <param name="text">待加密的文本</param>
         /// <param name="key">密钥，8位</param>
-        private static bool ValidateDes(string text, string key) => !string.IsNullOrWhiteSpace(text) && !string.IsNullOrWhiteSpace(key) && key.Length == 8;
+        private static bool ValidateDes(string text, string key) => !string.IsNullOrWhiteSpace(text) &&
+                                                                    !string.IsNullOrWhiteSpace(key) && key.Length == 8;
 
         /// <summary>
         /// 创建Des加密服务提供程序
@@ -265,7 +269,8 @@ namespace Util.Extras.Helpers
         /// <param name="transform">加密器</param>
         /// <param name="hex">十六进制</param>
         /// <param name="lowerCase">是否转换小写</param>
-        private static string GetDesEncryptResult(string value, Encoding encoding, ICryptoTransform transform, bool hex = false, bool lowerCase = false)
+        private static string GetDesEncryptResult(string value, Encoding encoding, ICryptoTransform transform,
+            bool hex = false, bool lowerCase = false)
         {
             var bytes = encoding.GetBytes(value);
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
@@ -279,7 +284,8 @@ namespace Util.Extras.Helpers
         /// <param name="encoding">字符编码</param>
         /// <param name="transform">加密器</param>
         /// <param name="hex">十六进制</param>
-        private static string GetDesDecryptResult(string value, Encoding encoding, ICryptoTransform transform, bool hex = false)
+        private static string GetDesDecryptResult(string value, Encoding encoding, ICryptoTransform transform,
+            bool hex = false)
         {
             var bytes = hex ? value.HexToBytes() : System.Convert.FromBase64String(value);
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
@@ -306,7 +312,6 @@ namespace Util.Extras.Helpers
 
             using var transform = CreateDesProvider(key).CreateEncryptor();
             return GetDesEncryptResult(text, Encoding.UTF8, transform, hex, lowerCase);
-
         }
 
         /// <summary>
@@ -355,6 +360,7 @@ namespace Util.Extras.Helpers
                         _iv[i] = 0;
                     }
                 }
+
                 return _iv;
             }
         }
@@ -451,7 +457,8 @@ namespace Util.Extras.Helpers
         /// <param name="value">待签名的值</param>
         /// <param name="key">私钥</param>
         /// <param name="encoding">字符编码</param>
-        public static string RsaSign(string value, string key, Encoding encoding) => RsaSign(value, key, encoding, RSAType.RSA);
+        public static string RsaSign(string value, string key, Encoding encoding) =>
+            RsaSign(value, key, encoding, RSAType.RSA);
 
         /// <summary>
         /// RSA签名，采用 SHA256 算法
@@ -466,7 +473,8 @@ namespace Util.Extras.Helpers
         /// <param name="value">待签名的值</param>
         /// <param name="key">私钥</param>
         /// <param name="encoding">字符编码</param>
-        public static string Rsa2Sign(string value, string key, Encoding encoding) => RsaSign(value, key, encoding, RSAType.RSA2);
+        public static string Rsa2Sign(string value, string key, Encoding encoding) =>
+            RsaSign(value, key, encoding, RSAType.RSA2);
 
         /// <summary>
         /// RSA签名
@@ -489,7 +497,8 @@ namespace Util.Extras.Helpers
         /// <param name="value">待验签的值</param>
         /// <param name="publicKey">公钥</param>
         /// <param name="sign">签名</param>
-        public static bool RsaVerify(string value, string publicKey, string sign) => RsaVerify(value, publicKey, sign, Encoding.UTF8);
+        public static bool RsaVerify(string value, string publicKey, string sign) =>
+            RsaVerify(value, publicKey, sign, Encoding.UTF8);
 
         /// <summary>
         /// RSA验签，采用 SHA1 算法
@@ -498,7 +507,8 @@ namespace Util.Extras.Helpers
         /// <param name="publicKey">公钥</param>
         /// <param name="sign">签名</param>
         /// <param name="encoding">字符编码</param>
-        public static bool RsaVerify(string value, string publicKey, string sign, Encoding encoding) => RsaVerify(value, publicKey, sign, encoding, RSAType.RSA);
+        public static bool RsaVerify(string value, string publicKey, string sign, Encoding encoding) =>
+            RsaVerify(value, publicKey, sign, encoding, RSAType.RSA);
 
         /// <summary>
         /// RSA验签，采用 SHA256 算法
@@ -506,7 +516,8 @@ namespace Util.Extras.Helpers
         /// <param name="value">待验签的值</param>
         /// <param name="publicKey">公钥</param>
         /// <param name="sign">签名</param>
-        public static bool Rsa2Verify(string value, string publicKey, string sign) => Rsa2Verify(value, publicKey, sign, Encoding.UTF8);
+        public static bool Rsa2Verify(string value, string publicKey, string sign) =>
+            Rsa2Verify(value, publicKey, sign, Encoding.UTF8);
 
         /// <summary>
         /// RSA验签，采用 SHA256 算法
@@ -515,7 +526,8 @@ namespace Util.Extras.Helpers
         /// <param name="publicKey">公钥</param>
         /// <param name="sign">签名</param>
         /// <param name="encoding">字符编码</param>
-        public static bool Rsa2Verify(string value, string publicKey, string sign, Encoding encoding) => RsaVerify(value, publicKey, sign, encoding, RSAType.RSA2);
+        public static bool Rsa2Verify(string value, string publicKey, string sign, Encoding encoding) =>
+            RsaVerify(value, publicKey, sign, encoding, RSAType.RSA2);
 
         /// <summary>
         /// RSA验签
@@ -774,7 +786,9 @@ namespace Util.Extras.Helpers
         /// </summary>
         /// <param name="value">值</param>
         /// <param name="encoding">字符编码</param>
-        public static string Base64Encrypt(string value, Encoding encoding) => string.IsNullOrWhiteSpace(value) ? string.Empty : System.Convert.ToBase64String(encoding.GetBytes(value));
+        public static string Base64Encrypt(string value, Encoding encoding) => string.IsNullOrWhiteSpace(value)
+            ? string.Empty
+            : System.Convert.ToBase64String(encoding.GetBytes(value));
 
         /// <summary>
         /// Base64解密

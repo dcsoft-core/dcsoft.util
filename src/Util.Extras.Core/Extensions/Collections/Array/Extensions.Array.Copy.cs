@@ -25,7 +25,8 @@ namespace Util.Extras.Extensions
         /// <param name="destinationArray">目标数组</param>
         /// <param name="destinationIndex">目标数组索引</param>
         /// <param name="length">长度</param>
-        public static void Copy(this System.Array sourceArray, int sourceIndex, System.Array destinationArray, int destinationIndex,
+        public static void Copy(this System.Array sourceArray, int sourceIndex, System.Array destinationArray,
+            int destinationIndex,
             int length) => System.Array.Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
 
         /// <summary>
@@ -45,7 +46,8 @@ namespace Util.Extras.Extensions
         /// <param name="destinationArray">目标数组</param>
         /// <param name="destinationIndex">目标数组索引</param>
         /// <param name="length">长度</param>
-        public static void Copy(this System.Array sourceArray, long sourceIndex, System.Array destinationArray, long destinationIndex,
+        public static void Copy(this System.Array sourceArray, long sourceIndex, System.Array destinationArray,
+            long destinationIndex,
             long length) => System.Array.Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
 
         /// <summary>
@@ -56,7 +58,8 @@ namespace Util.Extras.Extensions
         /// <param name="destinationArray">目标数组</param>
         /// <param name="destinationIndex">目标数组索引</param>
         /// <param name="length">长度</param>
-        public static void ConstrainedCopy(this System.Array sourceArray, int sourceIndex, System.Array destinationArray,
+        public static void ConstrainedCopy(this System.Array sourceArray, int sourceIndex,
+            System.Array destinationArray,
             int destinationIndex, int length) =>
             System.Array.ConstrainedCopy(sourceArray, sourceIndex, destinationArray, destinationIndex, length);
     }

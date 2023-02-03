@@ -29,7 +29,9 @@ public static class JWTAuthorizationServiceCollectionExtensions
     /// <param name="jwtBearerConfigure"></param>
     /// <param name="enableGlobalAuthorize">启动全局授权</param>
     /// <returns></returns>
-    public static AuthenticationBuilder AddJwt(this AuthenticationBuilder authenticationBuilder, object tokenValidationParameters = default, Action<JwtBearerOptions> jwtBearerConfigure = null, bool enableGlobalAuthorize = false)
+    public static AuthenticationBuilder AddJwt(this AuthenticationBuilder authenticationBuilder,
+        object tokenValidationParameters = default, Action<JwtBearerOptions> jwtBearerConfigure = null,
+        bool enableGlobalAuthorize = false)
     {
         // 配置 JWT 选项
         ConfigureJWTOptions(authenticationBuilder.Services);
@@ -41,7 +43,8 @@ public static class JWTAuthorizationServiceCollectionExtensions
             var jwtSettings = Config.Get<JWTSettingsOptions>("JWTSettings");
 
             // 配置 JWT 验证信息
-            options.TokenValidationParameters = (tokenValidationParameters as TokenValidationParameters) ?? JWTEncryption.CreateTokenValidationParameters(jwtSettings);
+            options.TokenValidationParameters = (tokenValidationParameters as TokenValidationParameters) ??
+                                                JWTEncryption.CreateTokenValidationParameters(jwtSettings);
 
             // 添加自定义配置
             jwtBearerConfigure?.Invoke(options);
@@ -67,17 +70,19 @@ public static class JWTAuthorizationServiceCollectionExtensions
     /// <param name="tokenValidationParameters">token 验证参数</param>
     /// <param name="jwtBearerConfigure"></param>
     /// <returns></returns>
-    public static AuthenticationBuilder AddJwt(this IServiceCollection services, Action<AuthenticationOptions> authenticationConfigure = null, object tokenValidationParameters = default, Action<JwtBearerOptions> jwtBearerConfigure = null)
+    public static AuthenticationBuilder AddJwt(this IServiceCollection services,
+        Action<AuthenticationOptions> authenticationConfigure = null, object tokenValidationParameters = default,
+        Action<JwtBearerOptions> jwtBearerConfigure = null)
     {
         // 添加默认授权
         var authenticationBuilder = services.AddAuthentication(options =>
-         {
-             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-             // 添加自定义配置
-             authenticationConfigure?.Invoke(options);
-         });
+            // 添加自定义配置
+            authenticationConfigure?.Invoke(options);
+        });
 
         AddJwt(authenticationBuilder, tokenValidationParameters, jwtBearerConfigure);
 
@@ -94,7 +99,9 @@ public static class JWTAuthorizationServiceCollectionExtensions
     /// <param name="jwtBearerConfigure"></param>
     /// <param name="enableGlobalAuthorize"></param>
     /// <returns></returns>
-    public static AuthenticationBuilder AddJwt<TAuthorizationHandler>(this IServiceCollection services, Action<AuthenticationOptions> authenticationConfigure = null, object tokenValidationParameters = default, Action<JwtBearerOptions> jwtBearerConfigure = null, bool enableGlobalAuthorize = false)
+    public static AuthenticationBuilder AddJwt<TAuthorizationHandler>(this IServiceCollection services,
+        Action<AuthenticationOptions> authenticationConfigure = null, object tokenValidationParameters = default,
+        Action<JwtBearerOptions> jwtBearerConfigure = null, bool enableGlobalAuthorize = false)
         where TAuthorizationHandler : class, IAuthorizationHandler
     {
         // 添加策略授权服务
@@ -112,11 +119,8 @@ public static class JWTAuthorizationServiceCollectionExtensions
     {
         // 配置验证
         services.AddOptions<JWTSettingsOptions>()
-                .BindConfiguration("JWTSettings")
-                .ValidateDataAnnotations()
-                .PostConfigure(options =>
-                {
-                    _ = JWTEncryption.SetDefaultJwtSettings(options);
-                });
+            .BindConfiguration("JWTSettings")
+            .ValidateDataAnnotations()
+            .PostConfigure(options => { _ = JWTEncryption.SetDefaultJwtSettings(options); });
     }
 }

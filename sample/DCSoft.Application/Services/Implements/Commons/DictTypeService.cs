@@ -24,7 +24,8 @@ namespace DCSoft.Applications.Services.Implements.Commons
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
-        public DictTypeService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork, IDictTypeRepository repository) : base(serviceProvider, unitOfWork, repository)
+        public DictTypeService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork,
+            IDictTypeRepository repository) : base(serviceProvider, unitOfWork, repository)
         {
             _dictTypeRepository = repository;
         }

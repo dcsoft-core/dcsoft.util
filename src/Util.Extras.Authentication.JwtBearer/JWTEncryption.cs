@@ -49,13 +49,16 @@ public class JWTEncryption
     /// <param name="payload"></param>
     /// <param name="algorithm"></param>
     /// <returns></returns>
-    public static string Encrypt(string issuerSigningKey, IDictionary<string, object> payload, string algorithm = SecurityAlgorithms.HmacSha256)
+    public static string Encrypt(string issuerSigningKey, IDictionary<string, object> payload,
+        string algorithm = SecurityAlgorithms.HmacSha256)
     {
         // 处理 JwtPayload 序列化不一致问题
-        var stringPayload = payload is JwtPayload jwtPayload ? jwtPayload.SerializeToJson() : JsonSerializer.Serialize(payload, new JsonSerializerOptions
-        {
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        });
+        var stringPayload = payload is JwtPayload jwtPayload
+            ? jwtPayload.SerializeToJson()
+            : JsonSerializer.Serialize(payload, new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
         return Encrypt(issuerSigningKey, stringPayload, algorithm);
     }
 
@@ -66,7 +69,8 @@ public class JWTEncryption
     /// <param name="payload"></param>
     /// <param name="algorithm"></param>
     /// <returns></returns>
-    public static string Encrypt(string issuerSigningKey, string payload, string algorithm = SecurityAlgorithms.HmacSha256)
+    public static string Encrypt(string issuerSigningKey, string payload,
+        string algorithm = SecurityAlgorithms.HmacSha256)
     {
         SigningCredentials credentials = null;
 
@@ -95,13 +99,13 @@ public class JWTEncryption
         var l = RandomNumberGenerator.GetInt32(3, 13);
 
         var payload = new Dictionary<string, object>
-            {
-                { "f",tokenParagraphs[0] },
-                { "e",tokenParagraphs[2] },
-                { "s",s },
-                { "l",l },
-                { "k",tokenParagraphs[1].Substring(s,l) }
-            };
+        {
+            { "f", tokenParagraphs[0] },
+            { "e", tokenParagraphs[2] },
+            { "s", s },
+            { "l", l },
+            { "k", tokenParagraphs[1].Substring(s, l) }
+        };
 
         return Encrypt(payload, expiredTime);
     }
@@ -114,7 +118,8 @@ public class JWTEncryption
     /// <param name="expiredTime">过期时间（分钟）</param>
     /// <param name="clockSkew">刷新token容差值，秒做单位</param>
     /// <returns></returns>
-    public static string Exchange(string expiredToken, string refreshToken, long? expiredTime = null, long clockSkew = 5)
+    public static string Exchange(string expiredToken, string refreshToken, long? expiredTime = null,
+        long clockSkew = 5)
     {
         // 交换刷新Token 必须原Token 已过期
         var (_isValid, _, _) = Validate(expiredToken);
@@ -134,7 +139,7 @@ public class JWTEncryption
         // 处理token并发容错问题
         var nowTime = DateTimeOffset.UtcNow;
         var cachedValue = distributedCache?.GetString(blacklistRefreshKey);
-        var isRefresh = !string.IsNullOrWhiteSpace(cachedValue);    // 判断是否刷新过
+        var isRefresh = !string.IsNullOrWhiteSpace(cachedValue); // 判断是否刷新过
         if (isRefresh)
         {
             var refreshTime = new DateTimeOffset(long.Parse(cachedValue), TimeSpan.Zero);
@@ -149,7 +154,9 @@ public class JWTEncryption
         // 判断各个部分是否匹配
         if (!refreshTokenObj.GetPayloadValue<string>("f").Equals(tokenParagraphs[0])) return default;
         if (!refreshTokenObj.GetPayloadValue<string>("e").Equals(tokenParagraphs[2])) return default;
-        if (!tokenParagraphs[1].Substring(refreshTokenObj.GetPayloadValue<int>("s"), refreshTokenObj.GetPayloadValue<int>("l")).Equals(refreshTokenObj.GetPayloadValue<string>("k"))) return default;
+        if (!tokenParagraphs[1]
+                .Substring(refreshTokenObj.GetPayloadValue<int>("s"), refreshTokenObj.GetPayloadValue<int>("l"))
+                .Equals(refreshTokenObj.GetPayloadValue<string>("k"))) return default;
 
         // 获取过期 Token 的存储信息
         var jwtSecurityToken = SecurityReadJwtToken(expiredToken);
@@ -168,7 +175,9 @@ public class JWTEncryption
         {
             distributedCache?.SetString(blacklistRefreshKey, nowTime.Ticks.ToString(), new DistributedCacheEntryOptions
             {
-                AbsoluteExpiration = DateTimeOffset.FromUnixTimeSeconds(refreshTokenObj.GetPayloadValue<long>(JwtRegisteredClaimNames.Exp))
+                AbsoluteExpiration =
+                    DateTimeOffset.FromUnixTimeSeconds(
+                        refreshTokenObj.GetPayloadValue<long>(JwtRegisteredClaimNames.Exp))
             });
         }
 
@@ -185,7 +194,9 @@ public class JWTEncryption
     /// <param name="tokenPrefix"></param>
     /// <param name="clockSkew"></param>
     /// <returns></returns>
-    public static bool AutoRefreshToken(AuthorizationHandlerContext context, DefaultHttpContext httpContext, long? expiredTime = null, int refreshTokenExpiredTime = 43200, string tokenPrefix = "Bearer ", long clockSkew = 5)
+    public static bool AutoRefreshToken(AuthorizationHandlerContext context, DefaultHttpContext httpContext,
+        long? expiredTime = null, int refreshTokenExpiredTime = 43200, string tokenPrefix = "Bearer ",
+        long clockSkew = 5)
     {
         // 如果验证有效，则跳过刷新
         if (context.User.Identity.IsAuthenticated) return true;
@@ -215,9 +226,9 @@ public class JWTEncryption
         httpContext.User = claimsPrincipal;
         httpContext.SignInAsync(claimsPrincipal);
 
-        string accessTokenKey = "access-token"
-             , xAccessTokenKey = "x-access-token"
-             , accessControlExposeKey = "Access-Control-Expose-Headers";
+        string accessTokenKey = "access-token",
+            xAccessTokenKey = "x-access-token",
+            accessControlExposeKey = "Access-Control-Expose-Headers";
 
         // 返回新的 Token
         httpContext.Response.Headers[accessTokenKey] = accessToken;
@@ -226,7 +237,8 @@ public class JWTEncryption
 
         // 处理 axios 问题
         httpContext.Response.Headers.TryGetValue(accessControlExposeKey, out var acehs);
-        httpContext.Response.Headers[accessControlExposeKey] = string.Join(',', StringValues.Concat(acehs, new StringValues(new[] { accessTokenKey, xAccessTokenKey })).Distinct());
+        httpContext.Response.Headers[accessControlExposeKey] = string.Join(',',
+            StringValues.Concat(acehs, new StringValues(new[] { accessTokenKey, xAccessTokenKey })).Distinct());
 
         return true;
     }
@@ -236,7 +248,8 @@ public class JWTEncryption
     /// </summary>
     /// <param name="accessToken"></param>
     /// <returns></returns>
-    public static (bool IsValid, JsonWebToken Token, TokenValidationResult validationResult) Validate(string accessToken)
+    public static (bool IsValid, JsonWebToken Token, TokenValidationResult validationResult) Validate(
+        string accessToken)
     {
         var jwtSettings = GetJWTSettings();
         if (jwtSettings == null) return (false, default, default);
@@ -273,7 +286,8 @@ public class JWTEncryption
     /// <param name="headerKey"></param>
     /// <param name="tokenPrefix"></param>
     /// <returns></returns>
-    public static bool ValidateJwtBearerToken(DefaultHttpContext httpContext, out JsonWebToken token, string headerKey = "Authorization", string tokenPrefix = "Bearer ")
+    public static bool ValidateJwtBearerToken(DefaultHttpContext httpContext, out JsonWebToken token,
+        string headerKey = "Authorization", string tokenPrefix = "Bearer ")
     {
         // 获取 token
         var accessToken = GetJwtBearerToken(httpContext, headerKey, tokenPrefix);
@@ -325,14 +339,17 @@ public class JWTEncryption
     /// <param name="headerKey"></param>
     /// <param name="tokenPrefix"></param>
     /// <returns></returns>
-    public static string GetJwtBearerToken(DefaultHttpContext httpContext, string headerKey = "Authorization", string tokenPrefix = "Bearer ")
+    public static string GetJwtBearerToken(DefaultHttpContext httpContext, string headerKey = "Authorization",
+        string tokenPrefix = "Bearer ")
     {
         // 判断请求报文头中是否有 "Authorization" 报文头
         var bearerToken = httpContext.Request.Headers[headerKey].ToString();
         if (string.IsNullOrWhiteSpace(bearerToken)) return default;
 
         var prefixLenght = tokenPrefix.Length;
-        return bearerToken.StartsWith(tokenPrefix, true, null) && bearerToken.Length > prefixLenght ? bearerToken[prefixLenght..] : default;
+        return bearerToken.StartsWith(tokenPrefix, true, null) && bearerToken.Length > prefixLenght
+            ? bearerToken[prefixLenght..]
+            : default;
     }
 
     /// <summary>
@@ -389,7 +406,8 @@ public class JWTEncryption
     /// <param name="payload"></param>
     /// <param name="expiredTime">过期时间，单位：分钟</param>
     /// <returns></returns>
-    private static (IDictionary<string, object> Payload, JWTSettingsOptions JWTSettings) CombinePayload(IDictionary<string, object> payload, long? expiredTime = null)
+    private static (IDictionary<string, object> Payload, JWTSettingsOptions JWTSettings) CombinePayload(
+        IDictionary<string, object> payload, long? expiredTime = null)
     {
         var jwtSettings = GetJWTSettings();
         var datetimeOffset = DateTimeOffset.UtcNow;
@@ -435,21 +453,25 @@ public class JWTEncryption
         {
             options.IssuerSigningKey ??= "U2FsdGVkX1+6H3D8Q//yQMhInzTdRZI9DbUGetbyaag=";
         }
+
         options.ValidateIssuer ??= true;
         if (options.ValidateIssuer == true)
         {
             options.ValidIssuer ??= "dotnetcore";
         }
+
         options.ValidateAudience ??= true;
         if (options.ValidateAudience == true)
         {
             options.ValidAudience ??= "powerby Util";
         }
+
         options.ValidateLifetime ??= true;
         if (options.ValidateLifetime == true)
         {
             options.ClockSkew ??= 10;
         }
+
         options.ExpiredTime ??= 20;
         options.Algorithm ??= SecurityAlgorithms.HmacSha256;
 
@@ -468,5 +490,6 @@ public class JWTEncryption
     /// <summary>
     /// 日期类型的 Claim 类型
     /// </summary>
-    private static readonly string[] DateTypeClaimTypes = new[] { JwtRegisteredClaimNames.Iat, JwtRegisteredClaimNames.Nbf, JwtRegisteredClaimNames.Exp };
+    private static readonly string[] DateTypeClaimTypes = new[]
+        { JwtRegisteredClaimNames.Iat, JwtRegisteredClaimNames.Nbf, JwtRegisteredClaimNames.Exp };
 }

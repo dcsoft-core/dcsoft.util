@@ -1,4 +1,5 @@
 ﻿using Util.Extras.Authorization;
+
 // ReSharper disable CheckNamespace
 
 namespace Microsoft.AspNetCore.Authorization;

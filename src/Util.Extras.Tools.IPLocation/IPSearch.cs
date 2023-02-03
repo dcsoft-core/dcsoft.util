@@ -24,7 +24,7 @@ namespace Util.Extras.Tools.IPLocation
             // 某些IP库包含有广告信息，显示的时候会过滤以下的广告信息
             var filterCountry = new Dictionary<int, string>
             {
-                {1, "CZ88.NET"},
+                { 1, "CZ88.NET" },
                 //{ 2, "未获得IP"},
                 //{ 3, "同一个局域网内"},
                 //{ 4, "局域网"}
@@ -33,12 +33,12 @@ namespace Util.Extras.Tools.IPLocation
             //当地区信息包含以下内容时，被忽略
             var filterArea = new Dictionary<int, string>
             {
-                {1, "电信"},
-                {2, "移动"},
-                {3, "联通"},
-                {4, "宽带"},
-                {5, "有线通"},
-                {6, "铁通"}
+                { 1, "电信" },
+                { 2, "移动" },
+                { 3, "联通" },
+                { 4, "宽带" },
+                { 5, "有线通" },
+                { 6, "铁通" }
             };
 
             // TODO 设置IP数据库路径

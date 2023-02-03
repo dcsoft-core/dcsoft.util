@@ -31,7 +31,7 @@ namespace DCSoft.Applications.Services.Implements.Commons
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="dictTypeRepository">字曲类型仓储</param>
         /// <param name="dictDataRepository">字典数据仓储</param>
-        public DictDataService(IServiceProvider serviceProvider, 
+        public DictDataService(IServiceProvider serviceProvider,
             IDataUnitOfWork unitOfWork,
             IDictTypeRepository dictTypeRepository,
             IDictDataRepository dictDataRepository) : base(serviceProvider)
@@ -69,6 +69,7 @@ namespace DCSoft.Applications.Services.Implements.Commons
                 var parentType = await _dictTypeRepository.SingleAsync(t => t.Id.Equals(dictionary.ParentId));
                 parent = new DictData(Id.CreateGuid(), parentType.Id.ToString() + ",", 0);
             }
+
             dictionary.InitPath(parent);
             dictionary.SortId = await _dictDataRepository.GenerateSortIdAsync(dictionary.ParentId);
             await _dictDataRepository.AddAsync(dictionary);
@@ -84,7 +85,8 @@ namespace DCSoft.Applications.Services.Implements.Commons
         {
             var dictionary = await _dictDataRepository.FindByIdAsync(request.Id.ToGuid());
             request.MapTo(dictionary);
-            if (await _dictDataRepository.ExistsAsync(t => t.Id != request.Id.ToGuid() && t.Code == request.Code && t.Type == request.Type))
+            if (await _dictDataRepository.ExistsAsync(t =>
+                    t.Id != request.Id.ToGuid() && t.Code == request.Code && t.Type == request.Type))
                 throw new Warning("字典编码已存在");
             dictionary.InitPinYin();
             await _dictDataRepository.UpdatePathAsync(dictionary);

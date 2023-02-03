@@ -38,6 +38,7 @@ namespace DCSoft.Domain.Models.Systems
         [Required]
         [MaxLength(256)]
         public string Code { get; set; }
+
         /// <summary>
         /// 角色名称
         ///</summary>
@@ -45,6 +46,7 @@ namespace DCSoft.Domain.Models.Systems
         [Required]
         [MaxLength(256)]
         public string Name { get; set; }
+
         /// <summary>
         /// 标准化角色名称
         ///</summary>
@@ -52,6 +54,7 @@ namespace DCSoft.Domain.Models.Systems
         [Required]
         [MaxLength(256)]
         public string NormalizedName { get; set; }
+
         /// <summary>
         /// 角色类型
         ///</summary>
@@ -59,61 +62,72 @@ namespace DCSoft.Domain.Models.Systems
         [Required]
         [MaxLength(128)]
         public string Type { get; set; }
+
         /// <summary>
         /// 管理员
         ///</summary>
         [DisplayName("管理员")]
         public bool IsAdmin { get; set; }
+
         /// <summary>
         /// 备注
         ///</summary>
         [DisplayName("备注")]
         [MaxLength(512)]
         public string Remark { get; set; }
+
         /// <summary>
         /// 拼音简码
         ///</summary>
         [DisplayName("拼音简码")]
         [MaxLength(256)]
         public string PinYin { get; set; }
+
         /// <summary>
         /// 签名
         ///</summary>
         [DisplayName("签名")]
         [MaxLength(256)]
         public string Sign { get; set; }
+
         /// <summary>
         /// 创建时间
         ///</summary>
         [DisplayName("创建时间")]
         public DateTime? CreationTime { get; set; }
+
         /// <summary>
         /// 创建者标识
         ///</summary>
         [DisplayName("创建者标识")]
         public Guid? CreatorId { get; set; }
+
         /// <summary>
         /// 创建者
         ///</summary>
         [DisplayName("创建者")]
         [MaxLength(256)]
         public string Creator { get; set; }
+
         /// <summary>
         /// 最后修改时间
         ///</summary>
         [DisplayName("最后修改时间")]
         public DateTime? LastModificationTime { get; set; }
+
         /// <summary>
         /// 最后修改者标识
         ///</summary>
         [DisplayName("最后修改者标识")]
         public Guid? LastModifierId { get; set; }
+
         /// <summary>
         /// 最后修改者
         ///</summary>
         [DisplayName("最后修改者")]
         [MaxLength(256)]
         public string LastModifier { get; set; }
+
         /// <summary>
         /// 是否删除
         ///</summary>

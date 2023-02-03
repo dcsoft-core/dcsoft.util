@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+
 // ReSharper disable CheckNamespace
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,8 @@ public static class AuthorizationServiceCollectionExtensions
     /// <param name="configure">自定义配置</param>
     /// <param name="enableGlobalAuthorize">是否启用全局授权</param>
     /// <returns>服务集合</returns>
-    public static IServiceCollection AddAppAuthorization<TAuthorizationHandler>(this IServiceCollection services, Action<IServiceCollection> configure = null, bool enableGlobalAuthorize = false)
+    public static IServiceCollection AddAppAuthorization<TAuthorizationHandler>(this IServiceCollection services,
+        Action<IServiceCollection> configure = null, bool enableGlobalAuthorize = false)
         where TAuthorizationHandler : class, IAuthorizationHandler
     {
         // 注册授权策略提供器
@@ -32,10 +34,7 @@ public static class AuthorizationServiceCollectionExtensions
         //启用全局授权
         if (enableGlobalAuthorize)
         {
-            services.Configure<MvcOptions>(options =>
-            {
-                options.Filters.Add(new AuthorizeFilter());
-            });
+            services.Configure<MvcOptions>(options => { options.Filters.Add(new AuthorizeFilter()); });
         }
 
         configure?.Invoke(services);

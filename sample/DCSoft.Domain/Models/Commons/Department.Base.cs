@@ -37,6 +37,7 @@ namespace DCSoft.Domain.Models.Commons
         [Required]
         [MaxLength(128)]
         public string Code { get; set; }
+
         /// <summary>
         /// 部门名称
         ///</summary>
@@ -44,59 +45,70 @@ namespace DCSoft.Domain.Models.Commons
         [Required]
         [MaxLength(256)]
         public string Name { get; set; }
+
         /// <summary>
         /// 拼音简码
         ///</summary>
         [DisplayName("拼音简码")]
         [MaxLength(256)]
         public string PinYin { get; set; }
+
         /// <summary>
         /// 备注
         ///</summary>
         [DisplayName("备注")]
         [MaxLength(512)]
         public string Remark { get; set; }
+
         /// <summary>
         /// 扩展
         ///</summary>
         [DisplayName("扩展")]
         public string Extend { get; set; }
+
         /// <summary>
         /// 父资源
         /// </summary>
         public Department Parent { get; set; }
+
         /// <summary>
         /// 创建时间
         ///</summary>
         [DisplayName("创建时间")]
         public DateTime? CreationTime { get; set; }
+
         /// <summary>
         /// 创建者标识
         ///</summary>
         [DisplayName("创建者标识")]
         public Guid? CreatorId { get; set; }
+
         /// <summary>
         /// 创建者
         ///</summary>
         [DisplayName("创建者")]
         [MaxLength(256)]
         public string Creator { get; set; }
+
         /// <summary>
         /// 最后修改时间
         ///</summary>
         [DisplayName("最后修改时间")]
         public DateTime? LastModificationTime { get; set; }
+
         /// <summary>
         /// 最后修改者标识
         ///</summary>
         [DisplayName("最后修改者标识")]
         public Guid? LastModifierId { get; set; }
+
         /// <summary>
         /// 最后修改者
         ///</summary>
         [DisplayName("最后修改者")]
         [MaxLength(256)]
         public string LastModifier { get; set; }
+
         /// <summary>
         /// 是否删除
         ///</summary>

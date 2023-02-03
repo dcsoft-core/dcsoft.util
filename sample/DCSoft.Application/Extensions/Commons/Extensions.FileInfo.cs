@@ -75,6 +75,7 @@ namespace DCSoft.Applications.Extensions.Commons
             result.RequestPath = file.Url;
             return result;
         }
+
         /// <summary>
         /// 转换为附件信息实体
         /// </summary>

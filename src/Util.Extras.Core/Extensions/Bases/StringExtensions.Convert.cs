@@ -211,7 +211,9 @@ namespace Util.Extras.Extensions
         {
             if (timeStamp.Length > 10)
                 timeStamp = timeStamp.Substring(0, 10);
-            var dateTimeStart = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), TimeZoneInfo.Local); ;
+            var dateTimeStart = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                TimeZoneInfo.Local);
+            ;
             var lIime = long.Parse(timeStamp + "0000000");
             var toNow = new TimeSpan(lIime);
             return dateTimeStart.Add(toNow);

@@ -12,10 +12,12 @@ namespace Util.Extras.Domain.Auditing
         /// 实体
         /// </summary>
         private readonly object _entity;
+
         /// <summary>
         /// 用户标识
         /// </summary>
         private readonly string _userId;
+
         /// <summary>
         /// 用户名称
         /// </summary>
@@ -59,6 +61,7 @@ namespace Util.Extras.Domain.Auditing
                 entity.LastModifier = _userName.SafeString();
                 return;
             }
+
             if (_entity is IModificationAudited<Guid?> entity2)
             {
                 entity2.LastModificationTime = Time.Now;
@@ -66,6 +69,7 @@ namespace Util.Extras.Domain.Auditing
                 entity2.LastModifier = _userName.SafeString();
                 return;
             }
+
             if (_entity is IModificationAudited<int> entity3)
             {
                 entity3.LastModificationTime = Time.Now;
@@ -73,6 +77,7 @@ namespace Util.Extras.Domain.Auditing
                 entity3.LastModifier = _userName.SafeString();
                 return;
             }
+
             if (_entity is IModificationAudited<int?> entity4)
             {
                 entity4.LastModificationTime = Time.Now;
@@ -80,6 +85,7 @@ namespace Util.Extras.Domain.Auditing
                 entity4.LastModifier = _userName.SafeString();
                 return;
             }
+
             if (_entity is IModificationAudited<string> entity5)
             {
                 entity5.LastModificationTime = Time.Now;
@@ -87,6 +93,7 @@ namespace Util.Extras.Domain.Auditing
                 entity5.LastModifier = _userName.SafeString();
                 return;
             }
+
             if (_entity is IModificationAudited<long> entity6)
             {
                 entity6.LastModificationTime = Time.Now;
@@ -94,6 +101,7 @@ namespace Util.Extras.Domain.Auditing
                 entity6.LastModifier = _userName.SafeString();
                 return;
             }
+
             if (_entity is IModificationAudited<long?> entity7)
             {
                 entity7.LastModificationTime = Time.Now;

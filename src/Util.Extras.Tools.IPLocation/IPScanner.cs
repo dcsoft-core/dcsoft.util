@@ -51,7 +51,7 @@ namespace Util.Extras.Tools.IPLocation
 
         private static long IpToInt(string ip)
         {
-            var separator = new[] {'.'};
+            var separator = new[] { '.' };
             if (ip.Split(separator).Length == 3)
             {
                 ip = ip + ".0";
@@ -109,7 +109,7 @@ namespace Util.Extras.Tools.IPLocation
                 ip = "300.300.300.300";
             }
 
-            var ipLocation = new IPLocation() {IP = ip};
+            var ipLocation = new IPLocation() { IP = ip };
             // ReSharper disable once InconsistentNaming
             var intIP = IpToInt(ip);
             if (intIP >= IpToInt("127.0.0.1") && intIP <= IpToInt("127.255.255.255"))
@@ -280,7 +280,7 @@ namespace Util.Extras.Tools.IPLocation
                 }
                 else
                 {
-                    stringBuilder.Append((char) lowByte);
+                    stringBuilder.Append((char)lowByte);
                 }
             }
         }

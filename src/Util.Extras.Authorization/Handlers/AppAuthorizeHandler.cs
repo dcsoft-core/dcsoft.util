@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+
 // ReSharper disable CheckNamespace
 
 namespace Util.Extras.Authorization;
@@ -22,7 +23,7 @@ public abstract class AppAuthorizeHandler : IAuthorizationHandler
         {
             await AuthorizeHandleAsync(context);
         }
-        else context.GetCurrentHttpContext()?.SignoutToSwagger();    // 退出Swagger登录
+        else context.GetCurrentHttpContext()?.SignoutToSwagger(); // 退出Swagger登录
     }
 
     /// <summary>
@@ -43,7 +44,8 @@ public abstract class AppAuthorizeHandler : IAuthorizationHandler
     /// <param name="httpContext"></param>
     /// <param name="requirement"></param>
     /// <returns></returns>
-    public virtual Task<bool> PolicyPipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext, IAuthorizationRequirement requirement)
+    public virtual Task<bool> PolicyPipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext,
+        IAuthorizationRequirement requirement)
     {
         return Task.FromResult(true);
     }

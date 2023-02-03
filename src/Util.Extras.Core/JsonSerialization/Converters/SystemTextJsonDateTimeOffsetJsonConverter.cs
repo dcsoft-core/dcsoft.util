@@ -58,7 +58,8 @@ public class SystemTextJsonDateTimeOffsetJsonConverter : JsonConverter<DateTimeO
     /// <returns></returns>
     public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return DateTime.SpecifyKind(Convert.ToDateTime(reader.GetString()), Localized ? DateTimeKind.Local : DateTimeKind.Utc);
+        return DateTime.SpecifyKind(Convert.ToDateTime(reader.GetString()),
+            Localized ? DateTimeKind.Local : DateTimeKind.Utc);
     }
 
     /// <summary>
@@ -127,7 +128,8 @@ public class SystemTextJsonNullableDateTimeOffsetJsonConverter : JsonConverter<D
     /// <returns></returns>
     public override DateTimeOffset? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return DateTime.SpecifyKind(Convert.ToDateTime(reader.GetString()), Localized ? DateTimeKind.Local : DateTimeKind.Utc);
+        return DateTime.SpecifyKind(Convert.ToDateTime(reader.GetString()),
+            Localized ? DateTimeKind.Local : DateTimeKind.Utc);
     }
 
     /// <summary>

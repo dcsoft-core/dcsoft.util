@@ -38,9 +38,9 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="moduleRepository">模块仓储</param>
         /// <param name="roleRepository">角色仓储</param>
         /// <param name="cache">缓存服务</param>
-        public UserService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork, 
-            IUserRepository repository, 
-            IModuleRepository moduleRepository, 
+        public UserService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork,
+            IUserRepository repository,
+            IModuleRepository moduleRepository,
             IRoleRepository roleRepository,
             ICache cache) : base(serviceProvider, unitOfWork, repository)
         {
@@ -85,7 +85,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
                 .WhereIfNotEmpty(t => t.NickName.Contains(param.NickName))
                 .WhereIf(t => t.UserType == param.UserType, param.UserType != 0);
         }
-        
+
         /// <summary>
         /// 转成数据传输对象
         /// </summary>
@@ -108,7 +108,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             user.SetPasswordHash(user.Password);
             user.SetPassword(user.Password, true);
             await _repository.AddAsync(user);
-            
+
             await _roleRepository.AddRolesToUserAsync(user.Id, request.RoleIds.ToGuidList());
             return user.Id;
         }

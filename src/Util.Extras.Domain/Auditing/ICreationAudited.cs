@@ -19,10 +19,12 @@ namespace Util.Extras.Domain.Auditing
         /// 创建人标识
         /// </summary>
         TKey CreatorId { get; set; }
+
         /// <summary>
         /// 创建人名称
         /// </summary>
         string Creator { get; set; }
+
         /// <summary>
         /// 创建时间
         /// </summary>

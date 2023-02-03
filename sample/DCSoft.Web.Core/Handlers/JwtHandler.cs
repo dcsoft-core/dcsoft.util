@@ -52,13 +52,15 @@ namespace DCSoft.Web.Core.Handlers
         /// <param name="context"></param>
         /// <param name="httpContext"></param>
         /// <returns></returns>
-        public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
+        public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context,
+            DefaultHttpContext httpContext)
         {
             if (context.Resource!.GetType() != typeof(DefaultHttpContext))
             {
                 var filterContext = (AuthorizationFilterContext)context.Resource;
                 //排除匿名访问接口
-                if (filterContext.ActionDescriptor.EndpointMetadata.Any(m => m.GetType() == typeof(AllowAnonymousAttribute)))
+                if (filterContext.ActionDescriptor.EndpointMetadata.Any(m =>
+                        m.GetType() == typeof(AllowAnonymousAttribute)))
                     return true;
 
                 //排除登录即可访问的接口
@@ -80,7 +82,8 @@ namespace DCSoft.Web.Core.Handlers
         /// <param name="filterContext"></param>
         /// <param name="httpContext"></param>
         /// <returns></returns>
-        private static async Task<bool> CheckAccreditedAsync(AuthorizationFilterContext filterContext, DefaultHttpContext httpContext)
+        private static async Task<bool> CheckAccreditedAsync(AuthorizationFilterContext filterContext,
+            DefaultHttpContext httpContext)
         {
             var session = Ioc.Create<ISession>();
 

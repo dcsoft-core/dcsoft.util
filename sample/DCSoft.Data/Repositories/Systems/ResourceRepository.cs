@@ -20,11 +20,12 @@ namespace DCSoft.Data.Repositories.Systems
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="permissionRepository">权限仓储</param>
-        public ResourceRepository(IDataUnitOfWork unitOfWork, 
+        public ResourceRepository(IDataUnitOfWork unitOfWork,
             IPermissionRepository permissionRepository) : base(unitOfWork)
         {
             _permissionRepository = permissionRepository;
         }
+
         /// <summary>
         /// 权限仓储
         /// </summary>

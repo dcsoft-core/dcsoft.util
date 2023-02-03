@@ -213,6 +213,7 @@ namespace DCSoft.Apis.Admin.Systems
             {
                 throw new Warning("上传文件有误");
             }
+
             var config = _uploadOptions.Avatar;
             var fileInfo = await _uploadHelper.UploadAsync(file, config, new { Id = $"{Session.GetUserName()}" });
 

@@ -65,10 +65,10 @@ namespace Util.Extras.Extensions
                 return null;
 
             return Enum.GetValues(enumType).Cast<Enum>()
-                 .Where(m => !ignoreUnKnown || !m.ToString().Equals("UnKnown")).Select(x => new Item
-                 (
-                     x.ToDescription(), x
-                 )).ToList();
+                .Where(m => !ignoreUnKnown || !m.ToString().Equals("UnKnown")).Select(x => new Item
+                (
+                    x.ToDescription(), x
+                )).ToList();
         }
     }
 }

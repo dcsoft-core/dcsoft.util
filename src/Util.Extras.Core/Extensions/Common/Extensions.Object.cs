@@ -25,6 +25,7 @@ namespace Util.Extras.Extensions
             {
                 return reveal;
             }
+
             return reveal;
         }
 
@@ -40,6 +41,7 @@ namespace Util.Extras.Extensions
             {
                 return reveal;
             }
+
             return errorValue;
         }
 
@@ -68,6 +70,7 @@ namespace Util.Extras.Extensions
             {
                 return reveal;
             }
+
             return 0;
         }
 
@@ -83,6 +86,7 @@ namespace Util.Extras.Extensions
             {
                 return reveal;
             }
+
             return errorValue;
         }
 
@@ -135,10 +139,12 @@ namespace Util.Extras.Extensions
         /// <returns></returns>
         public static decimal ToDecimal(this object thisValue)
         {
-            if (thisValue != null && thisValue != DBNull.Value && decimal.TryParse(thisValue.ToString(), out var reveal))
+            if (thisValue != null && thisValue != DBNull.Value &&
+                decimal.TryParse(thisValue.ToString(), out var reveal))
             {
                 return reveal;
             }
+
             return 0;
         }
 
@@ -150,10 +156,12 @@ namespace Util.Extras.Extensions
         /// <returns></returns>
         public static decimal ToDecimal(this object thisValue, decimal errorValue)
         {
-            if (thisValue != null && thisValue != DBNull.Value && decimal.TryParse(thisValue.ToString(), out var reveal))
+            if (thisValue != null && thisValue != DBNull.Value &&
+                decimal.TryParse(thisValue.ToString(), out var reveal))
             {
                 return reveal;
             }
+
             return errorValue;
         }
 
@@ -169,6 +177,7 @@ namespace Util.Extras.Extensions
             {
                 reveal = Convert.ToDateTime(thisValue);
             }
+
             return reveal;
         }
 
@@ -180,10 +189,12 @@ namespace Util.Extras.Extensions
         /// <returns></returns>
         public static DateTime ToDate(this object thisValue, DateTime errorValue)
         {
-            if (thisValue != null && thisValue != DBNull.Value && DateTime.TryParse(thisValue.ToString(), out var reveal))
+            if (thisValue != null && thisValue != DBNull.Value &&
+                DateTime.TryParse(thisValue.ToString(), out var reveal))
             {
                 return reveal;
             }
+
             return errorValue;
         }
 
@@ -199,6 +210,7 @@ namespace Util.Extras.Extensions
             {
                 return reveal;
             }
+
             return reveal;
         }
 

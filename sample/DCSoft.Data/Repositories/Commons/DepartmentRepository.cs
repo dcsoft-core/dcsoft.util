@@ -58,6 +58,7 @@ namespace DCSoft.Data.Repositories.Commons
             {
                 return oldDepartment?.Code;
             }
+
             return await GenerateCodeAsync(newParentId);
         }
     }

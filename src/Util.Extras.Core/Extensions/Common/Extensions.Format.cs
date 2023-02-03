@@ -105,6 +105,5 @@ namespace Util.Extras.Extensions
         }
 
         #endregion
-
     }
 }

@@ -52,5 +52,4 @@ namespace DCSoft.Integration.Upload
             UseFileUploadConfig(app, uploadConfig.Value.Document);
         }
     }
-
 }

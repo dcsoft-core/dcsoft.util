@@ -28,7 +28,8 @@ namespace Util.Extras.Extensions
         /// <param name="array">数组</param>
         /// <param name="index">索引</param>
         /// <param name="length">长度</param>
-        public static void Sort(this System.Array array, int index, int length) => System.Array.Sort(array, index, length);
+        public static void Sort(this System.Array array, int index, int length) =>
+            System.Array.Sort(array, index, length);
 
         /// <summary>
         /// 排序
@@ -74,7 +75,8 @@ namespace Util.Extras.Extensions
         /// <param name="index">索引</param>
         /// <param name="length">长度</param>
         /// <param name="comparer">比较器</param>
-        public static void Sort(this System.Array array, System.Array items, int index, int length, IComparer comparer) =>
+        public static void Sort(this System.Array array, System.Array items, int index, int length,
+            IComparer comparer) =>
             System.Array.Sort(array, items, index, length, comparer);
     }
 }

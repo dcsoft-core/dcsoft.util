@@ -40,10 +40,7 @@ namespace DCSoft.Data.MySql.EntityTypeConfigurations.Systems
             builder.HasMany(p => p.Roles).WithMany(p => p.Users).UsingEntity<UserRole>(
                 u => u.HasOne(c => c.Role).WithMany(c => c.UserRoles).HasForeignKey(c => c.RoleId),
                 u => u.HasOne(c => c.User).WithMany(c => c.UserRoles).HasForeignKey(c => c.UserId),
-                u =>
-                {
-                    u.HasKey(c => new { c.UserId, c.RoleId });
-                });
+                u => { u.HasKey(c => new { c.UserId, c.RoleId }); });
         }
 
         /// <summary>

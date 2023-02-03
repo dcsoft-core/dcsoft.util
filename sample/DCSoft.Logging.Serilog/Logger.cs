@@ -112,7 +112,8 @@ namespace DCSoft.Logging.Serilog
         /// <param name="response">返回正文</param>
         /// <param name="userType">操作类别（0其它 1后台用户 2手机端用户）</param>
         /// <param name="status">操作状态（0正常 1异常）</param>
-        public void Operate(string title, BusinessType type, string method, string response, OperateType userType, OperateStatus status)
+        public void Operate(string title, BusinessType type, string method, string response, OperateType userType,
+            OperateStatus status)
         {
             var errorMsg = "";
             Operate(title, type, method, response, userType, status, errorMsg);
@@ -128,7 +129,8 @@ namespace DCSoft.Logging.Serilog
         /// <param name="userType">操作类别（0其它 1后台用户 2手机端用户）</param>
         /// <param name="status">操作状态（0正常 1异常）</param>
         /// <param name="errorMsg">错误信息</param>
-        public void Operate(string title, BusinessType type, string method, string response, OperateType userType, OperateStatus status,
+        public void Operate(string title, BusinessType type, string method, string response, OperateType userType,
+            OperateStatus status,
             string errorMsg)
         {
             var ua = Parser.GetDefault().Parse(Web.Browser ?? "");

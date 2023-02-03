@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 // ReSharper disable RedundantLambdaParameterType
 // ReSharper disable UnusedMember.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
@@ -80,7 +81,9 @@ namespace Util.Extras.Tree
                 }
 
                 var nodeData = new TreeViewData<TV>(value, null, false);
-                var node = parentStack.Count == 0 ? InsertNode(Tree, nodeData) : InsertNode(parentStack.Peek(), nodeData);
+                var node = parentStack.Count == 0
+                    ? InsertNode(Tree, nodeData)
+                    : InsertNode(parentStack.Peek(), nodeData);
                 //push
                 parentStack.Push(node);
             }

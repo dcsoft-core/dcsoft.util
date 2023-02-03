@@ -27,8 +27,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
-        public ClaimService(IServiceProvider serviceProvider, 
-            IDataUnitOfWork unitOfWork, 
+        public ClaimService(IServiceProvider serviceProvider,
+            IDataUnitOfWork unitOfWork,
             IClaimRepository repository) : base(serviceProvider, unitOfWork, repository)
         {
             _repository = repository;

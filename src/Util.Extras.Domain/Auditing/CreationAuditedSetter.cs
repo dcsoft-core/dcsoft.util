@@ -12,14 +12,17 @@ namespace Util.Extras.Domain.Auditing
         /// 实体
         /// </summary>
         private readonly object _entity;
+
         /// <summary>
         /// 用户标识
         /// </summary>
         private readonly string _userId;
+
         /// <summary>
         /// 用户名称
         /// </summary>
         private readonly string _userName;
+
         /// <summary>
         /// 初始化创建操作审计设置器
         /// </summary>
@@ -58,6 +61,7 @@ namespace Util.Extras.Domain.Auditing
                 entity.Creator = _userName.SafeString();
                 return;
             }
+
             if (_entity is ICreationAudited<Guid?> entity2)
             {
                 entity2.CreationTime = Time.Now;
@@ -65,6 +69,7 @@ namespace Util.Extras.Domain.Auditing
                 entity2.Creator = _userName.SafeString();
                 return;
             }
+
             if (_entity is ICreationAudited<int> entity3)
             {
                 entity3.CreationTime = Time.Now;
@@ -72,6 +77,7 @@ namespace Util.Extras.Domain.Auditing
                 entity3.Creator = _userName.SafeString();
                 return;
             }
+
             if (_entity is ICreationAudited<int?> entity4)
             {
                 entity4.CreationTime = Time.Now;
@@ -79,6 +85,7 @@ namespace Util.Extras.Domain.Auditing
                 entity4.Creator = _userName.SafeString();
                 return;
             }
+
             if (_entity is ICreationAudited<string> entity5)
             {
                 entity5.CreationTime = Time.Now;
@@ -86,6 +93,7 @@ namespace Util.Extras.Domain.Auditing
                 entity5.Creator = _userName.SafeString();
                 return;
             }
+
             if (_entity is ICreationAudited<long> entity6)
             {
                 entity6.CreationTime = Time.Now;
@@ -93,6 +101,7 @@ namespace Util.Extras.Domain.Auditing
                 entity6.Creator = _userName.SafeString();
                 return;
             }
+
             if (_entity is ICreationAudited<long?> entity7)
             {
                 entity7.CreationTime = Time.Now;

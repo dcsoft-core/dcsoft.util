@@ -23,7 +23,8 @@ namespace Util.Extras.Tools.Captcha
         /// <summary>
         /// 验证码文本池
         /// </summary>
-        private static readonly string[] _cnTextArr = {
+        private static readonly string[] _cnTextArr =
+        {
             "的", "一", "国", "在", "人", "了", "有", "中", "是", "年", "和", "大", "业", "不", "为", "发", "会", "工", "经", "上", "地",
             "市", "要", "个", "产", "这", "出", "行", "作", "生", "家", "以", "成", "到", "日", "民", "来", "我", "部", "对", "进", "多",
             "全", "建", "他", "公", "开", "们", "场", "展", "时", "理", "新", "方", "主", "企", "资", "实", "学", "报", "制", "政", "济",
@@ -50,7 +51,8 @@ namespace Util.Extras.Tools.Captcha
             "获", "石", "食", "抓", "富", "模", "始", "住", "赛", "客", "越", "闻", "央", "席", "坚"
         };
 
-        private static readonly string[] _enTextArr = {
+        private static readonly string[] _enTextArr =
+        {
             "a", "b", "c", "d", "e", "f", "g", "h", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y",
             "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W",
             "X", "Y", "Z"
@@ -79,14 +81,16 @@ namespace Util.Extras.Tools.Captcha
         /// 颜色池,较深的颜色
         /// https://tool.oschina.net/commons?type=3
         /// </summary>
-        private static readonly string[] _colorHexArr = {
+        private static readonly string[] _colorHexArr =
+        {
             "#00E5EE", "#000000", "#2F4F4F", "#000000", "#43CD80", "#191970", "#006400", "#458B00", "#8B7765", "#CD5B45"
         };
 
         /// <summary>
         /// 较浅的颜色
         /// </summary>
-        private static readonly string[] _lightColorHexArr = { "#FFFACD", "#FDF5E6", "#F0FFFF", "#BBFFFF", "#FAFAD2", "#FFE4E1", "#DCDCDC", "#F0E68C" };
+        private static readonly string[] _lightColorHexArr =
+            { "#FFFACD", "#FDF5E6", "#F0FFFF", "#BBFFFF", "#FAFAD2", "#FFE4E1", "#DCDCDC", "#F0E68C" };
 
         /// <summary>
         /// 
@@ -158,7 +162,8 @@ namespace Util.Extras.Tools.Captcha
         {
             using var img = new Image<Rgba32>(_imageWidth, _imageHeight);
             var textFont = _fontArr.FirstOrDefault(c =>
-                "STCaiyun".Equals(c.Name, StringComparison.CurrentCultureIgnoreCase)) ?? _fontArr[_random.Next(0, _fontArr.Length)];
+                               "STCaiyun".Equals(c.Name, StringComparison.CurrentCultureIgnoreCase)) ??
+                           _fontArr[_random.Next(0, _fontArr.Length)];
 
             var colorCircleHex = _colorHexArr[_random.Next(0, _colorHexArr.Length)];
             var colorTextHex = colorCircleHex;
@@ -289,7 +294,8 @@ namespace Util.Extras.Tools.Captcha
             {
                 var fontCollection = new FontCollection();
 
-                _fontArr = names.Select(name => new Font(fontCollection.Add(assembly.GetManifestResourceStream(name)!), fontSize)).ToArray();
+                _fontArr = names.Select(name =>
+                    new Font(fontCollection.Add(assembly.GetManifestResourceStream(name)!), fontSize)).ToArray();
             }
             else
             {

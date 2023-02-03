@@ -16,7 +16,8 @@ namespace Util.Extras.Extensions
         /// <param name="dst">目标数组</param>
         /// <param name="dstOffset">目标数组偏移量</param>
         /// <param name="count">计数</param>
-        public static void BlockCopy(this System.Array src, int srcOffset, System.Array dst, int dstOffset, int count) =>
+        public static void BlockCopy(this System.Array src, int srcOffset, System.Array dst, int dstOffset,
+            int count) =>
             Buffer.BlockCopy(src, srcOffset, dst, dstOffset, count);
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace Util.Extras.Extensions
         /// <param name="array">数组</param>
         /// <param name="index">索引</param>
         /// <param name="value">值</param>
-        public static void SetByte(this System.Array array, int index, byte value) => Buffer.SetByte(array, index, value);
+        public static void SetByte(this System.Array array, int index, byte value) =>
+            Buffer.SetByte(array, index, value);
     }
 }

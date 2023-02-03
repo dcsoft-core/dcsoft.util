@@ -1,4 +1,5 @@
 ﻿// ReSharper disable once CheckNamespace
+
 namespace Util.Extras.Text
 {
     /// <summary>
@@ -17,14 +18,17 @@ namespace Util.Extras.Text
         /// 任意
         /// </summary>
         Any,
+
         /// <summary>
         /// 相同
         /// </summary>
         Same,
+
         /// <summary>
         /// 
         /// </summary>
         MayorLong,
+
         /// <summary>
         /// 
         /// </summary>

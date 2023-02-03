@@ -57,7 +57,7 @@ namespace Util.Extras.Timing
         public static bool IsWeekday(this DateTime dateTime)
         {
             DayOfWeek[] weeks =
-                {DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday};
+                { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday };
             return weeks.Contains(dateTime.DayOfWeek);
         }
 
@@ -91,7 +91,8 @@ namespace Util.Extras.Timing
         {
             DateTime utc = dateTime.ToUniversalTime();
             TimeSpan span = utc.Subtract(new DateTime(1970, 1, 1));
-            return Math.Round(milsec ? span.TotalMilliseconds : span.TotalSeconds).ToString(CultureInfo.InvariantCulture);
+            return Math.Round(milsec ? span.TotalMilliseconds : span.TotalSeconds)
+                .ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion

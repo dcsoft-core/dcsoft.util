@@ -151,7 +151,8 @@ namespace Util.Extras.Helpers
         /// </summary>
         /// <param name="value">值</param>
         public static string UnicodeToStr(string value) =>
-            new System.Text.RegularExpressions.Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(value,
+            new System.Text.RegularExpressions.Regex(@"\\u([0-9A-F]{4})",
+                RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(value,
                 x => Convert.ToChar(System.Convert.ToUInt16(x.Result("$1"), 16)).ToString());
 
         #endregion

@@ -47,7 +47,7 @@ namespace DCSoft.Applications.Extensions.Commons
             var parentDict = new Dictionary<string, DepartmentTreeData>();
             ITreeNodeVisitor<TreeViewData<DepartmentDto>> visitor =
                 new TreeNodeVisitorRootToLeaf<TreeViewData<DepartmentDto>>(
-                    tree.Tree, delegate (INode<TreeViewData<DepartmentDto>> treeNode)
+                    tree.Tree, delegate(INode<TreeViewData<DepartmentDto>> treeNode)
                     {
                         if (treeNode.IsRoot) return;
                         var menu = treeNode.Data.Value;

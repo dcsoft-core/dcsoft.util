@@ -24,7 +24,8 @@ namespace Util.Extras.Extensions
         /// <typeparam name="TKey">键类型</typeparam>
         /// <typeparam name="TValue">值类型</typeparam>
         /// <param name="dictionary">字典</param>
-        public static IDictionary<TKey, TValue> Sort<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) where TKey : notnull
+        public static IDictionary<TKey, TValue> Sort<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
+            where TKey : notnull
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -55,7 +56,8 @@ namespace Util.Extras.Extensions
         /// <typeparam name="TKey">键类型</typeparam>
         /// <typeparam name="TValue">值类型</typeparam>
         /// <param name="dictionary">字典</param>
-        public static IDictionary<TKey, TValue> SortByValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) where TKey : notnull =>
+        public static IDictionary<TKey, TValue> SortByValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
+            where TKey : notnull =>
             new SortedDictionary<TKey, TValue>(dictionary).OrderBy(x => x.Value)
                 .ToDictionary(x => x.Key, x => x.Value);
 
@@ -128,7 +130,8 @@ namespace Util.Extras.Extensions
         /// <typeparam name="TKey">键类型</typeparam>
         /// <typeparam name="TValue">值类型</typeparam>
         /// <param name="dictionary">字典</param>
-        public static IDictionary<TValue, TKey> Reverse<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) where TValue : notnull
+        public static IDictionary<TValue, TKey> Reverse<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
+            where TValue : notnull
         {
             if (dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -146,7 +149,8 @@ namespace Util.Extras.Extensions
         /// <typeparam name="TValue">值类型</typeparam>
         /// <param name="dictionary">字典</param>
         public static IReadOnlyDictionary<TKey, TValue> AsReadOnly<TKey, TValue>(
-            this IDictionary<TKey, TValue> dictionary) where TKey : notnull => new ReadOnlyDictionary<TKey, TValue>(dictionary);
+            this IDictionary<TKey, TValue> dictionary) where TKey : notnull =>
+            new ReadOnlyDictionary<TKey, TValue>(dictionary);
 
         #endregion
 
