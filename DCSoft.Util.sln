@@ -73,7 +73,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-EntityFrameworkCore", "0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-Util.Extras.Data.EntityFrameworkCore.MySql", "src\Util.Extras.Data.EntityFrameworkCore.MySql\04-Util.Extras.Data.EntityFrameworkCore.MySql.csproj", "{7D8102EC-A0B9-4F82-838E-3D99BD70C83D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Extras.Tools.Captcha", "src\Util.Extras.Tools.Captcha\Util.Extras.Tools.Captcha.csproj", "{65864682-C187-4314-8296-094AD7ED4161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util.Extras.Tools.Captcha", "src\Util.Extras.Tools.Captcha\Util.Extras.Tools.Captcha.csproj", "{65864682-C187-4314-8296-094AD7ED4161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

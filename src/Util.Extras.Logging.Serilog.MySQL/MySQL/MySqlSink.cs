@@ -11,8 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
-using MySql.Data.MySqlClient;
 using Serilog.Core;
 using Serilog.Debugging;
 using Serilog.Events;
@@ -23,6 +21,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using MySqlConnector;
 
 namespace Serilog.Sinks.MySQL
 {
@@ -186,7 +185,7 @@ namespace Serilog.Sinks.MySQL
                     tableCommandBuilder.Append("`CreationTime` datetime(6) null comment '创建时间',");
                     tableCommandBuilder.Append("`CreatorId` char(36) charset ascii null comment '创建者标识',");
                     tableCommandBuilder.Append("`Creator` varchar(256) null comment '创建者',");
-                    tableCommandBuilder.Append("`IsDeleted` tinyint(1) not null comment '是否删除',");
+                    tableCommandBuilder.Append("`IsDeleted` tinyint(1) not null comment '是否删除'");
                 }
                 else if (_logType == LogType.Login)
                 {
@@ -201,7 +200,7 @@ namespace Serilog.Sinks.MySQL
                     tableCommandBuilder.Append("`CreationTime` datetime(6) null comment '创建时间',");
                     tableCommandBuilder.Append("`CreatorId` char(36) charset ascii null comment '创建者标识',");
                     tableCommandBuilder.Append("`Creator` varchar(256) null comment '创建者',");
-                    tableCommandBuilder.Append("`IsDeleted` tinyint(1) not null comment '是否删除',");
+                    tableCommandBuilder.Append("`IsDeleted` tinyint(1) not null comment '是否删除'");
                 }
                 tableCommandBuilder.Append(" ) comment '日志' charset = utf8mb4");
 

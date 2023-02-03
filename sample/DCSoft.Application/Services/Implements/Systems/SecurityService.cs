@@ -103,6 +103,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="request">登录参数</param>
         public async Task<JsonWebToken> SignInAsync([Required] UserLoginRequest request)
         {
+            _logger.Login(request.UserName, LoginStatus.Failure, "用户名或密码不正确");
+
             var verifyCodeOptions = Config.Get<VerifyCodeOptions>("VerifyCode");
 
             #region 校验验证码
