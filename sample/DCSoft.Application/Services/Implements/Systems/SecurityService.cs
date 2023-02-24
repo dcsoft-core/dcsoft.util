@@ -15,7 +15,7 @@ using Util.Extras.Authorization;
 using Util.Extras.Extensions;
 using Util.Extras.Helpers;
 using Util.Extras.Sessions;
-using Util.Extras.Sessions.Claims;
+using Util.Extras.Security.Claims;
 using Util.Extras.Tools.Captcha;
 using Util.Helpers;
 using Random = Util.Extras.Helpers.Random;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Util.Extras.Sessions.Claims;
+using Util.Extras.Security.Claims;
 using Util.Helpers;
 using Util.Sessions;
 using Convert = Util.Helpers.Convert;

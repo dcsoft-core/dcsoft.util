@@ -4,7 +4,7 @@
 		<TargetFramework>$(NetTargetFramework)</TargetFramework>
 		<RootNamespace>Util.Extras.Applications</RootNamespace>
 		<PackageIcon>icon.jpg</PackageIcon>
-		<Description>Util.Extras.Application是Util应用框架的应用层基础类库</Description>
+		<Description>Util.Extras.Application是Util应用框架的应用层基础类库的扩展库</Description>
 		<AssemblyName>Util.Extras.Application</AssemblyName>
 	</PropertyGroup>
 
@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Util.Application" Version="7.0.17" />
+	  <PackageReference Include="Util.Application" Version="7.0.25" />
 	</ItemGroup>
 
 	<ItemGroup>

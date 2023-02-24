@@ -3,7 +3,7 @@ using Util;
 using Util.Extras.Helpers;
 using Util.Extras.Security.Encryptors;
 using Util.Helpers;
-using Util.Security;
+using Util.Security.Encryptors;
 
 namespace DCSoft.Domain.Models.Systems
 {

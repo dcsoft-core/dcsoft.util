@@ -2,10 +2,11 @@
 
 	<PropertyGroup>
 		<TargetFramework>$(NetTargetFramework)</TargetFramework>
-		<RootNamespace>Util.Extras.Applications</RootNamespace>
+		<RootNamespace>Util.Extras.Security</RootNamespace>
 		<PackageIcon>icon.jpg</PackageIcon>
-		<Description>Util.Extras.Application.EntityFrameworkCore是Util应用框架基于EntityFrameworkCore数据访问的应用层类库的扩展库</Description>
-		<AssemblyName>Util.Extras.Application.EntityFrameworkCore</AssemblyName>
+		<Description>Util.Extras.Security是Util应用框架的权限类库的扩展库</Description>
+		<AssemblyName>Util.Extras.Security</AssemblyName>
+		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -27,12 +28,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.Data.EntityFrameworkCore" Version="7.0.25" />
-		<PackageReference Include="Util.Application.EntityFrameworkCore" Version="7.0.25" />
+		<PackageReference Include="Util.Security" Version="7.0.25" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Util.Extras.Application\Util.Extras.Application.csproj" />
+	  <ProjectReference Include="..\Util.Extras.Core\01-Util.Extras.Core.csproj" />
 	</ItemGroup>
-
+	
 </Project>

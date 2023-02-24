@@ -1,4 +1,4 @@
-﻿namespace Util.Extras.Sessions.Claims
+﻿namespace Util.Extras.Security.Claims
 {
     /// <summary>
     /// 声明类型

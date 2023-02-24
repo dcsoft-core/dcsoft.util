@@ -4,7 +4,7 @@
 		<TargetFramework>$(NetTargetFramework)</TargetFramework>
 		<RootNamespace>Util.Extras</RootNamespace>
 		<PackageIcon>icon.jpg</PackageIcon>
-		<Description>Util.Extras.Core是Util应用框架的基础类库</Description>
+		<Description>Util.Extras.Core是Util应用框架的基础类库的扩展库</Description>
 		<AssemblyName>Util.Extras.Core</AssemblyName>
 	</PropertyGroup>
 
@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.Core" Version="7.0.17" />
+		<PackageReference Include="Util.Core" Version="7.0.25" />
 	</ItemGroup>
 
 	<ItemGroup>

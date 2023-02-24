@@ -4,7 +4,7 @@
 		<TargetFramework>$(NetTargetFramework)</TargetFramework>
 		<RootNamespace>Util.Extras</RootNamespace>
 		<PackageIcon>icon.jpg</PackageIcon>
-		<Description>Util.Extras.AspNetCore是Util应用框架的AspNetCore操作类库</Description>
+		<Description>Util.Extras.AspNetCore是Util应用框架的AspNetCore操作类库的扩展库</Description>
 		<AssemblyName>Util.Extras.AspNetCore</AssemblyName>
 	</PropertyGroup>
 
@@ -37,11 +37,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.AspNetCore" Version="7.0.17" />
+		<PackageReference Include="Util.AspNetCore" Version="7.0.25" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Util.Extras.Core\01-Util.Extras.Core.csproj" />
+	  <ProjectReference Include="..\Util.Extras.Security\Util.Extras.Security.csproj" />
 	</ItemGroup>
 
 </Project>

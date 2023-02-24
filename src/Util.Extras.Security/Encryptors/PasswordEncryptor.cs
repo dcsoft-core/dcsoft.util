@@ -1,4 +1,4 @@
-﻿using Util.Security;
+﻿using Util.Security.Encryptors;
 
 namespace Util.Extras.Security.Encryptors
 {
