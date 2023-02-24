@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using Enum = System.Enum;
 using Regex = System.Text.RegularExpressions.Regex;
 using String = Util.Helpers.String;
+
 // ReSharper disable PossibleMultipleEnumeration
 
 // ReSharper disable once CheckNamespace

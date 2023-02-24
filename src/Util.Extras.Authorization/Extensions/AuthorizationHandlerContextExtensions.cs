@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
+
 // ReSharper disable CheckNamespace
 
 namespace Microsoft.AspNetCore.Authorization;
@@ -19,7 +20,8 @@ public static class AuthorizationHandlerContextExtensions
         DefaultHttpContext httpContext;
 
         // 获取 httpContext 对象
-        if (context.Resource is AuthorizationFilterContext filterContext) httpContext = (DefaultHttpContext)filterContext.HttpContext;
+        if (context.Resource is AuthorizationFilterContext filterContext)
+            httpContext = (DefaultHttpContext)filterContext.HttpContext;
         else if (context.Resource is DefaultHttpContext defaultHttpContext) httpContext = defaultHttpContext;
         else httpContext = null;
 

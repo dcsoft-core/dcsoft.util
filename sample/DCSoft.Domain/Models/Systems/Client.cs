@@ -20,10 +20,12 @@ namespace DCSoft.Domain.Models.Systems
         /// 允许的跨域来源
         /// </summary>
         public List<string> AllowedCorsOrigins { get; set; }
+
         /// <summary>
         /// 允许的作用域
         /// </summary>
         public List<string> AllowedScopes { get; set; }
+
         /// <summary>
         /// 访问令牌生命周期
         /// </summary>

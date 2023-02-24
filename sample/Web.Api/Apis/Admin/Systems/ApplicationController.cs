@@ -23,7 +23,7 @@ namespace DCSoft.Apis.Admin.Systems
         /// <param name="logger">日志服务</param>
         /// <param name="service">应用程序服务</param>
         /// <param name="excelFactory">Excel工厂</param>
-        public ApplicationController(ILogger logger, 
+        public ApplicationController(ILogger logger,
             IApplicationService service,
             IExcelFactory excelFactory)
         {

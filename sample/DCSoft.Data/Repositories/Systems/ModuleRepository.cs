@@ -66,7 +66,8 @@ namespace DCSoft.Data.Repositories.Systems
         /// <param name="parentId">父标识</param>
         public async Task<int> GenerateSortIdAsync(Guid applicationId, Guid? parentId)
         {
-            var maxSortId = await _resourceRepository.Find(t => t.ApplicationId == applicationId && t.ParentId == parentId)
+            var maxSortId = await _resourceRepository
+                .Find(t => t.ApplicationId == applicationId && t.ParentId == parentId)
                 .MaxAsync(t => t.SortId);
             return maxSortId.SafeValue() + 1;
         }
@@ -81,13 +82,13 @@ namespace DCSoft.Data.Repositories.Systems
             if (applicationId == Guid.Empty || roleIds == null || roleIds.Count == 0)
                 return new List<Module>();
             var pos = await (from module in _resourceRepository.Find()
-                             join permission in _permissionRepository.Find() on module.Id equals permission.ResourceId
-                             where (module.Type == ResourceType.Module || module.Type == ResourceType.Operation) &&
-                                   module.ApplicationId == applicationId &&
-                                   module.Enabled &&
-                                   roleIds.Contains(permission.RoleId) &&
-                                   permission.IsDeny == false
-                             select module).ToListAsync();
+                join permission in _permissionRepository.Find() on module.Id equals permission.ResourceId
+                where (module.Type == ResourceType.Module || module.Type == ResourceType.Operation) &&
+                      module.ApplicationId == applicationId &&
+                      module.Enabled &&
+                      roleIds.Contains(permission.RoleId) &&
+                      permission.IsDeny == false
+                select module).ToListAsync();
             return pos.Distinct().OrderBy(t => t.SortId).Select(ToEntity).ToList();
         }
     }

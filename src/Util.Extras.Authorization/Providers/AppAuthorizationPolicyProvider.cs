@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+
 // ReSharper disable CheckNamespace
 
 namespace Util.Extras.Authorization;
@@ -52,7 +53,8 @@ internal sealed class AppAuthorizationPolicyProvider : IAuthorizationPolicyProvi
         if (policyName.StartsWith(Penetrates.AppAuthorizePrefix))
         {
             // 解析策略名并获取策略参数
-            var policies = policyName[Penetrates.AppAuthorizePrefix.Length..].Split(',', StringSplitOptions.RemoveEmptyEntries);
+            var policies = policyName[Penetrates.AppAuthorizePrefix.Length..]
+                .Split(',', StringSplitOptions.RemoveEmptyEntries);
 
             // 添加策略需求
             var policy = new AuthorizationPolicyBuilder();

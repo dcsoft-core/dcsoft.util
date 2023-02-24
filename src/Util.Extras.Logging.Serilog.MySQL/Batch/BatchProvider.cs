@@ -93,8 +93,12 @@ namespace Serilog.Sinks.Batch
                     }
                 }
             }
-            catch (InvalidOperationException) { }
-            catch (OperationCanceledException) { }
+            catch (InvalidOperationException)
+            {
+            }
+            catch (OperationCanceledException)
+            {
+            }
             catch (Exception ex)
             {
                 SelfLog.WriteLine(ex.Message);
@@ -125,8 +129,12 @@ namespace Serilog.Sinks.Batch
                     }
                 }
             }
-            catch (InvalidOperationException) { }
-            catch (OperationCanceledException) { }
+            catch (InvalidOperationException)
+            {
+            }
+            catch (OperationCanceledException)
+            {
+            }
             catch (Exception ex)
             {
                 SelfLog.WriteLine(ex.Message);
@@ -160,8 +168,12 @@ namespace Serilog.Sinks.Batch
                     _batchEventsCollection.Add(logEventList);
                 }
             }
-            catch (InvalidOperationException) { }
-            catch (OperationCanceledException) { }
+            catch (InvalidOperationException)
+            {
+            }
+            catch (OperationCanceledException)
+            {
+            }
             finally
             {
                 if (!_cancellationTokenSource.IsCancellationRequested)

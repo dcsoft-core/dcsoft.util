@@ -14,7 +14,8 @@ namespace Util.Extras.Extensions
         /// <param name="array">数组</param>
         /// <param name="index">索引</param>
         /// <param name="length">长度</param>
-        public static void Clear(this System.Array array, int index, int length) => System.Array.Clear(array, index, length);
+        public static void Clear(this System.Array array, int index, int length) =>
+            System.Array.Clear(array, index, length);
 
         /// <summary>
         /// 清空所有数据

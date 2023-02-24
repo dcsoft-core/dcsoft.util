@@ -87,6 +87,7 @@ namespace DCSoft.Applications.Services.Abstractions.Systems
         /// 获取操作权限
         /// </summary>
         Task<List<UserPermissionsResponse>> GetPermissionsAsync();
+
         /// <summary>
         /// 通过用户名查找
         /// </summary>

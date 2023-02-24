@@ -13,7 +13,8 @@ namespace Util.Extras.Extensions
         /// 转换为键值对集合
         /// </summary>
         /// <param name="this">名称-值集合</param>
-        public static IEnumerable<KeyValuePair<string, string>> ToKeyValuePair(this System.Collections.Specialized.NameValueCollection @this)
+        public static IEnumerable<KeyValuePair<string, string>> ToKeyValuePair(
+            this System.Collections.Specialized.NameValueCollection @this)
         {
             if (@this == null || @this.Count == 0)
                 yield break;

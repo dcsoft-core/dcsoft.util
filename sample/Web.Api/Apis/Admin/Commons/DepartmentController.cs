@@ -26,7 +26,7 @@ namespace DCSoft.Apis.Admin.Commons
         /// <param name="service">部门服务</param>
         /// <param name="queryService">部门查询服务</param>
         /// <param name="logger">日志服务</param>
-        public DepartmentController(IDepartmentService service, 
+        public DepartmentController(IDepartmentService service,
             IQueryDepartmentService queryService,
             ILogger logger) : base(queryService)
         {

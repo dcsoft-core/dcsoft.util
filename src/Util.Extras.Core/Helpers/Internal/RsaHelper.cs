@@ -48,7 +48,8 @@ namespace Util.Extras.Helpers.Internal
         public string Sign(string data)
         {
             var dataBytes = _encoding.GetBytes(data);
-            var signatureBytes = _privateKeyRsaProvider.SignData(dataBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
+            var signatureBytes =
+                _privateKeyRsaProvider.SignData(dataBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
             return System.Convert.ToBase64String(signatureBytes);
         }
 
@@ -65,7 +66,8 @@ namespace Util.Extras.Helpers.Internal
         {
             var dataBytes = _encoding.GetBytes(data);
             var signBytes = System.Convert.FromBase64String(sign);
-            var verify = _publicKeyRsaProvider.VerifyData(dataBytes, signBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
+            var verify =
+                _publicKeyRsaProvider.VerifyData(dataBytes, signBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
             return verify;
         }
 
@@ -81,7 +83,8 @@ namespace Util.Extras.Helpers.Internal
         {
             if (_privateKeyRsaProvider == null)
                 throw new Exception("_privateKeyRsaProvider is null");
-            return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(System.Convert.FromBase64String(cipherText), RSAEncryptionPadding.Pkcs1));
+            return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(System.Convert.FromBase64String(cipherText),
+                RSAEncryptionPadding.Pkcs1));
         }
 
         #endregion
@@ -96,7 +99,8 @@ namespace Util.Extras.Helpers.Internal
         {
             if (_publicKeyRsaProvider == null)
                 throw new Exception("_publicKeyRsaProvider is null");
-            return System.Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text), RSAEncryptionPadding.Pkcs1));
+            return System.Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text),
+                RSAEncryptionPadding.Pkcs1));
         }
 
         #endregion
@@ -155,7 +159,8 @@ namespace Util.Extras.Helpers.Internal
         public RSA CreateRsaProviderFromPublicKey(string publicKeyString)
         {
             // encoded OID sequence for  PKCS #1 rsaEncryption szOID_RSA_RSA = "1.2.840.113549.1.1.1"
-            byte[] seqOid = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
+            byte[] seqOid =
+                { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
 
             var x509Key = System.Convert.FromBase64String(publicKeyString);
 
@@ -165,33 +170,33 @@ namespace Util.Extras.Helpers.Internal
 
             var twoBytes = binReader.ReadUInt16();
             if (twoBytes == 0x8130) //data read as little endian order (actual data order for Sequence is 30 81)
-                binReader.ReadByte();    //advance 1 byte
+                binReader.ReadByte(); //advance 1 byte
             else if (twoBytes == 0x8230)
-                binReader.ReadInt16();   //advance 2 bytes
+                binReader.ReadInt16(); //advance 2 bytes
             else
                 return null;
 
             var seq = binReader.ReadBytes(15);
-            if (!CompareByteArrays(seq, seqOid))    //make sure Sequence for OID is correct
+            if (!CompareByteArrays(seq, seqOid)) //make sure Sequence for OID is correct
                 return null;
 
             twoBytes = binReader.ReadUInt16();
             if (twoBytes == 0x8103) //data read as little endian order (actual data order for Bit String is 03 81)
-                binReader.ReadByte();    //advance 1 byte
+                binReader.ReadByte(); //advance 1 byte
             else if (twoBytes == 0x8203)
-                binReader.ReadInt16();   //advance 2 bytes
+                binReader.ReadInt16(); //advance 2 bytes
             else
                 return null;
 
             var bt = binReader.ReadByte();
-            if (bt != 0x00)     //expect null byte next
+            if (bt != 0x00) //expect null byte next
                 return null;
 
             twoBytes = binReader.ReadUInt16();
             if (twoBytes == 0x8130) //data read as little endian order (actual data order for Sequence is 30 81)
-                binReader.ReadByte();    //advance 1 byte
+                binReader.ReadByte(); //advance 1 byte
             else if (twoBytes == 0x8230)
-                binReader.ReadInt16();   //advance 2 bytes
+                binReader.ReadInt16(); //advance 2 bytes
             else
                 return null;
 
@@ -200,7 +205,7 @@ namespace Util.Extras.Helpers.Internal
             byte highByte = 0x00;
 
             if (twoBytes == 0x8102) //data read as little endian order (actual data order for Integer is 02 81)
-                lowByte = binReader.ReadByte();  // read next bytes which is bytes in modulus
+                lowByte = binReader.ReadByte(); // read next bytes which is bytes in modulus
             else if (twoBytes == 0x8202)
             {
                 highByte = binReader.ReadByte(); //advance 2 bytes
@@ -208,21 +213,25 @@ namespace Util.Extras.Helpers.Internal
             }
             else
                 return null;
-            byte[] modInt = { lowByte, highByte, 0x00, 0x00 };   //reverse byte order since asn.1 key uses big endian order
+
+            byte[] modInt =
+                { lowByte, highByte, 0x00, 0x00 }; //reverse byte order since asn.1 key uses big endian order
             var modSize = BitConverter.ToInt32(modInt, 0);
 
             var firstByte = binReader.PeekChar();
             if (firstByte == 0x00)
-            {   //if first byte (highest order) of modulus is zero, don't include it
-                binReader.ReadByte();    //skip this null byte
-                modSize -= 1;   //reduce modulus buffer size by 1
+            {
+                //if first byte (highest order) of modulus is zero, don't include it
+                binReader.ReadByte(); //skip this null byte
+                modSize -= 1; //reduce modulus buffer size by 1
             }
 
-            var modulus = binReader.ReadBytes(modSize);   //read the modulus bytes
+            var modulus = binReader.ReadBytes(modSize); //read the modulus bytes
 
-            if (binReader.ReadByte() != 0x02)            //expect an Integer for the exponent data
+            if (binReader.ReadByte() != 0x02) //expect an Integer for the exponent data
                 return null;
-            var expBytes = (int)binReader.ReadByte();        // should only need one byte for actual exponent data (for all useful values)
+            var expBytes =
+                (int)binReader.ReadByte(); // should only need one byte for actual exponent data (for all useful values)
             var exponent = binReader.ReadBytes(expBytes);
 
             // ------- create RSACryptoServiceProvider instance and initialize with public key -----
@@ -255,8 +264,7 @@ namespace Util.Extras.Helpers.Internal
 
             if (bt == 0x81)
                 count = binReader.ReadByte();
-            else
-            if (bt == 0x82)
+            else if (bt == 0x82)
             {
                 var highByte = binReader.ReadByte();
                 var lowByte = binReader.ReadByte();
@@ -272,6 +280,7 @@ namespace Util.Extras.Helpers.Internal
             {
                 count -= 1;
             }
+
             binReader.BaseStream.Seek(-1, SeekOrigin.Current);
             return count;
         }
@@ -292,6 +301,7 @@ namespace Util.Extras.Helpers.Internal
                     return false;
                 i++;
             }
+
             return true;
         }
 

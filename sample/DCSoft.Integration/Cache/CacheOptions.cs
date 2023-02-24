@@ -25,7 +25,6 @@
         /// </summary>
         public class MemoryConfig
         {
-
         }
 
         /// <summary>
@@ -33,12 +32,10 @@
         /// </summary>
         public class RedisConfig
         {
-
             /// <summary>
             /// Redis配置
             /// </summary>
             public string ConnectionString { get; set; }
-
         }
     }
 }

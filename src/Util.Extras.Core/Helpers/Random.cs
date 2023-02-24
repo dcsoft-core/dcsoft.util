@@ -76,6 +76,7 @@ public class Random
         {
             newRandom.Append(Const.NumberAndBetter[rd.Next(Const.NumberAndBetter.Length)]);
         }
+
         return newRandom.ToString();
     }
 
@@ -92,6 +93,7 @@ public class Random
         {
             newRandom.Append(Const.NumberAndBetter[rd.Next(10)]);
         }
+
         return newRandom.ToString();
     }
 }

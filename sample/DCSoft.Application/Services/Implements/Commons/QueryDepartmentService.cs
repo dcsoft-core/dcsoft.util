@@ -19,7 +19,8 @@ namespace DCSoft.Applications.Services.Implements.Commons
     /// <summary>
     /// 组织机构查询服务
     /// </summary>
-    public class QueryDepartmentService : TreeServiceBase<Department, DepartmentDto, DepartmentQuery>, IQueryDepartmentService
+    public class QueryDepartmentService : TreeServiceBase<Department, DepartmentDto, DepartmentQuery>,
+        IQueryDepartmentService
     {
         /// <summary>
         /// 初始化资源服务

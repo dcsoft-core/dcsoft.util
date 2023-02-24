@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Util.Extras.JsonSerialization;
 
@@ -18,7 +17,8 @@ public static class SystemTextJsonExtensions
     /// <param name="outputFormat"></param>
     /// <param name="localized">自动转换 DateTimeOffset 为当地时间</param>
     /// <returns></returns>
-    public static IList<JsonConverter> AddDateTimeTypeConverters(this IList<JsonConverter> converters, string outputFormat = default, bool localized = false)
+    public static IList<JsonConverter> AddDateTimeTypeConverters(this IList<JsonConverter> converters,
+        string outputFormat = default, bool localized = false)
     {
         converters.Add(new SystemTextJsonDateTimeJsonConverter(outputFormat));
         converters.Add(new SystemTextJsonNullableDateTimeJsonConverter(outputFormat));

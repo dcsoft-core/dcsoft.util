@@ -20,7 +20,7 @@ namespace Util.Extras.Tools.Captcha
         public static byte[] ToPngArray<TPixel>(this Image<TPixel> img) where TPixel : unmanaged, IPixel<TPixel>
         {
             using var ms = new MemoryStream();
-            img.Save(ms,PngFormat.Instance);
+            img.Save(ms, PngFormat.Instance);
             return ms.ToArray();
         }
 

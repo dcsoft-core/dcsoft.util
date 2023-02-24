@@ -35,54 +35,64 @@ namespace DCSoft.Domain.Models.Systems
         [Required]
         [MaxLength(256)]
         public string Name { get; set; }
+
         /// <summary>
         /// 启用
         ///</summary>
         [DisplayName("启用")]
         public bool Enabled { get; set; }
+
         /// <summary>
         /// 排序号
         ///</summary>
         [DisplayName("排序号")]
         public int? SortId { get; set; }
+
         /// <summary>
         /// 备注
         ///</summary>
         [DisplayName("备注")]
         [MaxLength(512)]
         public string Remark { get; set; }
+
         /// <summary>
         /// 创建时间
         ///</summary>
         [DisplayName("创建时间")]
         public DateTime? CreationTime { get; set; }
+
         /// <summary>
         /// 创建者标识
         ///</summary>
         [DisplayName("创建者标识")]
         public Guid? CreatorId { get; set; }
+
         /// <summary>
         /// 创建者
         ///</summary>
         [DisplayName("创建者")]
         [MaxLength(256)]
         public string Creator { get; set; }
+
         /// <summary>
         /// 最后修改时间
         ///</summary>
         [DisplayName("最后修改时间")]
         public DateTime? LastModificationTime { get; set; }
+
         /// <summary>
         /// 最后修改者标识
         ///</summary>
         [DisplayName("最后修改者标识")]
         public Guid? LastModifierId { get; set; }
+
         /// <summary>
         /// 最后修改者
         ///</summary>
         [DisplayName("最后修改者")]
         [MaxLength(256)]
         public string LastModifier { get; set; }
+
         /// <summary>
         /// 是否删除
         ///</summary>

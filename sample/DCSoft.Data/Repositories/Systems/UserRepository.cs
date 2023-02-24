@@ -54,11 +54,13 @@ namespace DCSoft.Data.Repositories.Systems
         /// <exception cref="NotImplementedException"></exception>
         public async Task ChangePasswordAsync(User user, string currentPassword, string newPassword)
         {
-            var oldPassword = Encrypt.Base64Encrypt(Encrypt.HmacSha256(Encrypt.AesEncrypt(currentPassword), user.SecurityStamp));
+            var oldPassword =
+                Encrypt.Base64Encrypt(Encrypt.HmacSha256(Encrypt.AesEncrypt(currentPassword), user.SecurityStamp));
             if (!oldPassword.Equals(user.PasswordHash))
             {
                 throw new Warning("旧密码不对");
             }
+
             user.SetPasswordHash(newPassword);
             user.SetPassword(newPassword, true);
             await UpdateAsync(user);
@@ -89,9 +91,9 @@ namespace DCSoft.Data.Repositories.Systems
             if (roleId.IsEmpty())
                 return queryable;
             var selectedUsers = from user in queryable
-                                join userRole in UnitOfWork.Set<UserRole>() on user.Id equals userRole.UserId
-                                where userRole.RoleId == roleId
-                                select user;
+                join userRole in UnitOfWork.Set<UserRole>() on user.Id equals userRole.UserId
+                where userRole.RoleId == roleId
+                select user;
             if (except)
                 return queryable.Except(selectedUsers);
             return selectedUsers;

@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Text;
 using System.Threading.Tasks;
+
 // ReSharper disable CheckNamespace
 
 namespace Microsoft.AspNetCore.Http;
@@ -31,7 +32,8 @@ public static class HttpContextExtensions
     /// <returns></returns>
     public static ControllerActionDescriptor GetControllerActionDescriptor(this HttpContext httpContext)
     {
-        return httpContext.GetEndpoint()?.Metadata.FirstOrDefault(u => u is ControllerActionDescriptor) as ControllerActionDescriptor;
+        return httpContext.GetEndpoint()?.Metadata.FirstOrDefault(u => u is ControllerActionDescriptor) as
+            ControllerActionDescriptor;
     }
 
     /// <summary>
@@ -60,7 +62,8 @@ public static class HttpContextExtensions
     /// <param name="httpContext"></param>
     /// <param name="accessToken"></param>
     /// <param name="refreshToken"></param>
-    public static void SetTokensOfResponseHeaders(this HttpContext httpContext, string accessToken, string refreshToken = null)
+    public static void SetTokensOfResponseHeaders(this HttpContext httpContext, string accessToken,
+        string refreshToken = null)
     {
         httpContext.Response.Headers["access-token"] = accessToken;
         if (!string.IsNullOrWhiteSpace(refreshToken))
@@ -117,13 +120,13 @@ public static class HttpContextExtensions
     public static string GetRequestUrlAddress(this HttpRequest request)
     {
         return new StringBuilder()
-                .Append(request.Scheme)
-                .Append("://")
-                .Append(request.Host)
-                .Append(request.PathBase)
-                .Append(request.Path)
-                .Append(request.QueryString)
-                .ToString();
+            .Append(request.Scheme)
+            .Append("://")
+            .Append(request.Host)
+            .Append(request.PathBase)
+            .Append(request.Path)
+            .Append(request.QueryString)
+            .ToString();
     }
 
     /// <summary>

@@ -93,10 +93,12 @@ namespace Serilog.Sinks.MySQL
             else if (_logType == LogType.Operate)
             {
                 tableCommandBuilder.Append($"INSERT INTO  `{_tableName}` (");
-                tableCommandBuilder.Append("`LogId`, `Title`, `Type`, `HttpMethod`, `Method`, `Url`, `UrlType`, `IpAddress`, `Location`, `Params`, `Result`, `Status`, `ErrorMsg`, `OS`, " +
-                                           " `Browser`, `CreationTime`, `CreatorId`, `Creator`, `IsDeleted`)");
-                tableCommandBuilder.Append("VALUES (@LogId, @Title, @Type, @HttpMethod, @Method, @Url, @UrlType, @IpAddress, @Location, @Params, @Result, @Status, @ErrorMsg, " +
-                                           "@OS, @Browser, @CreationTime, @CreatorId, @Creator, @IsDeleted)");
+                tableCommandBuilder.Append(
+                    "`LogId`, `Title`, `Type`, `HttpMethod`, `Method`, `Url`, `UrlType`, `IpAddress`, `Location`, `Params`, `Result`, `Status`, `ErrorMsg`, `OS`, " +
+                    " `Browser`, `CreationTime`, `CreatorId`, `Creator`, `IsDeleted`)");
+                tableCommandBuilder.Append(
+                    "VALUES (@LogId, @Title, @Type, @HttpMethod, @Method, @Url, @UrlType, @IpAddress, @Location, @Params, @Result, @Status, @ErrorMsg, " +
+                    "@OS, @Browser, @CreationTime, @CreatorId, @Creator, @IsDeleted)");
 
                 cmd.CommandText = tableCommandBuilder.ToString();
 
@@ -123,10 +125,12 @@ namespace Serilog.Sinks.MySQL
             else if (_logType == LogType.Login)
             {
                 tableCommandBuilder.Append($"INSERT INTO `{_tableName}` (");
-                tableCommandBuilder.Append("`LogId`, `LoginName`, `IpAddress`, `Location`, `OS`, `Status`, `PromptMsg`, `Browser`, `CreationTime`, `CreatorId`, " +
-                                           " `Creator`, `IsDeleted`) ");
-                tableCommandBuilder.Append("VALUES (@LogId, @LoginName, @IpAddress, @Location, @OS, @Status, @PromptMsg, @Browser, @CreationTime, @CreatorId, " +
-                                           "@Creator, @IsDeleted)");
+                tableCommandBuilder.Append(
+                    "`LogId`, `LoginName`, `IpAddress`, `Location`, `OS`, `Status`, `PromptMsg`, `Browser`, `CreationTime`, `CreatorId`, " +
+                    " `Creator`, `IsDeleted`) ");
+                tableCommandBuilder.Append(
+                    "VALUES (@LogId, @LoginName, @IpAddress, @Location, @OS, @Status, @PromptMsg, @Browser, @CreationTime, @CreatorId, " +
+                    "@Creator, @IsDeleted)");
 
                 cmd.CommandText = tableCommandBuilder.ToString();
 
@@ -202,6 +206,7 @@ namespace Serilog.Sinks.MySQL
                     tableCommandBuilder.Append("`Creator` varchar(256) null comment '创建者',");
                     tableCommandBuilder.Append("`IsDeleted` tinyint(1) not null comment '是否删除'");
                 }
+
                 tableCommandBuilder.Append(" ) comment '日志' charset = utf8mb4");
 
                 var cmd = sqlConnection.CreateCommand();
@@ -237,44 +242,64 @@ namespace Serilog.Sinks.MySQL
                         insertCommand.Parameters["@template"].Value = logEvent.MessageTemplate.ToString();
                         insertCommand.Parameters["@msg"].Value = logMessageString;
                         insertCommand.Parameters["@ex"].Value = logEvent.Exception?.ToString();
-                        insertCommand.Parameters["@prop"].Value = logEvent.Properties.Count > 0 ? logEvent.Properties.Json() : string.Empty;
+                        insertCommand.Parameters["@prop"].Value =
+                            logEvent.Properties.Count > 0 ? logEvent.Properties.Json() : string.Empty;
                     }
                     else if (_logType == LogType.Operate)
                     {
                         insertCommand.Parameters["@LogId"].Value = ((ScalarValue)logEvent.Properties["LogId"]).Value;
                         insertCommand.Parameters["@Title"].Value = ((ScalarValue)logEvent.Properties["Title"]).Value;
                         insertCommand.Parameters["@Type"].Value = ((ScalarValue)logEvent.Properties["Type"]).Value;
-                        insertCommand.Parameters["@HttpMethod"].Value = ((ScalarValue)logEvent.Properties["HttpMethod"]).Value;
+                        insertCommand.Parameters["@HttpMethod"].Value =
+                            ((ScalarValue)logEvent.Properties["HttpMethod"]).Value;
                         insertCommand.Parameters["@Method"].Value = ((ScalarValue)logEvent.Properties["Method"]).Value;
                         insertCommand.Parameters["@Url"].Value = ((ScalarValue)logEvent.Properties["Url"]).Value;
-                        insertCommand.Parameters["@UrlType"].Value = ((ScalarValue)logEvent.Properties["UrlType"]).Value;
-                        insertCommand.Parameters["@IpAddress"].Value = ((ScalarValue)logEvent.Properties["IpAddress"]).Value;
-                        insertCommand.Parameters["@Location"].Value = ((ScalarValue)logEvent.Properties["Location"]).Value;
+                        insertCommand.Parameters["@UrlType"].Value =
+                            ((ScalarValue)logEvent.Properties["UrlType"]).Value;
+                        insertCommand.Parameters["@IpAddress"].Value =
+                            ((ScalarValue)logEvent.Properties["IpAddress"]).Value;
+                        insertCommand.Parameters["@Location"].Value =
+                            ((ScalarValue)logEvent.Properties["Location"]).Value;
                         insertCommand.Parameters["@Params"].Value = ((ScalarValue)logEvent.Properties["Params"]).Value;
                         insertCommand.Parameters["@Result"].Value = ((ScalarValue)logEvent.Properties["Result"]).Value;
                         insertCommand.Parameters["@Status"].Value = ((ScalarValue)logEvent.Properties["Status"]).Value;
-                        insertCommand.Parameters["@ErrorMsg"].Value = ((ScalarValue)logEvent.Properties["ErrorMsg"]).Value;
+                        insertCommand.Parameters["@ErrorMsg"].Value =
+                            ((ScalarValue)logEvent.Properties["ErrorMsg"]).Value;
                         insertCommand.Parameters["@OS"].Value = ((ScalarValue)logEvent.Properties["OS"]).Value;
-                        insertCommand.Parameters["@Browser"].Value = ((ScalarValue)logEvent.Properties["Browser"]).Value;
-                        insertCommand.Parameters["@CreationTime"].Value = ((ScalarValue)logEvent.Properties["CreationTime"]).Value;
-                        insertCommand.Parameters["@CreatorId"].Value = ((ScalarValue)logEvent.Properties["CreatorId"]).Value;
-                        insertCommand.Parameters["@Creator"].Value = ((ScalarValue)logEvent.Properties["Creator"]).Value;
-                        insertCommand.Parameters["@IsDeleted"].Value = ((ScalarValue)logEvent.Properties["IsDeleted"]).Value;
+                        insertCommand.Parameters["@Browser"].Value =
+                            ((ScalarValue)logEvent.Properties["Browser"]).Value;
+                        insertCommand.Parameters["@CreationTime"].Value =
+                            ((ScalarValue)logEvent.Properties["CreationTime"]).Value;
+                        insertCommand.Parameters["@CreatorId"].Value =
+                            ((ScalarValue)logEvent.Properties["CreatorId"]).Value;
+                        insertCommand.Parameters["@Creator"].Value =
+                            ((ScalarValue)logEvent.Properties["Creator"]).Value;
+                        insertCommand.Parameters["@IsDeleted"].Value =
+                            ((ScalarValue)logEvent.Properties["IsDeleted"]).Value;
                     }
                     else if (_logType == LogType.Login)
                     {
                         insertCommand.Parameters["@LogId"].Value = ((ScalarValue)logEvent.Properties["LogId"]).Value;
-                        insertCommand.Parameters["@LoginName"].Value = ((ScalarValue)logEvent.Properties["LoginName"]).Value;
-                        insertCommand.Parameters["@IpAddress"].Value = ((ScalarValue)logEvent.Properties["IpAddress"]).Value;
-                        insertCommand.Parameters["@Location"].Value = ((ScalarValue)logEvent.Properties["Location"]).Value;
+                        insertCommand.Parameters["@LoginName"].Value =
+                            ((ScalarValue)logEvent.Properties["LoginName"]).Value;
+                        insertCommand.Parameters["@IpAddress"].Value =
+                            ((ScalarValue)logEvent.Properties["IpAddress"]).Value;
+                        insertCommand.Parameters["@Location"].Value =
+                            ((ScalarValue)logEvent.Properties["Location"]).Value;
                         insertCommand.Parameters["@OS"].Value = ((ScalarValue)logEvent.Properties["OS"]).Value;
                         insertCommand.Parameters["@Status"].Value = ((ScalarValue)logEvent.Properties["Status"]).Value;
-                        insertCommand.Parameters["@PromptMsg"].Value = ((ScalarValue)logEvent.Properties["PromptMsg"]).Value;
-                        insertCommand.Parameters["@Browser"].Value = ((ScalarValue)logEvent.Properties["Browser"]).Value;
-                        insertCommand.Parameters["@CreationTime"].Value = ((ScalarValue)logEvent.Properties["CreationTime"]).Value;
-                        insertCommand.Parameters["@CreatorId"].Value = ((ScalarValue)logEvent.Properties["CreatorId"]).Value;
-                        insertCommand.Parameters["@Creator"].Value = ((ScalarValue)logEvent.Properties["Creator"]).Value;
-                        insertCommand.Parameters["@IsDeleted"].Value = ((ScalarValue)logEvent.Properties["IsDeleted"]).Value;
+                        insertCommand.Parameters["@PromptMsg"].Value =
+                            ((ScalarValue)logEvent.Properties["PromptMsg"]).Value;
+                        insertCommand.Parameters["@Browser"].Value =
+                            ((ScalarValue)logEvent.Properties["Browser"]).Value;
+                        insertCommand.Parameters["@CreationTime"].Value =
+                            ((ScalarValue)logEvent.Properties["CreationTime"]).Value;
+                        insertCommand.Parameters["@CreatorId"].Value =
+                            ((ScalarValue)logEvent.Properties["CreatorId"]).Value;
+                        insertCommand.Parameters["@Creator"].Value =
+                            ((ScalarValue)logEvent.Properties["Creator"]).Value;
+                        insertCommand.Parameters["@IsDeleted"].Value =
+                            ((ScalarValue)logEvent.Properties["IsDeleted"]).Value;
                     }
 
                     await insertCommand.ExecuteNonQueryAsync().ConfigureAwait(false);

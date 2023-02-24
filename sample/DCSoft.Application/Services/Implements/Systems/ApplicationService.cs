@@ -18,7 +18,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
     /// <summary>
     /// 应用程序服务
     /// </summary>
-    public class ApplicationService : CrudServiceBase<Application, ApplicationDto, ApplicationQuery>, IApplicationService
+    public class ApplicationService : CrudServiceBase<Application, ApplicationDto, ApplicationQuery>,
+        IApplicationService
     {
         /// <summary>
         /// 初始化应用程序服务
@@ -26,8 +27,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
-        public ApplicationService(IServiceProvider serviceProvider, 
-            IDataUnitOfWork unitOfWork, 
+        public ApplicationService(IServiceProvider serviceProvider,
+            IDataUnitOfWork unitOfWork,
             IApplicationRepository repository) : base(serviceProvider, unitOfWork, repository)
         {
             _repository = repository;

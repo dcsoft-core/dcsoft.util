@@ -19,6 +19,7 @@ using Serilog.Events;
 using Serilog.Sinks;
 using Serilog.Sinks.MySQL;
 using System;
+
 // ReSharper disable CheckNamespace
 
 namespace Serilog

@@ -52,7 +52,7 @@ namespace DCSoft.Applications.Extensions.Systems
             IList<ModuleTreeData> result = new List<ModuleTreeData>();
             var parentDict = new Dictionary<string, ModuleTreeData>();
             ITreeNodeVisitor<TreeViewData<ModuleDto>> visitor = new TreeNodeVisitorRootToLeaf<TreeViewData<ModuleDto>>(
-                tree.Tree, delegate (INode<TreeViewData<ModuleDto>> treeNode)
+                tree.Tree, delegate(INode<TreeViewData<ModuleDto>> treeNode)
                 {
                     if (treeNode.IsRoot) return;
                     var menu = treeNode.Data.Value;
@@ -93,7 +93,7 @@ namespace DCSoft.Applications.Extensions.Systems
             IList<ModuleDto> result = new List<ModuleDto>();
             var parentDict = new Dictionary<string, ModuleDto>();
             ITreeNodeVisitor<TreeViewData<ModuleDto>> visitor = new TreeNodeVisitorRootToLeaf<TreeViewData<ModuleDto>>(
-                tree.Tree, delegate (INode<TreeViewData<ModuleDto>> treeNode)
+                tree.Tree, delegate(INode<TreeViewData<ModuleDto>> treeNode)
                 {
                     if (treeNode.IsRoot) return;
                     var menu = treeNode.Data.Value;

@@ -37,7 +37,8 @@ namespace Util.Extras.Extensions
         /// 转换为集合(名称-值)
         /// </summary>
         /// <param name="this"></param>
-        public static System.Collections.Specialized.NameValueCollection ToNameValueCollection(this IDictionary<string, string> @this)
+        public static System.Collections.Specialized.NameValueCollection ToNameValueCollection(
+            this IDictionary<string, string> @this)
         {
             if (@this == null)
                 return null;
@@ -115,7 +116,8 @@ namespace Util.Extras.Extensions
         /// 转换为名称-值集合
         /// </summary>
         /// <param name="this">键值对集合</param>
-        public static System.Collections.Specialized.NameValueCollection ToNameValueCollection(this IEnumerable<KeyValuePair<string, string>> @this)
+        public static System.Collections.Specialized.NameValueCollection ToNameValueCollection(
+            this IEnumerable<KeyValuePair<string, string>> @this)
         {
             if (@this == null)
                 return null;

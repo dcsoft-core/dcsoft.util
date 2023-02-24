@@ -27,7 +27,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="roleRepository">角色仓储</param>
         /// <param name="moduleRepository">模块仓储</param>
-        public MenuService(IServiceProvider serviceProvider, IRoleRepository roleRepository, IModuleRepository moduleRepository) : base(serviceProvider)
+        public MenuService(IServiceProvider serviceProvider, IRoleRepository roleRepository,
+            IModuleRepository moduleRepository) : base(serviceProvider)
         {
             _roleRepository = roleRepository;
             _moduleRepository = moduleRepository;
@@ -63,7 +64,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// </summary>
         private async Task AddMissingParents(List<Module> modules)
         {
-            var parentIds = modules.Select(t=>t.Id.ToString()).ToList();
+            var parentIds = modules.Select(t => t.Id.ToString()).ToList();
             var parents = await _moduleRepository.FindByIdsAsync(parentIds.Select(t => t.ToGuid()));
             modules.AddRange(parents.Where(t => t.Enabled).Select(t => t.ToModule()));
         }

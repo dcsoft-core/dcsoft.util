@@ -138,7 +138,7 @@ namespace Util.Extras.Tools.Captcha
                 );
             }
 
-            processingContext.DrawImage(img, new Point(0,0), 1);
+            processingContext.DrawImage(img, new Point(0, 0), 1);
             return processingContext;
         }
 
@@ -162,12 +162,12 @@ namespace Util.Extras.Tools.Captcha
             }
 
             using var img = new Image<Rgba32>(containerWidth, containerHeight);
-            
+
             points.Add(new PointF(containerWidth, containerHeight));
             img.Mutate(ctx => ctx
                 .DrawLines(color, thickness, points.ToArray())
             );
-            processingContext.DrawImage(img, new Point(0,0), 1);
+            processingContext.DrawImage(img, new Point(0, 0), 1);
 
             return processingContext;
         }

@@ -33,10 +33,10 @@ namespace DCSoft.Data.Repositories.Systems
         public async Task<IEnumerable<Guid>> GetResourceIdsAsync(Guid applicationId, Guid roleId, bool isDeny)
         {
             var queryable = from permission in Find()
-                            join resource in UnitOfWork.Set<Resource>() on permission.ResourceId equals resource.Id
-                            where resource.ApplicationId == applicationId && permission.RoleId == roleId &&
-                                  permission.IsDeny == isDeny
-                            select resource.Id;
+                join resource in UnitOfWork.Set<Resource>() on permission.ResourceId equals resource.Id
+                where resource.ApplicationId == applicationId && permission.RoleId == roleId &&
+                      permission.IsDeny == isDeny
+                select resource.Id;
             return await queryable.ToListAsync();
         }
 

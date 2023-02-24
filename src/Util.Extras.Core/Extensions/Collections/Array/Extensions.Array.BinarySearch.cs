@@ -14,7 +14,8 @@ namespace Util.Extras.Extensions
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="value">值</param>
-        public static int BinarySearch(this System.Array array, object value) => System.Array.BinarySearch(array, value);
+        public static int BinarySearch(this System.Array array, object value) =>
+            System.Array.BinarySearch(array, value);
 
         /// <summary>
         /// 二进制查询
@@ -43,7 +44,8 @@ namespace Util.Extras.Extensions
         /// <param name="length">长度</param>
         /// <param name="value">值</param>
         /// <param name="comparer">比较器</param>
-        public static int BinarySearch(this System.Array array, int index, int length, object value, IComparer comparer) =>
+        public static int BinarySearch(this System.Array array, int index, int length, object value,
+            IComparer comparer) =>
             System.Array.BinarySearch(array, index, length, value, comparer);
     }
 }

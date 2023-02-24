@@ -33,7 +33,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="moduleRepository">模块仓储</param>
         /// <param name="resourceRepository">资源仓储</param>
-        public ModuleService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork, IModuleRepository moduleRepository,
+        public ModuleService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork,
+            IModuleRepository moduleRepository,
             IResourceRepository resourceRepository) : base(serviceProvider, unitOfWork, resourceRepository)
         {
             _moduleRepository = moduleRepository;

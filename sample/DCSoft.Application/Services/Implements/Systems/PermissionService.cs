@@ -29,8 +29,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="repository">仓储</param>
         /// <param name="userService">用户服务</param>
         /// <param name="cache">缓存服务</param>
-        public PermissionService(IServiceProvider serviceProvider, 
-            IDataUnitOfWork unitOfWork, 
+        public PermissionService(IServiceProvider serviceProvider,
+            IDataUnitOfWork unitOfWork,
             IPermissionRepository repository,
             IUserService userService,
             ICache cache) : base(serviceProvider, unitOfWork, repository)

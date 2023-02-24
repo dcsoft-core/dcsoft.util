@@ -25,7 +25,6 @@ namespace Util.Extras.Applications
         where TDto : class, IDto, new()
         where TQuery : IPage
     {
-
         #region 字段
 
         /// <summary>
@@ -43,7 +42,8 @@ namespace Util.Extras.Applications
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
-        protected DeleteServiceBase(IServiceProvider serviceProvider, IUnitOfWork unitOfWork, IRepository<TEntity, TKey> repository) : base(serviceProvider, repository)
+        protected DeleteServiceBase(IServiceProvider serviceProvider, IUnitOfWork unitOfWork,
+            IRepository<TEntity, TKey> repository) : base(serviceProvider, repository)
         {
             UnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));

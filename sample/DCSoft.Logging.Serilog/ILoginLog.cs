@@ -24,6 +24,7 @@ namespace DCSoft.Logging.Serilog
         /// <param name="creator">创建人</param>
         /// <param name="isDeleted">是否删除</param>
         void Write(Guid logId, string loginName, string ipAddress, string location, string operatingSystem,
-            LoginStatus status, string promptMsg, string browser, DateTime creationTime, Guid creatorId, string creator, bool isDeleted);
+            LoginStatus status, string promptMsg, string browser, DateTime creationTime, Guid creatorId, string creator,
+            bool isDeleted);
     }
 }

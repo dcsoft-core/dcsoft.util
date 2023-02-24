@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Xml.Serialization;
+
 // ReSharper disable StaticMemberInGenericType
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedParameter.Local
@@ -378,9 +379,9 @@ namespace Util.Extras.Tree
             /// <p>This method is called during serialization.</p>
             /// <p>Do not call this method directly.</p>
             /// </remarks>
-#pragma warning disable SYSLIB0003 // 类型或成员已过时
+#pragma warning disable SYSLIB0003 // 绫诲瀷鎴栨垚鍛樺凡杩囨椂
             [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-#pragma warning restore SYSLIB0003 // 类型或成员已过时
+#pragma warning restore SYSLIB0003 // 绫诲瀷鎴栨垚鍛樺凡杩囨椂
             public override void GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 base.GetObjectData(info, context);
@@ -483,9 +484,9 @@ namespace Util.Extras.Tree
         /// <p>This method is called during serialization.</p>
         /// <p>Do not call this method directly.</p>
         /// </remarks>
-#pragma warning disable SYSLIB0003 // 类型或成员已过时
+#pragma warning disable SYSLIB0003 // 绫诲瀷鎴栨垚鍛樺凡杩囨椂
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-#pragma warning restore SYSLIB0003 // 类型或成员已过时
+#pragma warning restore SYSLIB0003 // 绫诲瀷鎴栨垚鍛樺凡杩囨椂
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("NodeTreeVersion", 1);

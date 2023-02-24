@@ -235,7 +235,8 @@ namespace Util.Extras.Helpers
         /// </summary>
         private static string GetRemoteAddress()
         {
-            return Util.Helpers.Web.Request?.Headers["HTTP_X_FORWARDED_FOR"] ?? Util.Helpers.Web.Request?.Headers["REMOTE_ADDR"];
+            return Util.Helpers.Web.Request?.Headers["HTTP_X_FORWARDED_FOR"] ??
+                   Util.Helpers.Web.Request?.Headers["REMOTE_ADDR"];
         }
 
         #endregion

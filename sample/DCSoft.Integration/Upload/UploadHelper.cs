@@ -25,7 +25,8 @@ namespace DCSoft.Integration.Upload
         /// <param name="args"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Util.Extras.Files.FileInfo> UploadAsync(IFormFile file, FileUploadOptions config, object args, CancellationToken cancellationToken = default)
+        public async Task<Util.Extras.Files.FileInfo> UploadAsync(IFormFile file, FileUploadOptions config, object args,
+            CancellationToken cancellationToken = default)
         {
             if (file == null || file.Length < 1)
             {

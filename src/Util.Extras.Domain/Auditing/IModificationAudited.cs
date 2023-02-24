@@ -19,10 +19,12 @@ namespace Util.Extras.Domain.Auditing
         /// 最后修改人标识
         /// </summary>
         TKey LastModifierId { get; set; }
+
         /// <summary>
         /// 最后修改人名称
         /// </summary>
         string LastModifier { get; set; }
+
         /// <summary>
         /// 最后修改时间
         /// </summary>

@@ -70,6 +70,7 @@ namespace DCSoft.Applications.Services.Implements.Commons
             {
                 throw new Warning("一级字典不能删除");
             }
+
             return Task.CompletedTask;
         }
     }

@@ -119,10 +119,12 @@ namespace DCSoft.Applications.Services.Implements.Systems
                     {
                         throw new Warning("验证码已过期！");
                     }
+
                     if (!string.Equals(verifyCode, request.VerifyCode, StringComparison.CurrentCultureIgnoreCase))
                     {
                         throw new Warning("验证码输入有误！");
                     }
+
                     _cache.Remove(verifyCodeKey);
                 }
                 else
@@ -167,6 +169,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
                     {
                         throw new Warning("解析密码失败,密钥Key不存在.");
                     }
+
                     request.Password = Encrypt.DesDecrypt(request.Password, secretKey);
                     _cache.Remove(passwordEncryptKey);
                 }
@@ -205,15 +208,15 @@ namespace DCSoft.Applications.Services.Implements.Systems
 
             var dicClaim = new Dictionary<string, object>()
             {
-                {ClaimTypes.UserId, user.Id},
-                {ClaimTypes.UserName, user.UserName},
-                {ClaimTypes.Email, user.Email},
-                {ClaimTypes.Mobile, user.PhoneNumber},
-                {ClaimTypes.NickName, user.NickName},
-                {ClaimTypes.UserType, user.UserType},
-                {ClaimTypes.ApplicationId, application.Id},
-                {ClaimTypes.ApplicationCode, application.Code},
-                {ClaimTypes.ApplicationName, application.Name},
+                { ClaimTypes.UserId, user.Id },
+                { ClaimTypes.UserName, user.UserName },
+                { ClaimTypes.Email, user.Email },
+                { ClaimTypes.Mobile, user.PhoneNumber },
+                { ClaimTypes.NickName, user.NickName },
+                { ClaimTypes.UserType, user.UserType },
+                { ClaimTypes.ApplicationId, application.Id },
+                { ClaimTypes.ApplicationCode, application.Code },
+                { ClaimTypes.ApplicationName, application.Name },
             };
 
             var accessToken = JWTEncryption.Encrypt(dicClaim, application.AccessTokenLifetime / 60);
@@ -252,15 +255,15 @@ namespace DCSoft.Applications.Services.Implements.Systems
             {
                 var dicClaim = new Dictionary<string, object>()
                 {
-                    {ClaimTypes.UserId, _session.UserId},
-                    {ClaimTypes.UserName, _session.GetUserName()},
-                    {ClaimTypes.Email, _session.GetEmail()},
-                    {ClaimTypes.Mobile, _session.GetMobile()},
-                    {ClaimTypes.NickName, _session.GetNickName()},
-                    {ClaimTypes.UserType, _session.GetUserType()},
-                    {ClaimTypes.ApplicationId, _session.GetApplicationId()},
-                    {ClaimTypes.ApplicationCode, _session.GetApplicationCode()},
-                    {ClaimTypes.ApplicationName, _session.GetApplicationName()},
+                    { ClaimTypes.UserId, _session.UserId },
+                    { ClaimTypes.UserName, _session.GetUserName() },
+                    { ClaimTypes.Email, _session.GetEmail() },
+                    { ClaimTypes.Mobile, _session.GetMobile() },
+                    { ClaimTypes.NickName, _session.GetNickName() },
+                    { ClaimTypes.UserType, _session.GetUserType() },
+                    { ClaimTypes.ApplicationId, _session.GetApplicationId() },
+                    { ClaimTypes.ApplicationCode, _session.GetApplicationCode() },
+                    { ClaimTypes.ApplicationName, _session.GetApplicationName() },
                 };
 
                 var application = await _applicationService.GetByCodeAsync(_session.GetApplicationCode());
@@ -279,6 +282,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
                 result.RefreshUtcExpires = refreshTokenExpire;
                 result.TokenType = "Bearer";
             }
+
             return result;
         }
 
@@ -290,7 +294,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         public Task<AuthVerifyCodeResp> GetVerifyCodeAsync(string lastKey)
         {
             var img = _verifyCode.GetBase64String(out string code);
-            
+
             // var code = _securityCode.GetRandomEnDigitalText(4);
             // var img = _securityCode.GetGifEnDigitalCodeByte(code).ToBase64();
 

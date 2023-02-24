@@ -14,7 +14,8 @@ namespace DCSoft.Data.MySql
         /// </summary>
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="options">配置项</param>
-        public DataUnitOfWork(IServiceProvider serviceProvider, DbContextOptions<DataUnitOfWork> options) : base(serviceProvider, options)
+        public DataUnitOfWork(IServiceProvider serviceProvider, DbContextOptions<DataUnitOfWork> options) : base(
+            serviceProvider, options)
         {
         }
     }

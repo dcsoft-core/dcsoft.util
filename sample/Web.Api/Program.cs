@@ -19,7 +19,7 @@ builder.Services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
 //配置服务
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    options.JsonSerializerOptions.DefaultBufferSize = 10_0000;//返回较大数据数据序列化时会截断，原因：默认缓冲区大小（以字节为单位）为16384。
+    options.JsonSerializerOptions.DefaultBufferSize = 10_0000; //返回较大数据数据序列化时会截断，原因：默认缓冲区大小（以字节为单位）为16384。
     options.JsonSerializerOptions.Converters.AddDateTimeTypeConverters("yyyy-MM-dd HH:mm:ss");
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; // 忽略循环引用 仅.NET 6支持
 });

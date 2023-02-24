@@ -60,6 +60,7 @@ namespace DCSoft.Applications.Extensions.Commons
                     Disabled = !item.Enabled
                 });
             }
+
             return result;
         }
 
@@ -69,14 +70,15 @@ namespace DCSoft.Applications.Extensions.Commons
         /// <returns></returns>
         public static IList<DictDataTreeResponse> ToTreeData(this IEnumerable<DictDataDto> data)
         {
-            TreeView<string, DictDataDto> tree = new TreeViewByParentId<string, DictDataDto>("Id", "ParentId", "SortId");
+            TreeView<string, DictDataDto>
+                tree = new TreeViewByParentId<string, DictDataDto>("Id", "ParentId", "SortId");
             tree.Reset(data);
             // Tree构造
             IList<DictDataTreeResponse> result = new List<DictDataTreeResponse>();
             var parentDict = new Dictionary<string, DictDataTreeResponse>();
             ITreeNodeVisitor<TreeViewData<DictDataDto>> visitor =
                 new TreeNodeVisitorRootToLeaf<TreeViewData<DictDataDto>>(
-                    tree.Tree, delegate (INode<TreeViewData<DictDataDto>> treeNode)
+                    tree.Tree, delegate(INode<TreeViewData<DictDataDto>> treeNode)
                     {
                         if (treeNode.IsRoot) return;
                         var menu = treeNode.Data.Value;

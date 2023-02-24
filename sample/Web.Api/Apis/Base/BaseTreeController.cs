@@ -11,7 +11,8 @@ namespace DCSoft.Apis.Base
     /// 接口基类
     /// </summary>
     [Authorize]
-    public class BaseTreeController<TDto, TQuery> : NgZorroTreeControllerBase<TDto, TQuery> where TDto : TreeDtoBase<TDto>, new() where TQuery : class, ITreeQueryParameter
+    public class BaseTreeController<TDto, TQuery> : NgZorroTreeControllerBase<TDto, TQuery>
+        where TDto : TreeDtoBase<TDto>, new() where TQuery : class, ITreeQueryParameter
     {
         /// <summary>
         /// 会话

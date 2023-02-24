@@ -17,13 +17,17 @@ namespace Util.Extras.Files
             switch (unit)
             {
                 case FileSizeUnit.K:
-                    Size = size * 1024; break;
+                    Size = size * 1024;
+                    break;
                 case FileSizeUnit.M:
-                    Size = size * 1024 * 1024; break;
+                    Size = size * 1024 * 1024;
+                    break;
                 case FileSizeUnit.G:
-                    Size = size * 1024 * 1024 * 1024; break;
+                    Size = size * 1024 * 1024 * 1024;
+                    break;
                 default:
-                    Size = size; break;
+                    Size = size;
+                    break;
             }
         }
 

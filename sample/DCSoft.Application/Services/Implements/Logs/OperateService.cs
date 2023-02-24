@@ -21,7 +21,8 @@ namespace DCSoft.Applications.Services.Implements.Logs
         /// <param name="serviceProvider">服务提供器</param>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
-        public OperateService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork, IOperateRepository repository) : base(serviceProvider, unitOfWork, repository)
+        public OperateService(IServiceProvider serviceProvider, IDataUnitOfWork unitOfWork,
+            IOperateRepository repository) : base(serviceProvider, unitOfWork, repository)
         {
         }
 

@@ -20,8 +20,8 @@ public class SystemTextJsonLongToStringJsonConverter : JsonConverter<long>
     public override long Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         return reader.TokenType == JsonTokenType.String
-                ? long.Parse(reader.GetString() ?? string.Empty)
-                : reader.GetInt64();
+            ? long.Parse(reader.GetString() ?? string.Empty)
+            : reader.GetInt64();
     }
 
     /// <summary>
@@ -51,8 +51,8 @@ public class SystemTextJsonNullableLongToStringJsonConverter : JsonConverter<lon
     public override long? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         return reader.TokenType == JsonTokenType.String
-                ? long.Parse(reader.GetString() ?? string.Empty)
-                : reader.GetInt64();
+            ? long.Parse(reader.GetString() ?? string.Empty)
+            : reader.GetInt64();
     }
 
     /// <summary>
