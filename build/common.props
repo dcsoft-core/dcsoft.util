@@ -8,8 +8,8 @@
         <Authors>杨柳</Authors>
         <Copyright>Copyright © 2023 DCSoft Studio</Copyright>
         <MaintainerEmail>willow.lau@outlook.com</MaintainerEmail>
-        <PackageProjectUrl>https://github.com/willowlau/dcsoft</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/willowlau/dcsoft</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/willowlau/dcsoft.util</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/willowlau/dcsoft.util</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>DCSoft应用框架以MIT开源发布，可随意使用</PackageReleaseNotes>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
