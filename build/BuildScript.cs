@@ -32,13 +32,13 @@ namespace Build
         /// Nuget推送地址
         /// </summary>
         [FromArg("nugetUrl")]
-        public string NugetUrl { get; set; } = "https://api.nuget.org/v3/index.json"; //"https://nuget.designcoding.com/v3/index.json";
+        public string NugetUrl { get; set; } = "https://api.nuget.org/v3/index.json"; 
 
         /// <summary>
         /// Nuget密钥
         /// </summary>
         [FromArg("nugetKey", "Nuget api key for publishing nuget packages.")]
-        public string NugetApiKey { get; set; } = "oy2p7g7jlpurqeiosqlqfgyekhvwjbquhpcgcgi3onedza"; //"w9AiPxG2otJzL7srbzFF8hETquU1tFuTKse85C3cP0CAkB";
+        public string NugetApiKey { get; set; } = "oy2p7g7XXxxx"; 
 
         /// <summary>
         /// 源代码目录
