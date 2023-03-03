@@ -37,8 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Util.Application" Version="7.0.26" />
-	  <PackageReference Include="Util.Application.EntityFrameworkCore" Version="7.0.26" />
+	  <PackageReference Include="Util.Application" Version="7.0.27" />
+	  <PackageReference Include="Util.Application.EntityFrameworkCore" Version="7.0.27" />
   </ItemGroup>
 
   <ItemGroup>
