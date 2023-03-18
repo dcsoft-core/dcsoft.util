@@ -28,7 +28,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CSRedisCore" Version="3.8.670" />
-		<PackageReference Include="Util.Caching" Version="7.0.27" />
+		<PackageReference Include="Util.Caching" Version="7.0.30" />
 	</ItemGroup>
 
 </Project>
