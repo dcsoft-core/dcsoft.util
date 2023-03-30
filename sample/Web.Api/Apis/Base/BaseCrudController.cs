@@ -17,11 +17,6 @@ namespace DCSoft.Apis.Base
         where TQuery : IPage
     {
         /// <summary>
-        /// 会话
-        /// </summary>
-        protected virtual Util.Sessions.ISession Session => Util.Sessions.Session.Instance;
-
-        /// <summary>
         /// 当前方法名
         /// </summary>
         /// <returns></returns>

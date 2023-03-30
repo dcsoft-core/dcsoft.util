@@ -28,7 +28,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.3" />
-		<PackageReference Include="Util.Core" Version="7.0.30" />
+		<PackageReference Include="Util.Core" Version="7.0.39" />
 	</ItemGroup>
 
 </Project>

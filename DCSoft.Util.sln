@@ -78,6 +78,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util.Extras.Tools.Captcha",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Extras.Security", "src\Util.Extras.Security\Util.Extras.Security.csproj", "{9483A9DB-DF0C-4883-8FD7-1AB6F066B0BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-Util.Extras.Data.EntityFrameworkCore.SqlServer", "src\Util.Extras.Data.EntityFrameworkCore.SqlServer\02-Util.Extras.Data.EntityFrameworkCore.SqlServer.csproj", "{5607A499-26D8-4423-AF35-DF1F39AF5E48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -176,6 +178,10 @@ Global
 		{9483A9DB-DF0C-4883-8FD7-1AB6F066B0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9483A9DB-DF0C-4883-8FD7-1AB6F066B0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9483A9DB-DF0C-4883-8FD7-1AB6F066B0BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5607A499-26D8-4423-AF35-DF1F39AF5E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5607A499-26D8-4423-AF35-DF1F39AF5E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5607A499-26D8-4423-AF35-DF1F39AF5E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5607A499-26D8-4423-AF35-DF1F39AF5E48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,6 +219,7 @@ Global
 		{7D8102EC-A0B9-4F82-838E-3D99BD70C83D} = {E4A21A41-D685-4E6E-8746-071E872A0AE6}
 		{65864682-C187-4314-8296-094AD7ED4161} = {C60A0D99-E3CD-46F6-A7DD-3DB76D615282}
 		{9483A9DB-DF0C-4883-8FD7-1AB6F066B0BE} = {E8795AE3-E66C-4905-8736-303F7E449A13}
+		{5607A499-26D8-4423-AF35-DF1F39AF5E48} = {E4A21A41-D685-4E6E-8746-071E872A0AE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A99CBA9-4A62-454F-9267-D3F362965038}

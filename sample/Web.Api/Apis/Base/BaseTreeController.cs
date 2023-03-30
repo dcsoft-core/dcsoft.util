@@ -15,11 +15,6 @@ namespace DCSoft.Apis.Base
         where TDto : TreeDtoBase<TDto>, new() where TQuery : class, ITreeQueryParameter
     {
         /// <summary>
-        /// 会话
-        /// </summary>
-        protected virtual Util.Sessions.ISession Session => Util.Sessions.Session.Instance;
-
-        /// <summary>
         /// 当前方法名
         /// </summary>
         /// <returns></returns>

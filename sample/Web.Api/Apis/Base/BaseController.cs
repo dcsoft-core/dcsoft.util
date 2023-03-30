@@ -13,11 +13,6 @@ namespace DCSoft.Apis.Base
     public class BaseController : WebApiControllerBase
     {
         /// <summary>
-        /// 会话
-        /// </summary>
-        protected virtual ISession Session => Util.Sessions.Session.Instance;
-
-        /// <summary>
         /// 当前方法名
         /// </summary>
         /// <returns></returns>

@@ -1,9 +1,9 @@
 using System;
 using UAParser;
 using Util.Extras.Sessions;
-using Util.Sessions;
 using Util.Extras.Tools.IPLocation;
 using Util.Helpers;
+using Util.Sessions;
 using Web = Util.Extras.Helpers.Web;
 
 namespace DCSoft.Logging.Serilog
@@ -60,8 +60,8 @@ namespace DCSoft.Logging.Serilog
             var operatingSystem = ua.OS.ToString();
             var browser = Web.Browser;
             var creationTime = DateTime.Now;
-            var creatorId = Session.Instance.GetUserId();
-            var creator = Session.Instance.GetUserName();
+            var creatorId = UserSession.Instance.GetUserId();
+            var creator = UserSession.Instance.GetUserName();
 
             LoginLog.Write(logId, loginName, ipAddress, location, operatingSystem, status, promptMsg, browser,
                 creationTime, creatorId, creator, false);
@@ -144,8 +144,8 @@ namespace DCSoft.Logging.Serilog
             var operatingSystem = ua.OS.ToString();
             var browser = Web.Browser;
             var creationTime = DateTime.Now;
-            var creatorId = Session.Instance.GetUserId();
-            var creator = Session.Instance.GetUserName();
+            var creatorId = UserSession.Instance.GetUserId();
+            var creator = UserSession.Instance.GetUserName();
 
             OperateLog.Write(logId, title, type, httpMethod, method, url, userType, ipAddress,
                 location, param, result,
