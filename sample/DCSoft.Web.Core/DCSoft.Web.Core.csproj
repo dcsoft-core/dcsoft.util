@@ -27,18 +27,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.Application.WebApi" Version="7.0.39" />
-		<PackageReference Include="Util.Caching.EasyCaching" Version="7.0.39" />
-		<PackageReference Include="Util.Data.Dapper.MySql" Version="7.0.39" />
-		<PackageReference Include="Util.Logging.Serilog.Exceptionless" Version="7.0.39" />
-		<PackageReference Include="Util.Ui.NgZorro" Version="7.0.39" />
+		<PackageReference Include="Util.Application.WebApi" Version="7.0.43" />
+		<PackageReference Include="Util.Caching.EasyCaching" Version="7.0.43" />
+		<PackageReference Include="Util.Data.Dapper.MySql" Version="7.0.43" />
+		<PackageReference Include="Util.Logging.Serilog.Exceptionless" Version="7.0.43" />
+		<PackageReference Include="Util.Ui.NgZorro" Version="7.0.43" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Util.Extras.Application\Util.Extras.Application.csproj" />
 		<ProjectReference Include="..\..\src\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
 		<ProjectReference Include="..\..\src\Util.Extras.Authentication.JwtBearer\Util.Extras.Authentication.JwtBearer.csproj" />
-		<ProjectReference Include="..\..\src\Util.Extras.Caching.CSRedisCore\03-Util.Extras.Caching.CSRedisCore.csproj" />
 		<ProjectReference Include="..\..\src\Util.Extras.Logging.Serilog.MySQL\04-Util.Extras.Logging.Serilog.MySQL.csproj" />
 		<ProjectReference Include="..\..\src\Util.Extras.Tools.Captcha\Util.Extras.Tools.Captcha.csproj" />
 		<ProjectReference Include="..\DCSoft.Application\DCSoft.Application.csproj" />

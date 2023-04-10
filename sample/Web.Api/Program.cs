@@ -4,11 +4,14 @@ using DCSoft.Integration.Upload;
 using DCSoft.Web.Core.Handlers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using EasyCaching.InMemory;
 using Util;
 using Util.Aop;
+using Util.Caching.EasyCaching;
 using Util.Data.EntityFrameworkCore;
 using Util.Data.Sql;
 using Util.Extras.Applications.Middles;
+using Util.Helpers;
 using Util.Logging.Serilog;
 
 //创建Web应用程序生成器
@@ -31,6 +34,7 @@ builder.Services.AddUploadConfig();
 //配置Util
 builder.Host.AddUtil(options => options
     .UseAop()
+    .UseRedisCache(builder.Configuration, "Redis")
     .UseSerilog(t => t.AddExceptionless())
     .UseMySqlQuery(builder.Configuration.GetConnectionString("DefaultConnection"))
     .UseMySqlExecutor(builder.Configuration.GetConnectionString("DefaultConnection"))

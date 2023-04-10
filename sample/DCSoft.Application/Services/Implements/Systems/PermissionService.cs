@@ -33,7 +33,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             IDataUnitOfWork unitOfWork,
             IPermissionRepository repository,
             IUserService userService,
-            ICache cache) : base(serviceProvider, unitOfWork, repository)
+            IRedisCache cache) : base(serviceProvider, unitOfWork, repository)
         {
             _repository = repository;
             _userService = userService;
@@ -53,7 +53,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 缓存服务
         /// </summary>
-        private readonly ICache _cache;
+        private readonly IRedisCache _cache;
 
         /// <inheritdoc />
         protected override IQueryable<Permission> Filter(IQueryable<Permission> queryable, PermissionQuery param)
@@ -97,7 +97,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             await _repository.SaveAsync(request.ApplicationId.SafeValue(), request.RoleId.SafeValue(),
                 request.ResourceIds.ToGuidList(), request.IsDeny.SafeValue());
 
-            _cache.Remove(CacheKey.UserPermissions);
+            await _cache.RemoveByPrefixAsync(Integration.Cache.CacheKey.UserPermissions);
         }
     }
 }

@@ -4,6 +4,7 @@ using Util.Extras.Helpers;
 using Util.Extras.Security.Encryptors;
 using Util.Helpers;
 using Util.Security.Encryptors;
+using Encrypt = Util.Extras.Helpers.Encrypt;
 
 namespace DCSoft.Domain.Models.Systems
 {

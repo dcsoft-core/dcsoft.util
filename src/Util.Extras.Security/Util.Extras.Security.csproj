@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.Security" Version="7.0.39" />
+		<PackageReference Include="Util.Security" Version="7.0.43" />
 	</ItemGroup>
 
 	<ItemGroup>

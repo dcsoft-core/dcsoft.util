@@ -1,6 +1,5 @@
 ﻿using System;
 using DCSoft.Integration.Upload;
-using DCSoft.Web.Core.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Util.Extras.Tools.Captcha;
 using Util.Infrastructure;
@@ -23,7 +22,6 @@ namespace DCSoft.Web.Core
         {
             context.HostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddCaches();
                 services.AddCaptcha();
                 services.AddScoped<UploadHelper>();
             });

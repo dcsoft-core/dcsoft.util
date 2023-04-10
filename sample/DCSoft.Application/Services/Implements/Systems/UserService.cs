@@ -21,6 +21,7 @@ using Util.Data;
 using Util.Extras.Security.Encryptors;
 using Util.Extras.Sessions;
 using Util.Helpers;
+using CacheKey = DCSoft.Integration.Cache.CacheKey;
 
 namespace DCSoft.Applications.Services.Implements.Systems
 {
@@ -42,7 +43,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             IUserRepository repository,
             IModuleRepository moduleRepository,
             IRoleRepository roleRepository,
-            ICache cache) : base(serviceProvider, unitOfWork, repository)
+            IRedisCache cache) : base(serviceProvider, unitOfWork, repository)
         {
             _repository = repository;
             _moduleRepository = moduleRepository;
@@ -68,7 +69,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 缓存服务
         /// </summary>
-        private readonly ICache _cache;
+        private readonly IRedisCache _cache;
 
         /// <inheritdoc />
         protected override IQueryable<User> Filter(IQueryable<User> queryable, UserQuery param)

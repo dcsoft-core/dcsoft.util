@@ -18,6 +18,9 @@ using Util.Extras.Sessions;
 using Util.Extras.Security.Claims;
 using Util.Extras.Tools.Captcha;
 using Util.Helpers;
+using CacheKey = DCSoft.Integration.Cache.CacheKey;
+using CacheOptions = Util.Caching.CacheOptions;
+using Encrypt = Util.Extras.Helpers.Encrypt;
 using Random = Util.Extras.Helpers.Random;
 
 namespace DCSoft.Applications.Services.Implements.Systems
@@ -42,7 +45,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             IApplicationService applicationService,
             IHttpContextAccessor httpContextAccessor,
             Util.Sessions.ISession session,
-            ICache cache,
+            IRedisCache cache,
             VerifyCodeHelper verifyCodeHelper,
             SecurityCodeHelper securityCodeHelper,
             IUserService userService)
@@ -80,7 +83,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 缓存服务
         /// </summary>
-        private readonly ICache _cache;
+        private readonly IRedisCache _cache;
 
         /// <summary>
         /// 验证码类
@@ -112,7 +115,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             if (verifyCodeOptions.Enable)
             {
                 var verifyCodeKey = string.Format(CacheKey.VerifyCodeKey, request.VerifyCodeKey);
-                if (_cache.Exists(verifyCodeKey))
+                if (await _cache.ExistsAsync(verifyCodeKey))
                 {
                     var verifyCode = await _cache.GetAsync<string>(verifyCodeKey, null);
                     if (string.IsNullOrEmpty(verifyCode))
@@ -125,7 +128,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
                         throw new Warning("验证码输入有误！");
                     }
 
-                    _cache.Remove(verifyCodeKey);
+                    await _cache.RemoveAsync(verifyCodeKey);
                 }
                 else
                 {
@@ -162,7 +165,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             if (request.PasswordKey.NotEmpty())
             {
                 var passwordEncryptKey = string.Format(CacheKey.PassWordEncryptKey, request.PasswordKey);
-                if (_cache.Exists(passwordEncryptKey))
+                if (await _cache.ExistsAsync(passwordEncryptKey))
                 {
                     var secretKey = await _cache.GetAsync<string>(passwordEncryptKey, null);
                     if (secretKey.IsNull())
@@ -171,7 +174,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
                     }
 
                     request.Password = Encrypt.DesDecrypt(request.Password, secretKey);
-                    _cache.Remove(passwordEncryptKey);
+                    await _cache.RemoveAsync(passwordEncryptKey);
                 }
                 else
                 {
@@ -307,7 +310,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             //写入Redis
             var guid = Id.Create();
             var key = string.Format(CacheKey.VerifyCodeKey, guid);
-            _cache.TryAdd(key, code, TimeSpan.FromMinutes(5));
+            _cache.TrySet(key, code, new CacheOptions(){Expiration = TimeSpan.FromMinutes(5) });
 
             var result = new AuthVerifyCodeResp { Key = guid, Img = img };
             return Task.FromResult(result);
@@ -323,7 +326,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             var guid = Id.Create();
             var key = string.Format(CacheKey.PassWordEncryptKey, guid);
             var encryptKey = Random.GenerateRandom(8);
-            _cache.TryAdd(key, encryptKey, TimeSpan.FromMinutes(5));
+            _cache.TrySet(key, encryptKey, new CacheOptions() { Expiration = TimeSpan.FromMinutes(5) });
             var data = new AuthEncryptKeyResp { Key = guid, EncryptKey = encryptKey };
 
             return Task.FromResult(data);
