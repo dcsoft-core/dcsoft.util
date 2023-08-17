@@ -38,11 +38,17 @@ namespace Util.Extras.Tools.IPLocation
                 { 3, "联通" },
                 { 4, "宽带" },
                 { 5, "有线通" },
-                { 6, "铁通" }
+                { 6, "铁通" },
+                { 7, "CZ88.NET" }
             };
 
+            if (ip.Length > 15)
+            {
+                return "IPV6暂不支持";
+            }
+
             // TODO 设置IP数据库路径
-            var ipfilePath = Web.GetPhysicalPath("App_Data/qqwry.dat");
+            var ipfilePath = Web.GetPhysicalPath("Data/qqwry.dat");
             var qqWry = new IPScanner(ipfilePath);
 
             var ipLocation = qqWry.Query(ip);

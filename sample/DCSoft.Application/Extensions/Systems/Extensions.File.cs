@@ -1,4 +1,5 @@
-﻿using Util.Extras.Files;
+﻿using DCSoft.Applications.Dtos.Commons;
+using Util.Extras.Files;
 using Util.Helpers;
 
 namespace DCSoft.Applications.Extensions.Systems

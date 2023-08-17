@@ -1,52 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>$(NetTargetFramework)</TargetFramework>
-		<RootNamespace>Util.Extras.Applications</RootNamespace>
-		<PackageIcon>icon.jpg</PackageIcon>
-		<Description>Util.Extras.Application是Util应用框架的应用层基础类库的扩展库</Description>
-		<AssemblyName>Util.Extras.Application</AssemblyName>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>$(NetTargetFramework)</TargetFramework>
+        <RootNamespace>Util.Extras.Applications</RootNamespace>
+        <PackageIcon>icon.jpg</PackageIcon>
+        <Description>Util.Extras.Application是Util应用框架的应用层基础类库的扩展库</Description>
+        <AssemblyName>Util.Extras.Application</AssemblyName>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<OutputPath></OutputPath>
-		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <OutputPath></OutputPath>
+        <DocumentationFile>.\obj\Debug\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<OutputPath></OutputPath>
-		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath></OutputPath>
+        <DocumentationFile>.\obj\Release\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\build\icon.jpg">
-			<Pack>True</Pack>
-			<Visible>False</Visible>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\build\icon.jpg">
+            <Pack>True</Pack>
+            <Visible>False</Visible>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="Util.Application" Version="7.0.43" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Util.Application" Version="7.1.17"/>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj"/>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Properties\AppRes.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppRes.resx</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+    <ItemGroup>
+        <Compile Update="Properties\AppRes.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>AppRes.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <EmbeddedResource Update="Properties\AppRes.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppRes.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	</ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\AppRes.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>AppRes.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
 
 </Project>

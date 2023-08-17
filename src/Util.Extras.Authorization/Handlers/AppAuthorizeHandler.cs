@@ -23,7 +23,7 @@ public abstract class AppAuthorizeHandler : IAuthorizationHandler
         {
             await AuthorizeHandleAsync(context);
         }
-        else context.GetCurrentHttpContext()?.SignoutToSwagger(); // 退出Swagger登录
+        else context.GetCurrentHttpContext()?.SignOutToSwagger(); // 退出Swagger登录
     }
 
     /// <summary>

@@ -42,7 +42,7 @@ namespace DCSoft.Web.Core.Handlers
                 DefaultHttpContext currentHttpContext = context.GetCurrentHttpContext();
                 if (currentHttpContext == null)
                     return;
-                currentHttpContext.SignoutToSwagger();
+                currentHttpContext.SignOutToSwagger();
             }
         }
 

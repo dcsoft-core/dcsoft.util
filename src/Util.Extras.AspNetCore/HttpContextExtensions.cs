@@ -51,7 +51,7 @@ public static class HttpContextExtensions
     /// 设置规范化文档退出登录
     /// </summary>
     /// <param name="httpContext"></param>
-    public static void SignoutToSwagger(this HttpContext httpContext)
+    public static void SignOutToSwagger(this HttpContext httpContext)
     {
         httpContext.Response.Headers["access-token"] = "invalid_token";
     }

@@ -27,20 +27,20 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
-        <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1"/>
+        <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Fonts" />
+        <Folder Include="Fonts"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Util.Extras.Core\01-Util.Extras.Core.csproj" />
+        <ProjectReference Include="..\Util.Extras.Core\01-Util.Extras.Core.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Fonts\*.ttf" />
+        <EmbeddedResource Include="Fonts\*.ttf"/>
     </ItemGroup>
 
 </Project>

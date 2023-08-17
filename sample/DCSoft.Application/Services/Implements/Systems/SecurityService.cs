@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DCSoft.Applications.Requests.Systems;
 using DCSoft.Applications.Responses.Systems.AuthResult;
 using DCSoft.Applications.Services.Abstractions.Systems;
-using DCSoft.Integration.Cache;
 using DCSoft.Integration.Options.Token;
 using DCSoft.Logging.Serilog;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +12,6 @@ using Util.Caching;
 using Util.Exceptions;
 using Util.Extras.Authorization;
 using Util.Extras.Extensions;
-using Util.Extras.Helpers;
 using Util.Extras.Sessions;
 using Util.Extras.Security.Claims;
 using Util.Extras.Tools.Captcha;
@@ -38,16 +36,14 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <param name="httpContextAccessor">Http上下文访问器</param>
         /// <param name="session">当前会话</param>
         /// <param name="cache">缓存服务</param>
-        /// <param name="verifyCodeHelper">验证码类</param>
-        /// <param name="securityCodeHelper">验证码类</param>
+        /// <param name="captcha">验证码类</param>
         /// <param name="userService">用户服务</param>
         public SecurityService(ILogger logger,
             IApplicationService applicationService,
             IHttpContextAccessor httpContextAccessor,
             Util.Sessions.ISession session,
             IRedisCache cache,
-            VerifyCodeHelper verifyCodeHelper,
-            SecurityCodeHelper securityCodeHelper,
+            IImageSharpCaptcha captcha,
             IUserService userService)
         {
             _logger = logger;
@@ -55,8 +51,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             _httpContextAccessor = httpContextAccessor;
             _session = session;
             _cache = cache;
-            _verifyCode = verifyCodeHelper;
-            _securityCode = securityCodeHelper;
+            _captcha = captcha;
             _userService = userService;
         }
 
@@ -88,12 +83,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <summary>
         /// 验证码类
         /// </summary>
-        private readonly VerifyCodeHelper _verifyCode;
-
-        /// <summary>
-        /// 验证码类
-        /// </summary>
-        private readonly SecurityCodeHelper _securityCode;
+        private readonly IImageSharpCaptcha _captcha;
 
         /// <summary>
         /// 用户仓储
@@ -108,32 +98,27 @@ namespace DCSoft.Applications.Services.Implements.Systems
         {
             _logger.Login(request.UserName, LoginStatus.Failure, "用户名或密码不正确");
 
-            var verifyCodeOptions = Config.Get<VerifyCodeOptions>("VerifyCode");
-
             #region 校验验证码
 
-            if (verifyCodeOptions.Enable)
+            var verifyCodeKey = string.Format(CacheKey.VerifyCodeKey, request.VerifyCodeKey);
+            if (await _cache.ExistsAsync(verifyCodeKey))
             {
-                var verifyCodeKey = string.Format(CacheKey.VerifyCodeKey, request.VerifyCodeKey);
-                if (await _cache.ExistsAsync(verifyCodeKey))
-                {
-                    var verifyCode = await _cache.GetAsync<string>(verifyCodeKey, null);
-                    if (string.IsNullOrEmpty(verifyCode))
-                    {
-                        throw new Warning("验证码已过期！");
-                    }
-
-                    if (!string.Equals(verifyCode, request.VerifyCode, StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        throw new Warning("验证码输入有误！");
-                    }
-
-                    await _cache.RemoveAsync(verifyCodeKey);
-                }
-                else
+                var verifyCode = await _cache.GetAsync<string>(verifyCodeKey, null);
+                if (string.IsNullOrEmpty(verifyCode))
                 {
                     throw new Warning("验证码已过期！");
                 }
+
+                if (!string.Equals(verifyCode, request.VerifyCode, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    throw new Warning("验证码输入有误！");
+                }
+
+                await _cache.RemoveAsync(verifyCodeKey);
+            }
+            else
+            {
+                throw new Warning("验证码已过期！");
             }
 
             #endregion
@@ -296,10 +281,8 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// <returns></returns>
         public Task<AuthVerifyCodeResp> GetVerifyCodeAsync(string lastKey)
         {
-            var img = _verifyCode.GetBase64String(out string code);
-
-            // var code = _securityCode.GetRandomEnDigitalText(4);
-            // var img = _securityCode.GetGifEnDigitalCodeByte(code).ToBase64();
+            var code = _captcha.GetRandomEnDigitalText(4);
+            var img = _captcha.GetEnDigitalCodeByte(code).ToBase64();
 
             //删除上次缓存的验证码
             if (!lastKey.IsNull())
@@ -310,7 +293,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
             //写入Redis
             var guid = Id.Create();
             var key = string.Format(CacheKey.VerifyCodeKey, guid);
-            _cache.TrySet(key, code, new CacheOptions(){Expiration = TimeSpan.FromMinutes(5) });
+            _cache.TrySet(key, code, new CacheOptions() { Expiration = TimeSpan.FromMinutes(5) });
 
             var result = new AuthVerifyCodeResp { Key = guid, Img = img };
             return Task.FromResult(result);
@@ -337,7 +320,7 @@ namespace DCSoft.Applications.Services.Implements.Systems
         /// </summary>
         public Task SignOutAsync()
         {
-            _httpContextAccessor.HttpContext.SignoutToSwagger();
+            _httpContextAccessor.HttpContext.SignOutToSwagger();
             return Task.CompletedTask;
         }
     }

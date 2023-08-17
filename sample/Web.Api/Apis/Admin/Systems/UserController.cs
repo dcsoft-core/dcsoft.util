@@ -14,6 +14,7 @@ using Util;
 using Util.Exceptions;
 using Util.Extras.Applications.Properties;
 using Util.Extras.Sessions;
+using Util.Sessions;
 using ILogger = DCSoft.Logging.Serilog.ILogger;
 
 namespace DCSoft.Apis.Admin.Systems
@@ -208,7 +209,7 @@ namespace DCSoft.Apis.Admin.Systems
         [Login]
         public async Task<IActionResult> UpdateAvatarAsync()
         {
-            var file = Util.Extras.Helpers.Web.GetFile();
+            var file = Util.Helpers.Web.GetFile();
             if (file == null)
             {
                 throw new Warning("上传文件有误");

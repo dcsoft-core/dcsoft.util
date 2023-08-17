@@ -1,9 +1,9 @@
 ﻿<Project>
-	<PropertyGroup>
-		<VersionMajor>7</VersionMajor>
-		<VersionMinor>0</VersionMinor>
-		<VersionPatch>10</VersionPatch>
-		<VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch)</VersionPrefix>
-		<VersionSuffix></VersionSuffix>
-	</PropertyGroup>
+    <PropertyGroup>
+        <VersionMajor>7</VersionMajor>
+        <VersionMinor>0</VersionMinor>
+        <VersionPatch>12</VersionPatch>
+        <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch)</VersionPrefix>
+        <VersionSuffix></VersionSuffix>
+    </PropertyGroup>
 </Project>

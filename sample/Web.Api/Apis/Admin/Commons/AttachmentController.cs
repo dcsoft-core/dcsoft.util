@@ -77,11 +77,11 @@ namespace DCSoft.Apis.Admin.Commons
         [Login]
         public async Task<IActionResult> UploadAsync()
         {
-            var objId = Util.Extras.Helpers.Web.GetParam("objId");
-            var objType = Util.Extras.Helpers.Web.GetParam("objType");
-            var typeCode = Util.Extras.Helpers.Web.GetParam("typeCode");
-            var typeName = Util.Extras.Helpers.Web.GetParam("typeName");
-            var file = Util.Extras.Helpers.Web.GetFile();
+            var objId = Util.Helpers.Web.GetParam("objId");
+            var objType = Util.Helpers.Web.GetParam("objType");
+            var typeCode = Util.Helpers.Web.GetParam("typeCode");
+            var typeName = Util.Helpers.Web.GetParam("typeName");
+            var file = Util.Helpers.Web.GetFile();
             if (file == null)
             {
                 throw new Warning("上传文件有误");
@@ -111,7 +111,7 @@ namespace DCSoft.Apis.Admin.Commons
         public async Task<IActionResult> DownloadAsync(string id)
         {
             var dto = await _attachmentService.GetByIdAsync(id);
-            await Util.Extras.Helpers.Web.DownloadFileAsync(dto.FilePath, dto.ActualName);
+            await Util.Helpers.Web.DownloadFileAsync(dto.FilePath, dto.ActualName);
             return Success();
         }
 

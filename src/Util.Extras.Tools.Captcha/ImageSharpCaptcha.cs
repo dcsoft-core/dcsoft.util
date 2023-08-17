@@ -11,19 +11,17 @@ using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
-// ReSharper disable StringLiteralTypo
-
 namespace Util.Extras.Tools.Captcha
 {
     /// <summary>
     /// 验证码配置和绘制逻辑
     /// </summary>
-    public class SecurityCodeHelper
+    public class ImageSharpCaptcha : IImageSharpCaptcha
     {
         /// <summary>
-        /// 验证码文本池
+        /// 验证码中文文本池
         /// </summary>
-        private static readonly string[] _cnTextArr =
+        private static readonly string[] CnTextArr =
         {
             "的", "一", "国", "在", "人", "了", "有", "中", "是", "年", "和", "大", "业", "不", "为", "发", "会", "工", "经", "上", "地",
             "市", "要", "个", "产", "这", "出", "行", "作", "生", "家", "以", "成", "到", "日", "民", "来", "我", "部", "对", "进", "多",
@@ -51,7 +49,10 @@ namespace Util.Extras.Tools.Captcha
             "获", "石", "食", "抓", "富", "模", "始", "住", "赛", "客", "越", "闻", "央", "席", "坚"
         };
 
-        private static readonly string[] _enTextArr =
+        /// <summary>
+        /// 验证码英文文本池
+        /// </summary>
+        private static readonly string[] EnTextArr =
         {
             "a", "b", "c", "d", "e", "f", "g", "h", "k", "m", "n", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y",
             "z", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W",
@@ -63,6 +64,9 @@ namespace Util.Extras.Tools.Captcha
         /// </summary>
         private readonly int _imageWidth = 120;
 
+        /// <summary>
+        /// 验证码图片高度
+        /// </summary>
         private readonly int _imageHeight = 50;
 
         /// <summary>
@@ -71,31 +75,35 @@ namespace Util.Extras.Tools.Captcha
         private int _circleCount = 14;
 
         /// <summary>
-        /// 泡泡半径范围
+        /// 泡泡半径最小范围
         /// </summary>
         private readonly int _miniCircleR = 2;
 
+        /// <summary>
+        /// 泡泡半径最大范围
+        /// </summary>
         private readonly int _maxCircleR = 8;
 
         /// <summary>
         /// 颜色池,较深的颜色
-        /// https://tool.oschina.net/commons?type=3
         /// </summary>
-        private static readonly string[] _colorHexArr =
+        private static readonly string[] ColorHexArr =
         {
             "#00E5EE", "#000000", "#2F4F4F", "#000000", "#43CD80", "#191970", "#006400", "#458B00", "#8B7765", "#CD5B45"
         };
 
         /// <summary>
-        /// 较浅的颜色
+        /// 颜色池,较浅的颜色
         /// </summary>
-        private static readonly string[] _lightColorHexArr =
-            { "#FFFACD", "#FDF5E6", "#F0FFFF", "#BBFFFF", "#FAFAD2", "#FFE4E1", "#DCDCDC", "#F0E68C" };
+        private static readonly string[] LightColorHexArr =
+        {
+            "#FFFACD", "#FDF5E6", "#F0FFFF", "#BBFFFF", "#FAFAD2", "#FFE4E1", "#DCDCDC", "#F0E68C"
+        };
 
         /// <summary>
-        /// 
+        /// 随机数对象
         /// </summary>
-        private static readonly Random _random = new Random();
+        private static readonly Random RandomObj = new();
 
         /// <summary>
         /// 字体池
@@ -105,7 +113,7 @@ namespace Util.Extras.Tools.Captcha
         /// <summary>
         /// 构造函数
         /// </summary>
-        public SecurityCodeHelper()
+        public ImageSharpCaptcha()
         {
             InitFonts(_imageHeight);
         }
@@ -122,7 +130,7 @@ namespace Util.Extras.Tools.Captcha
             {
                 do
                 {
-                    sb.Append(_cnTextArr[_random.Next(0, _cnTextArr.Length)]);
+                    sb.Append(CnTextArr[RandomObj.Next(0, CnTextArr.Length)]);
                 } while (--length > 0);
             }
 
@@ -140,13 +148,13 @@ namespace Util.Extras.Tools.Captcha
             if (length <= 0) return sb.ToString();
             do
             {
-                if (_random.Next(0, 2) > 0)
+                if (RandomObj.Next(0, 2) > 0)
                 {
-                    sb.Append(_random.Next(2, 10));
+                    sb.Append(RandomObj.Next(2, 10));
                 }
                 else
                 {
-                    sb.Append(_enTextArr[_random.Next(0, _enTextArr.Length)]);
+                    sb.Append(EnTextArr[RandomObj.Next(0, EnTextArr.Length)]);
                 }
             } while (--length > 0);
 
@@ -163,12 +171,12 @@ namespace Util.Extras.Tools.Captcha
             using var img = new Image<Rgba32>(_imageWidth, _imageHeight);
             var textFont = _fontArr.FirstOrDefault(c =>
                                "STCaiyun".Equals(c.Name, StringComparison.CurrentCultureIgnoreCase)) ??
-                           _fontArr[_random.Next(0, _fontArr.Length)];
+                           _fontArr[RandomObj.Next(0, _fontArr.Length)];
 
-            var colorCircleHex = _colorHexArr[_random.Next(0, _colorHexArr.Length)];
+            var colorCircleHex = ColorHexArr[RandomObj.Next(0, ColorHexArr.Length)];
             var colorTextHex = colorCircleHex;
 
-            if (_random.Next(0, 6) == 3)
+            if (RandomObj.Next(0, 6) == 3)
             {
                 colorCircleHex = "#FFFFFF"; //白色
                 _circleCount = (int)(_circleCount * 2.65);
@@ -194,11 +202,11 @@ namespace Util.Extras.Tools.Captcha
         public byte[] GetGifBubbleCodeByte(string text)
         {
             var gifCircleCount = (int)(_circleCount * 1.5);
-            var color = Rgba32.ParseHex(_colorHexArr[_random.Next(0, _colorHexArr.Length)]);
+            var color = Rgba32.ParseHex(ColorHexArr[RandomObj.Next(0, ColorHexArr.Length)]);
             //优先使用STCAIYUN 这个字体
             var textFont =
                 _fontArr.FirstOrDefault(c => "STCaiyun".Equals(c.Name, StringComparison.CurrentCultureIgnoreCase)) ??
-                _fontArr[_random.Next(0, _fontArr.Length)];
+                _fontArr[RandomObj.Next(0, _fontArr.Length)];
 
             var img = new Image<Rgba32>(_imageWidth, _imageHeight);
             {
@@ -211,7 +219,7 @@ namespace Util.Extras.Tools.Captcha
                 {
                     using var tempImg = new Image<Rgba32>(_imageWidth, _imageHeight);
                     tempImg.Frames[0].Metadata.GetFormatMetadata(GifFormat.Instance).FrameDelay =
-                        _random.Next(20, 50);
+                        RandomObj.Next(20, 50);
                     tempImg.Mutate(ctx => ctx
                         .Fill(Color.White)
                         .DrawingCircles(_imageWidth, _imageHeight, gifCircleCount, _miniCircleR, _maxCircleR, color)
@@ -219,7 +227,7 @@ namespace Util.Extras.Tools.Captcha
                     img.Frames.AddFrame(tempImg.Frames[0]);
                 }
 
-                img.Frames[0].Metadata.GetFormatMetadata(GifFormat.Instance).FrameDelay = _random.Next(20, 50);
+                img.Frames[0].Metadata.GetFormatMetadata(GifFormat.Instance).FrameDelay = RandomObj.Next(20, 50);
                 img.Mutate(ctx => ctx
                     .DrawingCnText(_imageWidth, _imageHeight, text, color, textFont)
                 );
@@ -250,11 +258,11 @@ namespace Util.Extras.Tools.Captcha
             {
                 using var tempImg = GetEnDigitalCodeImage(text);
                 tempImg.Frames[0].Metadata.GetFormatMetadata(GifFormat.Instance).FrameDelay =
-                    _random.Next(80, 150);
+                    RandomObj.Next(80, 150);
                 img.Frames.AddFrame(tempImg.Frames[0]);
             }
 
-            img.Frames[0].Metadata.GetFormatMetadata(GifFormat.Instance).FrameDelay = _random.Next(200, 400);
+            img.Frames[0].Metadata.GetFormatMetadata(GifFormat.Instance).FrameDelay = RandomObj.Next(200, 400);
             return img.ToGifArray();
         }
 
@@ -266,14 +274,14 @@ namespace Util.Extras.Tools.Captcha
         private Image<Rgba32> GetEnDigitalCodeImage(string text)
         {
             var img = new Image<Rgba32>(_imageWidth, _imageHeight);
-            var colorTextHex = _colorHexArr[_random.Next(0, _colorHexArr.Length)];
-            var lightColorHex = _lightColorHexArr[_random.Next(0, _lightColorHexArr.Length)];
+            var colorTextHex = ColorHexArr[RandomObj.Next(0, ColorHexArr.Length)];
+            var lightColorHex = LightColorHexArr[RandomObj.Next(0, LightColorHexArr.Length)];
 
             img.Mutate(ctx => ctx
-                .Fill(Rgba32.ParseHex(_lightColorHexArr[_random.Next(0, _lightColorHexArr.Length)]))
+                .Fill(Rgba32.ParseHex(LightColorHexArr[RandomObj.Next(0, LightColorHexArr.Length)]))
                 .Glow(Rgba32.ParseHex(lightColorHex))
                 .DrawingGrid(_imageWidth, _imageHeight, Rgba32.ParseHex(lightColorHex), 8, 1)
-                .DrawingEnText(_imageWidth, _imageHeight, text, _colorHexArr, _fontArr)
+                .DrawingEnText(_imageWidth, _imageHeight, text, ColorHexArr, _fontArr)
                 .GaussianBlur(0.4f)
                 .DrawingCircles(_imageWidth, _imageHeight, 15, _miniCircleR, _maxCircleR, Color.White)
             );

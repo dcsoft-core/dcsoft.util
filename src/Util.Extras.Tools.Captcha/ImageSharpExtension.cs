@@ -164,8 +164,7 @@ namespace Util.Extras.Tools.Captcha
             using var img = new Image<Rgba32>(containerWidth, containerHeight);
 
             points.Add(new PointF(containerWidth, containerHeight));
-            img.Mutate(ctx => ctx
-                .DrawLines(color, thickness, points.ToArray())
+            img.Mutate(ctx => ctx.DrawLine(color, thickness, points.ToArray())
             );
             processingContext.DrawImage(img, new Point(0, 0), 1);
 

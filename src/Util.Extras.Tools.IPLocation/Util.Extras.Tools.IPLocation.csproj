@@ -1,37 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>$(NetTargetFramework)</TargetFramework>
-		<RootNamespace>Util.Extras.Tools.IPLocation</RootNamespace>
-		<PackageIcon>icon.jpg</PackageIcon>
-		<Description>Util.Extras.Tools.IPLocation是IP归属地工具类</Description>
-		<AssemblyName>Util.Extras.Tools.IPLocation</AssemblyName>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>$(NetTargetFramework)</TargetFramework>
+        <RootNamespace>Util.Extras.Tools.IPLocation</RootNamespace>
+        <PackageIcon>icon.jpg</PackageIcon>
+        <Description>Util.Extras.Tools.IPLocation是IP归属地工具类</Description>
+        <AssemblyName>Util.Extras.Tools.IPLocation</AssemblyName>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<OutputPath></OutputPath>
-		<DocumentationFile>.\obj\Debug\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <OutputPath></OutputPath>
+        <DocumentationFile>.\obj\Debug\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<OutputPath></OutputPath>
-		<DocumentationFile>.\obj\Release\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath></OutputPath>
+        <DocumentationFile>.\obj\Release\$(NetTargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\build\icon.jpg">
-			<Pack>True</Pack>
-			<Visible>False</Visible>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\build\icon.jpg">
+            <Pack>True</Pack>
+            <Visible>False</Visible>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Util.Core" Version="7.0.43" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Util.Core" Version="7.1.17"/>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj"/>
+    </ItemGroup>
 
 </Project>

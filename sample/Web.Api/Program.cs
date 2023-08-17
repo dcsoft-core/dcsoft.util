@@ -8,6 +8,7 @@ using EasyCaching.InMemory;
 using Util;
 using Util.Aop;
 using Util.Caching.EasyCaching;
+using Util.Data.Dapper.Sql;
 using Util.Data.EntityFrameworkCore;
 using Util.Data.Sql;
 using Util.Extras.Applications.Middles;
@@ -32,14 +33,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddUploadConfig();
 
 //配置Util
-builder.Host.AddUtil(options => options
-    .UseAop()
-    .UseRedisCache(builder.Configuration, "Redis")
-    .UseSerilog(t => t.AddExceptionless())
-    .UseMySqlQuery(builder.Configuration.GetConnectionString("DefaultConnection"))
-    .UseMySqlExecutor(builder.Configuration.GetConnectionString("DefaultConnection"))
-    .UseMySqlUnitOfWork<IDataUnitOfWork, DataUnitOfWork>(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+builder.Host
+    .AsBuild()
+    .AddAop()
+    .AddRedisCache(builder.Configuration, "Redis")
+    .AddSerilog(t => t.AddExceptionless())
+    .AddMySqlQuery(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .AddMySqlExecutor(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .AddMySqlUnitOfWork<IDataUnitOfWork, DataUnitOfWork>(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .AddUtil();
 
 //构建Web应用程序
 var app = builder.Build();

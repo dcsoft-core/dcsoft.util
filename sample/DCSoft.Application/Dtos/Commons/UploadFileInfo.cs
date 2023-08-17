@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Util.Extras.Files
+namespace DCSoft.Applications.Dtos.Commons
 {
     /// <summary>
     /// 上传文件信息

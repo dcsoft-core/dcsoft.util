@@ -5,7 +5,7 @@
         <RootNamespace>Util.Extras.Data.EntityFrameworkCore</RootNamespace>
         <PackageIcon>icon.jpg</PackageIcon>
         <Description>Util.Extras.Data.EntityFrameworkCore.SqlServer是Util应用框架基于EntityFrameworkCore的数据访问封装类库,用于处理SqlServer数据库的扩展库</Description>
-        <AssemblyName>Util.Extras.Data.EntityFrameworkCore.SqlServer </AssemblyName>
+        <AssemblyName>Util.Extras.Data.EntityFrameworkCore.SqlServer</AssemblyName>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -27,12 +27,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Util.Data.EntityFrameworkCore.SqlServer" Version="7.0.43" />
+        <PackageReference Include="Util.Data.EntityFrameworkCore.SqlServer" Version="7.1.17"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj" />
-        <ProjectReference Include="..\Util.Extras.Domain\01-Util.Extras.Domain.csproj" />
+        <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj"/>
+        <ProjectReference Include="..\Util.Extras.Domain\01-Util.Extras.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

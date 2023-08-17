@@ -20,8 +20,7 @@ namespace Util.Extras.Tools.Captcha
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddScoped<SecurityCodeHelper>();
-            services.AddScoped<VerifyCodeHelper>();
+            services.AddScoped<IImageSharpCaptcha, ImageSharpCaptcha>();
             return services;
         }
     }
