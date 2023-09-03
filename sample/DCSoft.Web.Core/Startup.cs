@@ -22,7 +22,6 @@ namespace DCSoft.Web.Core
         {
             context.HostBuilder.ConfigureServices((hostContext, services) =>
             {
-                services.AddCaptcha();
                 services.AddScoped<UploadHelper>();
             });
             return null!;

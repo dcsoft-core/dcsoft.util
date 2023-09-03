@@ -5,7 +5,7 @@ namespace Util.Extras.Tools.Captcha
     /// <summary>
     /// 验证码配置和绘制逻辑
     /// </summary>
-    public interface IImageSharpCaptcha
+    public interface IImageSharpCaptcha : IScopeDependency
     {
         /// <summary>
         /// 生成随机中文字符串
