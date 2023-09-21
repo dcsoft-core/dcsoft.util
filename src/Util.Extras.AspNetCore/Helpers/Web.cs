@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNetCore.Http;
 using Util.Helpers;
 
@@ -53,7 +51,7 @@ namespace Util.Extras.Helpers
                 var stream = Util.Helpers.Web.Request.Body;
                 long? length = Util.Helpers.Web.Request.ContentLength;
                 Util.Helpers.Web.Request.Body.Position = 0;
-                if (length != null && length > 0)
+                if (length is > 0)
                 {
                     // 使用这个方式读取，并且使用异步
                     var streamReader = new StreamReader(stream, Encoding.UTF8);
