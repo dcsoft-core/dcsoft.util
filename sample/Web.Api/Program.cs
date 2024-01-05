@@ -32,7 +32,7 @@ builder.Host
     .AsBuild()
     .AddAop()
     .AddRedisCache(builder.Configuration, "Redis")
-    .AddSerilog(t => t.AddExceptionless())
+    .AddSerilog()
     .AddMySqlQuery(builder.Configuration.GetConnectionString("DefaultConnection"))
     .AddMySqlExecutor(builder.Configuration.GetConnectionString("DefaultConnection"))
     .AddMySqlUnitOfWork<IDataUnitOfWork, DataUnitOfWork>(builder.Configuration.GetConnectionString("DefaultConnection"))

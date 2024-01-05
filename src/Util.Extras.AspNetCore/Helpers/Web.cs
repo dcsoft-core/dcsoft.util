@@ -74,10 +74,17 @@ namespace Util.Extras.Helpers
         {
             get
             {
-                using var reader = new StreamReader(Util.Helpers.Web.Response.Body);
-                Util.Helpers.Web.Response.Body.Seek(0, SeekOrigin.Begin);
-                var body = reader.ReadToEnd();
-
+                var body = string.Empty;
+                var stream = Util.Helpers.Web.Response.Body;
+                long? length = Util.Helpers.Web.Response.ContentLength;
+                Util.Helpers.Web.Response.Body.Position = 0;
+                if (length is > 0)
+                {
+                    // 使用这个方式读取，并且使用异步
+                    var streamReader = new StreamReader(stream, Encoding.UTF8);
+                    body = streamReader.ReadToEndAsync().GetAwaiter().GetResult();
+                }
+                Util.Helpers.Web.Response.Body.Position = 0;
                 return body;
             }
         }
