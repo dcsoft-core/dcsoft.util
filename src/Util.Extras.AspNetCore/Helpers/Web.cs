@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Util.Extras.Text;
 using Util.Helpers;
 
 namespace Util.Extras.Helpers
@@ -84,6 +85,7 @@ namespace Util.Extras.Helpers
                     var streamReader = new StreamReader(stream, Encoding.UTF8);
                     body = streamReader.ReadToEndAsync().GetAwaiter().GetResult();
                 }
+
                 Util.Helpers.Web.Response.Body.Position = 0;
                 return body;
             }
@@ -153,9 +155,9 @@ namespace Util.Extras.Helpers
         /// <returns></returns>
         private static string GetRemoteIpAddress()
         {
-            var ip = Util.Helpers.Web.HttpContext.Request.Headers["X-Real-IP"].FirstOrDefault();
+            var ip = Util.Helpers.Web.HttpContext?.Request.Headers["X-Real-IP"].FirstOrDefault();
             if (!ip.IsEmpty()) return ip;
-            ip = Util.Helpers.Web.HttpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+            ip = Util.Helpers.Web.HttpContext?.Request.Headers["X-Forwarded-For"].FirstOrDefault();
             if (ip.IsEmpty())
             {
                 ip = Util.Helpers.Web.HttpContext?.Connection.RemoteIpAddress.SafeString();
@@ -186,6 +188,15 @@ namespace Util.Extras.Helpers
         {
             try
             {
+                var localIp = NetworkInterface.GetAllNetworkInterfaces()
+                    .Select(p => p.GetIPProperties())
+                    .SelectMany(p => p.UnicastAddresses)
+                    .FirstOrDefault(p => p.Address.AddressFamily == AddressFamily.InterNetwork && !IPAddress.IsLoopback(p.Address))?.Address.ToString();
+
+                if(!localIp.IsNullOrEmpty())
+                {
+                    return localIp;
+                }
                 foreach (var item in NetworkInterface.GetAllNetworkInterfaces())
                 {
                     if (item.NetworkInterfaceType != type || item.OperationalStatus != OperationalStatus.Up)
