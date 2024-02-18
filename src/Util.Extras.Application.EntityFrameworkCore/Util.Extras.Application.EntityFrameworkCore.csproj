@@ -27,8 +27,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Util.Data.EntityFrameworkCore" Version="7.1.131" />
-        <PackageReference Include="Util.Application.EntityFrameworkCore" Version="7.1.131" />
+        <PackageReference Include="Util.Data.EntityFrameworkCore" Version="8.0.1" />
+        <PackageReference Include="Util.Application.EntityFrameworkCore" Version="8.0.1" />
     </ItemGroup>
 
     <ItemGroup>

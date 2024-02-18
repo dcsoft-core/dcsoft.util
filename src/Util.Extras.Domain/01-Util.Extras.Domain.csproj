@@ -27,9 +27,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Util.Data.Abstractions" Version="7.1.131" />
-        <PackageReference Include="Util.Events" Version="7.1.131" />
-        <PackageReference Include="Util.Domain" Version="7.1.131" />
+        <PackageReference Include="Util.Data.Abstractions" Version="8.0.1" />
+        <PackageReference Include="Util.Events" Version="8.0.1" />
+        <PackageReference Include="Util.Domain" Version="8.0.1" />
     </ItemGroup>
 
 </Project>
