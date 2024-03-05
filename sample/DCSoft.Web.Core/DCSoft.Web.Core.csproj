@@ -27,11 +27,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Util.Application.WebApi" Version="8.0.1" />
-		<PackageReference Include="Util.Caching.EasyCaching" Version="8.0.1" />
-		<PackageReference Include="Util.Data.Dapper.MySql" Version="8.0.1" />
-		<PackageReference Include="Util.Logging.Serilog.Exceptionless" Version="8.0.1" />
-		<PackageReference Include="Util.Ui.NgZorro" Version="8.0.1" />
+		<PackageReference Include="Util.Application.WebApi" Version="8.0.2" />
+		<PackageReference Include="Util.Caching.EasyCaching" Version="8.0.2" />
+		<PackageReference Include="Util.Data.Dapper.MySql" Version="8.0.2" />
+		<PackageReference Include="Util.Logging.Serilog.Exceptionless" Version="8.0.2" />
+		<PackageReference Include="Util.Ui.NgZorro" Version="8.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
