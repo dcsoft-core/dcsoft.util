@@ -27,10 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Util.Core" Version="8.0.2" />
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Util.Extras.AspNetCore\07-Util.Extras.AspNetCore.csproj"/>
     </ItemGroup>
 

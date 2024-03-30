@@ -88,6 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{970C25C6-A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util.Extras.AspNetCore.Tests.Integration", "test\Util.Extras.AspNetCore.Tests.Integration\Util.Extras.AspNetCore.Tests.Integration.csproj", "{09DB3D30-D3B6-4EDB-89AA-6797070EF036}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Caching", "03-Caching", "{D21A8480-1378-4BF9-94C3-6A99B5DE80C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -247,6 +249,7 @@ Global
 		{ECC64615-0947-4C61-9571-8CD50800AE63} = {E4A21A41-D685-4E6E-8746-071E872A0AE6}
 		{ECD3A7B8-3A2A-482D-8D6D-4409EB2E043B} = {E4A21A41-D685-4E6E-8746-071E872A0AE6}
 		{09DB3D30-D3B6-4EDB-89AA-6797070EF036} = {970C25C6-AC98-4009-8429-FBC9AE42AA50}
+		{D21A8480-1378-4BF9-94C3-6A99B5DE80C2} = {A1B16F56-F07D-4C38-91E6-BFB636836DF1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A99CBA9-4A62-454F-9267-D3F362965038}
