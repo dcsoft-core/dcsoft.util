@@ -1,6 +1,7 @@
 using System;
 using Serilog;
 using Serilog.Sinks;
+using Serilog.Sinks.MySQL;
 using Util.Helpers;
 
 namespace DCSoft.Logging.Serilog
@@ -54,7 +55,7 @@ namespace DCSoft.Logging.Serilog
                 .Enrich.WithProperty("CreatorId", creatorId)
                 .Enrich.WithProperty("Creator", creator)
                 .Enrich.WithProperty("IsDeleted", isDeleted ? 1 : 0)
-                .WriteTo.MySQL(LogType.Login, connectionString, tableName)
+                .WriteTo.MySQL(connectionString)
                 .CreateLogger();
 
             logger.Information(loginName);

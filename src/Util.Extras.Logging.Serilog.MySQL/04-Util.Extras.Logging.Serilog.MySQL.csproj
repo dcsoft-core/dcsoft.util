@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>$(NetTargetFramework)</TargetFramework>
-        <RootNamespace>Serilog.Sinks</RootNamespace>
+        <RootNamespace>Serilog.Sinks.MySQL</RootNamespace>
         <PackageIcon>icon.jpg</PackageIcon>
         <Description>Util.Extras.Logging.Serilog.MySQL是Util应用框架集成封装Serilog日志框架的核心类库,它包含了写入MySql</Description>
         <AssemblyName>Util.Extras.Logging.Serilog.MySQL</AssemblyName>
