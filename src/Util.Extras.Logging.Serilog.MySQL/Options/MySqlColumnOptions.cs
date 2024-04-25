@@ -343,7 +343,11 @@ namespace Serilog.Sinks.MySQL.Options
 		/// <summary>
 		/// 自增长
 		/// </summary>
-		AutoIncrementInt
+		AutoIncrementInt,
+		/// <summary>
+		/// 整型
+		/// </summary>
+		Int
 	}
 
 	/// <summary>
